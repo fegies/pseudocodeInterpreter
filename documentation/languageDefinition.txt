@@ -1,0 +1,63 @@
+This is an interpreter capable of running scripts in the Syntax of professor Näher.
+It is reference counted, which gives it rather large performance hits in some cases.
+
+Internally it works by using an execution stack that all operations are pushed onto.
+(Kind of like any other interpreted language does)
+
+Features of the Language:
+
+Commands are seperated by line endings or by semicolons
+If multiple commands are on the same line, they MUST be separeted by semicolons
+
+Examples of valid syntax:
+
+command1
+command2
+command3;
+command4; command5
+
+There is no explicit variable declaration. They are instanciated on the fly.
+Value assingment is done using the following syntax:
+variable <- value
+
+Conditional execution is possible using the following syntax:
+if expression then
+commands
+elseif
+command
+else
+command
+fi
+
+The elseif and else statements including comments are optional.
+
+There is a number of loop syntaxes including the basic while, a repeat until and a for loop.
+The syntax for the while loop is
+while expression do
+command
+od
+
+The syntax for the repeat until loop is
+repeat
+command
+until expression
+
+There are two variants of the for loop. A  .. to and a ... downto variant.
+They both use the syntax
+for variable=initial value [to,downto] final value do
+command
+od
+
+The language contains rudimentary objects.
+
+An object must be of a priorly defined class.
+It may then be instanciated using the keyword new and assingned to a variable.
+The programmer need not worry about freeing used variables or memory usage is it is done using the
+internal garbage collector.
+
+although these objects are objetcs they behave more like c structs, both in terms of access of its fields
+and because they cannot contain funtcions.
+
+It is fundamentally impossible to copy objects. if the assingnment operator is used on an object, it will pass a reference.
+if the programmer really wishes to copy the object, he has to create a new object and overwrite all the fields inside the struct.
+

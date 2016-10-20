@@ -1,0 +1,7 @@
+This program has to be run from the command line.
+
+Accepted arguments:
+
+pseudocode [filename]
+
+if no filename is supplied, the program will read the commands from stdin.

@@ -1,0 +1,37 @@
+The pseudocode may contain variables.
+
+Because these variables are dynamically allocated their size cannot be known at compile time.
+To avoid inefficiencies, they are contained in a B-tree.
+The searchable key is the variable name.
+Keywords of the language may not be variable names.
+
+The pseudocode contains no unsigned integers.
+
+Every variable is of the type
+struct variable
+	unsigned int info
+	void *contents
+	unsigned short refcount
+
+the last 2 bits of the int type specifies the type of the variable
+valid types are:
+0 - the variable is undefined
+1 - the value is an int
+2 - the value is a string
+3 - the value is on object
+
+The remaining bits store the size of the variable.
+
+Structure of the info number
+[bits storing the size] [type bits]
+
+The short refcount contains the number of references to this variable.
+
+The variables B-Tree consists of the following structs:
+
+struct varTreeNode
+	char *name
+	varTreeNode *left
+	varTreeNode *right
+	variable *var
+
