@@ -79,7 +79,7 @@ char assignValue(varTreeNode* root, char* name, variable* value)
 		case 1:
 			var = (variable*) malloc(sizeof(variable));
 			var-> info = 1;
-			var-> contents = value -> contents;
+			var-> content = value -> content;
 			var-> refcount = 1;
 			break;
 		//a string

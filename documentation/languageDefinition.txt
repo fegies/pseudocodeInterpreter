@@ -1,5 +1,5 @@
 This is an interpreter capable of running scripts in the Syntax of professor Näher.
-It is reference counted, which gives it rather large performance hits in some cases.
+It is reference counted.
 
 Internally it works by using an execution stack that all operations are pushed onto.
 (Kind of like any other interpreted language does)

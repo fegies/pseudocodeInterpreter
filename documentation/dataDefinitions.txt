@@ -38,3 +38,14 @@ struct varTreeNode
 	varTreeNode *right
 	variable *var
 
+There are no string operations aside from comparing.
+Comparing is done using the strcomp result syntax:
+1 the left variable is larger
+0 the variables are equal
+-1 the left variable is smaller
+-2 one of the variables is undefined
+-3 the variables are not of equal type
+
+If both variables are objects, it will eiter return 0
+if the pointer addresses are the same (It is just another reference)
+or 2 if the objects are not equal.

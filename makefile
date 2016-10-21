@@ -3,9 +3,9 @@
 PROG       = pseudocode
 VPATH      = src include
 ODIR       = ./bin
-SHAREFLAGS = -g -pipe -Wall
+SHAREFLAGS = -pipe -Wall
 CPPCFLAGS  = $(SHAREFLAGS) -std=c++11
-CCFLAGS    = $(SHAREFLAGS) 
+CCFLAGS    = $(SHAREFLAGS)
 LINKFLAGS  = $(SHAREFLAGS)
 CPPCOMPILER= $(CXX)
 CCOMPILER  = $(CC)
@@ -16,7 +16,7 @@ SUBPATHS   = .
 #The Objects that are compiled
 OBJS       = $(BASEOBS)
 
-BASEOBS    = main.o varTree.o
+BASEOBS    = main.o varTree.o variable.o
 
 OPROG = $(addprefix $(ODIR)/, $(PROG))
 RUNFLAGS =

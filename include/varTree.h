@@ -1,11 +1,6 @@
 #pragma once
 
-typedef struct variable
-{
-	unsigned int info;
-	void *contents;
-	unsigned short refcount;
-} variable;
+#include "variable.h"
 
 typedef struct varTreeNode varTreeNode;
 
