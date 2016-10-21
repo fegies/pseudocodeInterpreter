@@ -20,6 +20,9 @@ valid types are:
 2 - the value is a string
 3 - the value is on object
 
+if the var value is a int, the integer value is stored in the pointer.
+Be careful not to dereference those!
+
 The remaining bits store the size of the variable.
 
 Structure of the info number

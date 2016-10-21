@@ -39,4 +39,9 @@ void incrementReferences(varTreeNode* root);
 //Decrements all reference counts within the word tree.
 //Should the number of references of a variable reach 0, its memory is freed
 //and the variable removed from the tree
-void decrementReferences(varTreeNode* root);
+void decrementReferences(varTreeNode** root);
+
+//used for the freeing of memory.
+//Called when the reference count of a variable reaches 0
+//Does not free anything if 0 is called to be freed
+void freeVar(variable* var);
