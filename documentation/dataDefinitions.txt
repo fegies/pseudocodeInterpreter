@@ -13,15 +13,24 @@ struct variable
 	void *contents
 	unsigned short refcount
 
-the last 2 bits of the int type specifies the type of the variable
+the last 3 (0x7) bits of the int type specifies the type of the variable
 valid types are:
 0 - the variable is undefined
 1 - the value is an int
 2 - the value is a string
 3 - the value is on object
+4 - the value is a defined function
+5 - the value is a class archtype
+6 - the value is an array of values
 
 if the var value is a int, the integer value is stored in the pointer.
 Be careful not to dereference those!
+
+In the case of a funtion it is a pointer to the beginning of the block
+inside the function.
+
+In the case of an array the remaining bits of the info variable contain the length of the array.
+
 
 The remaining bits store the size of the variable.
 

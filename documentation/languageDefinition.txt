@@ -56,7 +56,7 @@ The programmer need not worry about freeing used variables or memory usage is it
 internal garbage collector.
 
 although these objects are objetcs they behave more like c structs, both in terms of access of its fields
-and because they cannot contain funtcions.
+and because they cannot contain functions.
 
 It is fundamentally impossible to copy objects. if the assingnment operator is used on an object, it will pass a reference.
 if the programmer really wishes to copy the object, he has to create a new object and overwrite all the fields inside the struct.

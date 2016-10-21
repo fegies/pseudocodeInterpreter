@@ -16,7 +16,7 @@ SUBPATHS   = .
 #The Objects that are compiled
 OBJS       = $(BASEOBS)
 
-BASEOBS    = main.o varTree.o variable.o builtins.o
+BASEOBS    = main.o varTree.o variable.o builtins.o interpreter.o
 
 OPROG = $(addprefix $(ODIR)/, $(PROG))
 RUNFLAGS =

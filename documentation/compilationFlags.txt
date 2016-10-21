@@ -1,4 +1,0 @@
-
-
--D PRINTERRORS
-	compiles in more error reporting where they show up.
