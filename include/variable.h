@@ -26,7 +26,7 @@ varTreeNode *globalTree;
 //only loocks in the local tree.
 //classes are not returned by this method.
 //if the name is not found within the tree, a new variable is created.
-variable* lookupVar(varTreeNode* localTree,char* name);
+variable* lookupVar(varTreeNode* vtn,char* name);
 
 //looks up an entry in the global tree.
 //This us used when accassing function and class definitions.
@@ -39,7 +39,7 @@ void incrementRefs(varTreeNode* vtn);
 //when the reference count of a node reaches 0 the variable it points to is freed
 //and the pointer set to 0.
 //For performance reasons the will NOT be unlinked.
-void decrementRefs(varTreeNode* )
+void decrementRefs(varTreeNode* vtn);
 
 //Frees the memory occupied by the variable
 //Also decrements the reference counts of all further variables

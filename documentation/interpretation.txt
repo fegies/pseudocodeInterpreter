@@ -1,0 +1,21 @@
+The interpreter will attempt to load the entire script into memory.
+
+It then prepares the global variable tree and a local variable tree.
+(They are both empty at the beginning)
+
+it then begins to interpret the code as if it all was wrapped in a function.
+
+Upon encountering a block it will increment the reference counts of all
+variables inside the scoped tree.
+If the block is a loop of any kind it will save a returns address on the loop stack
+and continue execution.
+
+If control flow encounters a function or class definition it will save that
+definition in the global tree.
+
+When control flow leaves a block of any kind it will decrement all references
+in its tree and free memory as appropriate.
+
+If an attempt at calling a fuction is made, a new variable tree with only
+the arguments in it will be created and execution will resume at the beginning
+of the function block.

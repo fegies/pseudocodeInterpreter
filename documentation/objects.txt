@@ -8,7 +8,7 @@ block are rendered invalid.
 class definitions are made using the following syntax:
 
 class <name> {
-	member definitions	
+	member definitions
 };
 
 a member definiton consists of a type name
