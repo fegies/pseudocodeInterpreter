@@ -18,7 +18,7 @@ valid types are:
 0 - the variable is undefined
 1 - the value is an int
 2 - the value is a string
-3 - the value is on object
+3 - the value is on object reference.
 4 - the value is a defined function
 5 - the value is a class archtype
 6 - the value is an array of values
@@ -57,4 +57,16 @@ Comparing is done using the strcomp result syntax:
 
 If both variables are objects, it will eiter return 0
 if the pointer addresses are the same (It is just another reference)
-or 2 if the objects are not equal.
+or 2 if the adresses are not equal.
+
+Classes are stored in the global namespace, e.g the globalTree
+This means they disobey the normal scoping rules.
+Once a class is declared it STAYS declared until its declaration is overwritten by another
+declaration (not recommended because it invalidates all its objects)
+or the program ends
+
+Functions behave in the same way class definitions do. They are also kept in the global namespace
+This means that no function and class may have the same name.
+
+The interpreter has an internal variable buffer on the stack it can pass to
+the functions.
