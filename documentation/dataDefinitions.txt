@@ -9,11 +9,10 @@ The pseudocode contains no unsigned integers.
 
 Every variable is of the type
 struct variable
-	unsigned int info
+	unsigned char type
 	void *contents
 	unsigned short refcount
 
-the last 3 (0x7) bits of the int type specifies the type of the variable
 valid types are:
 0 - the variable is undefined
 1 - the value is an int

@@ -2,9 +2,11 @@
 
 #include "variable.h"
 
+typedef struct arrayHead arrayHead;
+
 struct arrayHead
 {
-	unsigned int largestIndex;
+	unsigned int segmentSize;
 	variable* firstEntry;
 	arrayHead* nextSegment;
 };
@@ -16,6 +18,7 @@ variable* accessArray(arrayHead* a,unsigned int index);
 
 //creates a new array head.
 //Used for the initialization of arrays.
+//maxIndex is the largest index accessible in this segment after creation.
 arrayHead* createArray(unsigned int maxIndex);
 
 //frees the memory of the entire array.

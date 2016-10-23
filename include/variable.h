@@ -2,7 +2,7 @@
 
 typedef struct variable
 {
-	unsigned int info;
+	unsigned char type;
 	void* contents;
 	unsigned short refcount;
 } variable;
@@ -47,4 +47,6 @@ void decrementRefs(varTreeNode* vtn);
 //This can be a nasty nasty thing in the case of objects(linked lists, etc)
 //And even worse in the case of arrays of objects
 //Reall, OOP fucking everything up again
-void freeVar(variable* v);
+//if freeMem is set to false, it will only free variables referenced by v.
+//if it is set to true, it will free() the memory occupied by v.
+void freeVar(variable* v,char freeMem);

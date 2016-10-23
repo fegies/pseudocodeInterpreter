@@ -16,7 +16,7 @@ SUBPATHS   = .
 #The Objects that are compiled
 OBJS       = $(BASEOBS)
 
-BASEOBS    = main.o variable.o
+BASEOBS    = main.o array.o
 
 OPROG = $(addprefix $(ODIR)/, $(PROG))
 RUNFLAGS =
@@ -38,7 +38,7 @@ clean:
 
 #linking
 $(OPROG): $(addprefix $(ODIR)/, $(OBJS))
-	$(CPPCOMPILER) -o $@ $^ $(LINKFLAGS)
+	$(CCOMPILER) -o $@ $^ $(LINKFLAGS)
 
 #compiling
 $(ODIR)/%.o : %.cpp

@@ -20,9 +20,12 @@ All arrays are of the type variable*
 The array linked list has the form
 
 arrayHead
-	unsigned int largestIndex
+	unsigned int segmentSize
 	variable* firstEntry
 	arrayHead* nextSegment
+
+The segment size specifies the number of variables stored in the array segment.
+It is at least 1 large.
 
 If an index larger than arrayHead is requested a new arrayHead is added and
 at least ARRAYRESERVEMIN new variables reserved.

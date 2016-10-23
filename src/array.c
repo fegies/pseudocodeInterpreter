@@ -1,30 +1,65 @@
-#include "variable.h"
+#include "array.h"
 #include "constants.h"
+
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 
 variable* accessArray(arrayHead* a,unsigned int index)
 {
-	do {
-		if ( index < a-> larestIndex )
-			return a-> firstEntry + index;
-		
-		//The index is larger than this segment.
-		//Look in the next one.
-		if( nextSegment != 0 )
-			a = a-> nextSegment;
+	while (1)
+	{
+		//The index is in this segment
+		if( index < (a-> segmentSize) )
+			return (a-> firstEntry) + index;
 
-		//reserve more memory (create another segment)
-		else
-		{
-			//s is the size of the segment that must be allocated.
-			unsigned int s = index - (a-> largestIndex);
-			if ( s < ARRAYRESERVEMIN )
-				s = ARRAYRESERVEMIN;
-			arrayHead* nh = malloc(sizeof(arrayHead));
-			nh-> largestIndex = s + (a-> largestIndex);
-			nh-> nextSegment = 0;
-			nh-> firstEntry = malloc( sizeof(variable) * s);
-			a-> nextSegment = nh;
-			return a-> firstEntry + index;
-		}
-	} while (true);
+		//Look in the next segment.
+		//The next segment is counted from 0 again, so this is necessary.
+		index -= a-> segmentSize;
+
+		//There is no next segment to be accessed.
+		if( (a-> nextSegment) == 0 )
+			a-> nextSegment = createArray(index);
+
+		a = a-> nextSegment;
+	}
+}
+
+
+arrayHead* createArray(unsigned int maxIndex)
+{
+	unsigned int size = maxIndex + 1;
+	if(size < ARRAYRESERVEMIN)
+		size = ARRAYRESERVEMIN;
+
+	arrayHead * ah = (arrayHead*) malloc( sizeof(arrayHead) );
+	ah-> segmentSize = size;
+	ah-> firstEntry = (variable*) malloc( size * sizeof(variable) );
+
+	if( (ah-> firstEntry) == 0 )
+	{
+		fprintf(stderr, "could not reserve array memory of size %d\n",size);
+		exit(EXIT_FAILURE);
+	}
+
+	memset( ah-> firstEntry, 0, size * sizeof(variable) );
+	ah-> nextSegment = 0;
+	return ah;
+}
+
+
+void destroyArray(arrayHead* a)
+{
+	//Destroy all the next segments
+	if( a-> nextSegment != 0 )
+		destroyArray(a-> nextSegment);
+
+	variable* varp = (a-> firstEntry) + (a-> segmentSize -1);
+
+	while( varp >= (a-> firstEntry) )
+		if ( (varp-> type) > 2 )
+			freeVar(varp,0);
+
+	
+	free(varp);
 }
