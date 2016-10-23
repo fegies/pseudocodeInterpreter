@@ -102,4 +102,8 @@ void freeVarRefs(variable* v)
 		case 6:
 			destroyArray( (arrayHead*) v-> contents );
 	}
+
+	//invalidate the variable
+	v-> type = 0;
+	v-> contents = 0;
 }

@@ -14,23 +14,18 @@ typedef struct classPrototype
 	//one or more classEntry 's
 } classPrototype;
 
-struct objectEntry
-{
-	char* entryName;
-	variable* value;
-};
 
 typedef struct object
 {
 	unsigned char entryCount;
 	classPrototype* prototype;
-	//ome or more objectEntry 's
+	//ome or more variable 's
 } object;
 
 //These return the size of the class definition
 //or the object instance 
-int classSizeof(classPrototype *c);
-int objectSizeof(object *o);
+unsigned int classSizeof(classPrototype *c);
+unsigned int objectSizeof(object *o);
 
 //This function returns the member being accessed.
 //or 0 if the object does not exist or contain a member of that name

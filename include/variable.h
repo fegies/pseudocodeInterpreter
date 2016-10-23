@@ -23,7 +23,7 @@ struct varTreeNode
 //(Fucking OOP)
 varTreeNode *globalTree;
 
-//only loocks in the local tree.
+//only looks in the local tree.
 //classes are not returned by this method.
 //if the name is not found within the tree, a new variable is created.
 //it is undefined at the moment of creation.
@@ -49,5 +49,6 @@ Looks at the variable and frees the memory that might be referenced by the
 variable given.
 Does not actually call free() on the variable pointer itself.
 That task must be done by the code calling freeVarRefs().
+Sets the type of the variable to 0.
 */
 void freeVarRefs(variable* v);
