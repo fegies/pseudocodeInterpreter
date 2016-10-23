@@ -13,8 +13,8 @@ struct varTreeNode
 {
 	char *name;
 	varTreeNode* left;
-	varTreeNode* rigth;
-	variable* var;
+	varTreeNode* right;
+	variable var;
 };
 
 //This is the global namespace Tree.
@@ -26,7 +26,10 @@ varTreeNode *globalTree;
 //only loocks in the local tree.
 //classes are not returned by this method.
 //if the name is not found within the tree, a new variable is created.
-variable* lookupVar(varTreeNode* vtn,char* name);
+//it is undefined at the moment of creation.
+//Double pointers are required because accessing an empty tree creates a
+//new root node.
+variable* lookupVar(varTreeNode** vtn,char* name);
 
 //looks up an entry in the global tree.
 //This us used when accassing function and class definitions.
@@ -41,12 +44,10 @@ void incrementRefs(varTreeNode* vtn);
 //For performance reasons the will NOT be unlinked.
 void decrementRefs(varTreeNode* vtn);
 
-//Frees the memory occupied by the variable
-//Also decrements the reference counts of all further variables
-//eventually referenced by the variable (in the case of Objects and arrays.)
-//This can be a nasty nasty thing in the case of objects(linked lists, etc)
-//And even worse in the case of arrays of objects
-//Reall, OOP fucking everything up again
-//if freeMem is set to false, it will only free variables referenced by v.
-//if it is set to true, it will free() the memory occupied by v.
-void freeVar(variable* v,char freeMem);
+/*
+Looks at the variable and frees the memory that might be referenced by the
+variable given.
+Does not actually call free() on the variable pointer itself.
+That task must be done by the code calling freeVarRefs().
+*/
+void freeVarRefs(variable* v);

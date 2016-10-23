@@ -58,8 +58,8 @@ void destroyArray(arrayHead* a)
 
 	while( varp >= (a-> firstEntry) )
 		if ( (varp-> type) > 2 )
-			freeVar(varp,0);
+			freeVarRefs(varp);
 
-	
+
 	free(varp);
 }

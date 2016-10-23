@@ -34,16 +34,16 @@ int objectSizeof(object *o);
 
 //This function returns the member being accessed.
 //or 0 if the object does not exist or contain a member of that name
-variable* accessMember(object *o, char* name);
+variable* accessObjectMember(object *o, char* name);
 
 //This function creates a new object.
 //All values inside the object are set to 0
 //returns 0 if not enough memory could be allocated
 //or the class is invalid.
-object* instanciate(classPrototype *c);
+object* instanciateObject(classPrototype *c);
 
 //called when the last reference to this object is invalidated.
 //frees the memory occupied by this object and sets its type to 0
 //to  invalidate further access to it
 //decrements the refcount of any objects referenced by this object.
-void destroy(object* o);
+void destroyObject(object* o);
