@@ -11,6 +11,8 @@ All operations set the type of the result to 0 if they could not correctly
 */
 
 //Integer operations
+//They do not accept any null pointers.
+//If they find a null pointer, they will just terminate.
 void addInt(variable* result, variable* v1, variable* v2);
 void subtractInt(variable* result, variable* v1, variable* v2);
 void multiplyInt(variable* result, variable* v1, variable* v2);
