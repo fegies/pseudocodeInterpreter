@@ -55,3 +55,6 @@ it may take one of the following values:
 i: an integer
 s: a string
 r: a reference to another object
+
+Trying to compare two object variables is the same as trying to comare the references
+(pointers)
