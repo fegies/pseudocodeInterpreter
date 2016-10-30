@@ -4,6 +4,7 @@
 
 #include "variable.h"
 #include "localVariableContainer.h"
+#include "constants.h"
 /*
 This header defines the interpretation functions called by the main function.
 It does so by first creating a Tree of blocks with statements and subblocks.
@@ -18,14 +19,27 @@ The type can take the following values:
 1: conditional execution
 2: function call
 3: function return
+4: blockEnter (increment local References)
+5: blockLeave (decrement local References)
 */
-struct block
+typedef struct statement
 {
 	char type;
 	char* instruction;
 	int instructionLength;
-	struct block* nextBlockTrue;
-	struct block* nextBlockFalse;
-};
+	struct statement* nextBlockTrue;
+	struct statement* nextBlockFalse;
+} statement;
 
-struct block* buildBlocks()
+typedef struct callstackEntry
+{
+	statement* returnPoint;
+	localVariableContainer vars;
+} callstackEntry;
+
+callstackEntry callstack [MAXDEPTH];
+int currentDepth = 0;
+
+statement* buildStructure(char* beginnning, int length);
+
+void interpretCode(statement* entryPoint);

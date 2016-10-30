@@ -13,8 +13,8 @@
 #define ARRAYRESERVEMIN 50
 
 //The size of the block return stack.
-//This value determines the maximum number of nested loops
-#define MAXLOOPDEPTH 20
+//This value determines the maximum number of recursion steps.
+#define MAXDEPTH 20
 
 //turn off diagnostic information
 //#define NDEBUG

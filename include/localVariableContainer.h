@@ -2,10 +2,16 @@
 
 #include "variable.h"
 
+//the return value is accessed by passing in a null char as the name.
 typedef struct localVariableContainer
 {
-	
+
 } localVariableContainer;
+
+//The variable container containing the functions and classes and stuff has to
+//be global.
+//I'm not even going to bother with memory management there
+localVariableContainer globalVars;
 
 //looks up the variable.
 //must return a valid variable.

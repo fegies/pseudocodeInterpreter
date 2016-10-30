@@ -18,22 +18,19 @@ void interpretFile(FILE* input)
 		exit(1);
 	}
 
-	unsigned int reads = fread( buffer, sizeof(char), SCRIPTBUFFERSIZE, input);
-
-	if( reads >= SCRIPTBUFFERSIZE-1 )
+	if( fread( buffer, sizeof(char), SCRIPTBUFFERSIZE, input) 
+		>=
+		 SCRIPTBUFFERSIZE-1 )
 	{
-		fprintf(stderr, "Read Script size larger than buffer of %d bytes\n", SCRIPTBUFFERSIZE);
+		fprintf(stderr, "Read Script size larger than buffer of %d bytes\n",
+			SCRIPTBUFFERSIZE);
 		exit(1);
 	}
 
-	variable* rootreturnval = 0;
+	statement* entryStatement = buildStructure(buffer, strlen(buffer));
 
-	localVariableContainer rootstack;
-	memset( &rootstack, 0, sizeof(localVariableContainer) );
+	interpretCode(entryStatement);
 
-	interpretFunction(buffer,&rootreturnval, &rootstack);
-
-	destroyLVC(&rootstack);
 	free(buffer);
 }
 
