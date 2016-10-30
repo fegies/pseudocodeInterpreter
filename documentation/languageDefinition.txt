@@ -30,6 +30,7 @@ command
 fi
 
 The elseif and else statements including comments are optional.
+The then-statement must be on the same line as the if statement.
 
 There is a number of loop syntaxes including the basic while, a repeat until and a for loop.
 The syntax for the while loop is

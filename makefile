@@ -16,10 +16,10 @@ SUBPATHS   = .
 #The Objects that are compiled
 OBJS       = $(BASEOBS)
 
-BASEOBS    = main.o array.o variable.o objects.o operations.o
+BASEOBS    = main.o interpreter.o
 
 OPROG = $(addprefix $(ODIR)/, $(PROG))
-RUNFLAGS =
+RUNFLAGS = testscript.pseudocode
 
 
 run : all
