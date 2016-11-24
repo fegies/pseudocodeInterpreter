@@ -16,5 +16,7 @@
 //This value determines the maximum number of recursion steps.
 #define MAXDEPTH 20
 
+#define EXECUTIONSTACKSIZE (unsigned int)100
+
 //turn off diagnostic information
 //#define NDEBUG

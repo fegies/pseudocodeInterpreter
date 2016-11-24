@@ -22,14 +22,14 @@ localVariableContainer globalVars;
 //looks up the variable.
 //must return a valid variable.
 //if it is a new name, it create a new variable.
-variable* lookupVar(localVariableContainer* lvc,char* name);
+variable* LVClookupVar(localVariableContainer* lvc,char* name);
 
 //stores the variable in the tree.
 //increments the reference count of the variable in question.
 //if there is already a variable with the same name in the tree,
 //the old reference must be rewritten to point to the new var, and the refcount
 //decremented accordingly
-void storeVar(localVariableContainer* lvc, variable* var, char* name);
+void LVCstoreVar(localVariableContainer* lvc, variable* var, char* name);
 
 //Increments the reference count of variables in the tree.
 void enterBlockLVC(localVariableContainer* lvc);

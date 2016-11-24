@@ -7,3 +7,6 @@ Syntax checking is performed by the compiler.
 The compiler cannot check variable access or out of bounds-access or anything of the like.
 */
 
+#include "statement.h"
+
+statement* buildStructure(char* beginnning, int length);
