@@ -62,3 +62,4 @@ and because they cannot contain functions.
 It is fundamentally impossible to copy objects. if the assingnment operator is used on an object, it will pass a reference.
 if the programmer really wishes to copy the object, he has to create a new object and overwrite all the fields inside the struct.
 
+Variable Names may not begin with an underscore ( _Name ), because that beginning is reserved for language-internal use.

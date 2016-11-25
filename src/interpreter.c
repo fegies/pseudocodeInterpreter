@@ -2,11 +2,14 @@
 #include "constants.h"
 #include "variable.h"
 
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 #include <stdio.h>
 #include "statement.h"
 #include "localVariableContainer.h"
+#include "array.h"
+#include "object.h"
+#include "numeric.h"
 
 void interpretFile(FILE* input)
 {
@@ -30,15 +33,23 @@ void interpretFile(FILE* input)
 
 	statement* entryStatement = buildStructure(buffer, strlen(buffer));
 
-	interpretCode(entryStatement);
+	interpretStructure(entryStatement);
 
 	free(buffer);
 }
 
 variable* localStackAccess(char mode, variable* v)
 {
+	static char isFirstCall = 1;
 	static int stacktop = 0;
-	static variable*  stack = malloc( EXECUTIONSTACKSIZE, sizeof(variable*) )
+	static variable** stack;
+
+	if( isFirstCall )
+	{
+		stack = malloc( EXECUTIONSTACKSIZE * sizeof(variable*) );
+		isFirstCall = 0;
+	}
+
 	if( mode == 0 )
 		stack[ stacktop++ ] = v;
 	else if( mode == 1 )
@@ -57,10 +68,11 @@ variable* localStackAccess(char mode, variable* v)
 }
 
 //returns void
-#define locasStackPush() localStackAccess( 0, v );
-// returns variable*
-#define localStackPop() localStackAccess( 1, (variable*) 0 );
-#define localStackTop() localStackAccess( 2, (variable*) 0 ); //returns top event without popping
+#define localStackPush(v) (localStackAccess( 0, v ));
+
+//These return a variable*
+#define localStackPop() ( localStackAccess( 1, (variable*) 0 ) )
+#define localStackTop() ( localStackAccess( 2, (variable*) 0 ) ) //returns top event without popping
 
 
 void interpretStructure(statement* entryPoint)
@@ -77,49 +89,55 @@ void interpretStructure(statement* entryPoint)
 			case 0: // NOP
 				break;
 			case 1: // IF
-				curst = (localStackPop() -> data) == 0 ?
+				curst = ((variableBoolean*)(localStackPop() -> variabledata)) == 0 ?
 					curst -> next : ((statementCondition*) curst) -> nextFalse;
 				continue;
 			case 2: // LVCLookup
-				localStackPush( LVClookupVar(lvc, ((statementLVCLookup*)curst) -> name );
+				localStackPush( LVClookupVar(&lvc, ((statementLVCLookup*)curst) -> name ) );
 				break;
 			case 3: // LVCStore
-				LVCstoreVar( lvc, localStackPop(), ((statementLVCStore*)curst) -> name );
+				LVCstoreVar( &lvc, localStackPop(), ((statementLVCStore*)curst) -> name );
 				break;
 			case 4:	// Array Access
 				localStackPush( arrayAccess( (variableArray*)localStackPop(),
-				((statementArrayAccess*)curst)-> index);
+				((statementArrayAccess*)curst)-> index) );
 				break;
 			case 5: // Object member access
 				localStackPush( objectMemberAccess( 
-					(variableObject*)localStackPop(),
-					( (statementObjectMemberAccess*)curst ) );
+					(variableObject*) localStackPop(),
+					((statementObjectMemberAccess*)curst)-> name ) );
 				break;
 			case 6: // Object initialization
+			{
 				variable* class = localStackPop();
 				localStackPush( objectInitialize( (variableClass*)class ) );
+			}
 				break;
 			case 10: // variable assignment
+			{
 				variable* tv = localStackPop();
-				variableAssign( localStackPop(), localStackTop() );
+				variableAssign( localStackTop(), tv );
+			}
 				break;
 			case 11: // addition
 			case 12: // subtraction
 			case 13: // multiplication
 			case 14: // division
+			{
 				variable* top = localStackPop();
 				variable* bot = localStackPop();
-				switch( s -> type )
+				switch( curst -> type )
 				{
 					case 11:
 						localStackPush( variableNumericAdd( top, bot ) ); break;
 					case 12:
 						localStackPush( variableNumericSubtract( top, bot ) ); break;
 					case 13:
-						localStackPush( variableNumericMutliply( top, bot ) ); break;
+						localStackPush( variableNumericMultiply( top, bot ) ); break;
 					case 14:
 						localStackPush( variableNumericDivide( top, bot ) ); break;
 				}
+			}
 				break;
 			case 30: //println
 				break;

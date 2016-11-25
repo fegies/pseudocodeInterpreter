@@ -1,0 +1,14 @@
+All statements can only operate on the internal „Accumulator“
+
+0: Not an operation (Just skip it)
+1: conditional execution
+2: function call
+3: function return
+4: blockEnter (increment local References)
+5: blockLeave (decrement local References)
+
+
+analyseStatement return values
+
+0: whitespace
+1: 

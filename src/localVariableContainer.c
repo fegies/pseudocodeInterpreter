@@ -6,7 +6,7 @@
 lvc = calloc( 1, sizeof(localVariableContainer) ); \
 lvc-> name = name;
 
-variable* lookupVar(localVariableContainer* lvc, char* name)
+variable* LVClookupVar(localVariableContainer* lvc, char* name)
 {
 	if( lvc == 0 )
 	{
@@ -36,7 +36,7 @@ variable* lookupVar(localVariableContainer* lvc, char* name)
 	}
 }
 
-void storeVar(localVariableContainer* lvc, variable* var, char* name)
+void LVCstoreVar(localVariableContainer* lvc, variable* var, char* name)
 {
 	if( lvc == 0 )
 	{
@@ -89,7 +89,10 @@ void leaveBlockLVC(localVariableContainer* lvc)
 	leaveBlockLVC(lvc-> left);
 	leaveBlockLVC(lvc-> right);
 	if( lvc-> variable != 0 && variable_decrementRefs(lvc-> variable) )
+	{
+		free( lvc-> variable );
 		lvc-> variable = 0;
+	}
 }
 
 void destroyLVC(localVariableContainer* lvc)
