@@ -113,6 +113,12 @@ void interpretStructure(statement* entryPoint)
 				localStackPush( objectInitialize( (variableClass*)class ) );
 			}
 				break;
+			case 7:
+				localStackPush( LVCglobalLookup( ((statementGlobalLookup*)curst)-> name ) );
+				break;
+			case 8:
+				LVCglobalStore( localStackPop(), ((statementGlobalStore*)curst)-> name );
+				break;
 			case 10: // variable assignment
 			{
 				variable* tv = localStackPop();

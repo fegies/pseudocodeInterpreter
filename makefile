@@ -17,7 +17,7 @@ SUBPATHS   = .
 OBJS       = $(BASEOBS)
 
 BASEOBS    = main.o interpreter.o variable.o localVariableContainer.o array.o \
-			 numeric.o
+			 numeric.o object.o
 
 OPROG = $(addprefix $(ODIR)/, $(PROG))
 RUNFLAGS = testscript.pseudocode

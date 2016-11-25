@@ -52,6 +52,14 @@ typedef struct statementObjectInitialize {
 	char* classname;
 } statementObjectInitialize;
 
+//type 7
+//used for class and function names.
+typedef struct statementLVCLookup statementGlobalLookup;
+
+//type 8
+//used in constructing the stack.
+typedef struct statementLVCStore statementGlobalStore;
+
 //type 10
 //assigns the top value of the stack to the var below it.
 typedef struct statementAssignment {

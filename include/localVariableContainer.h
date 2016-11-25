@@ -40,3 +40,8 @@ void leaveBlockLVC(localVariableContainer* lvc);
 //Destroys the container. decrements references of variables in there.
 //Frees all possible memory.
 void destroyLVC(localVariableContainer* lvc);
+
+
+//These are just like the local variants, only they have a global lookup tree
+variable* LVCglobalLookup( char* name );
+void LVCglobalStore( variable* var, char* name );
