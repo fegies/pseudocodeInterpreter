@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-#include "interpreter.h"
 
 int main(int argc, char** argv)
 {
@@ -11,8 +10,6 @@ int main(int argc, char** argv)
 		usesFile = 1;
 		f = fopen(argv[1],"r");
 	}
-
-	interpretFile(f);
 	
 	if(usesFile)
 		fclose(f);

@@ -3,9 +3,9 @@
 PROG       = pseudocode
 VPATH      = src include
 ODIR       = ./bin
-SHAREFLAGS = -pipe -Wall
-CPPCFLAGS  = $(SHAREFLAGS) -std=c++11
-CCFLAGS    = $(SHAREFLAGS) -std=gnu99
+SHAREFLAGS = -pipe -Wall -pedantic
+CPPCFLAGS  = $(SHAREFLAGS) -std=c++14
+CCFLAGS    = $(SHAREFLAGS)
 LINKFLAGS  = $(SHAREFLAGS)
 CPPCOMPILER= $(CXX)
 CCOMPILER  = $(CC)
@@ -16,8 +16,7 @@ SUBPATHS   = .
 #The Objects that are compiled
 OBJS       = $(BASEOBS)
 
-BASEOBS    = main.o interpreter.o variable.o localVariableContainer.o array.o \
-			 numeric.o object.o
+BASEOBS    = main.o variable.o nameStore.o execStack.o
 
 OPROG = $(addprefix $(ODIR)/, $(PROG))
 RUNFLAGS = testscript.pseudocode

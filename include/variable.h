@@ -1,58 +1,43 @@
 #pragma once
 
-/*
-This header defines all that has to do with variables.
-*/
-
-struct variableData
-{
-	unsigned int refcount;
-	void* content;
-};
-
 typedef struct variable
 {
 	char type;
-	struct variableData* variabledata;
+	unsigned int refcount;
+	void* ref;
 } variable;
 
+//just does as it says on the tin
+void variable_increment_Refs( variable* v );
 
+//May free the variable after use!
+void variable_decrement_Refs( variable* v );
 
-//decrements the reference count of this variable.
-//Frees memory if applicable.
-//does not actually free the variable itself
-//returns 1 if the variable does not reference anything anymore
-//returns 0 otherwise
-char variable_decrementRefs(variable* v);
+//calls the methods of whatever the variable is referencing
+//and then free()'s the variable
+void _variable_free( variable* v );
 
-//does nothing more than just freeing some memory.
-void variable_incrementRefs(variable* v);
+//returns a new variable with a refcount initialized to 1 to prevent it
+//from being deleted immediately
+variable* variable_new();
 
-//assingns the value of v2 to v1
-void variableAssign(variable* v1, variable* v2);
+/*
+Variable types:
+0: none (Undefined)
+1: int
+2: boolean
+3: String
+4: Array
+5: Function
+6: Object
+7: Class
+*/
 
-
-//type 0 means the variable is a special null variable
-
-//type 1
-//A boolean is true when the data pointer is not a null pointer.
-//it is false otherwise
-typedef struct variable variableBoolean;
-
-//type 2
-//the integer value is stored in the data pointer
-typedef struct variable variableInteger;
-
-//type 3
-//The pointer points to an array data structure
-typedef struct variable variableArray;
-
-//type 4
-//Once again the pointer is actually used as a pointer.
-typedef struct variable variableObject;
-
-//type 5
-typedef struct variable variableObject;
-
-//type 6
-typedef struct variable variableClass;
+#define VARIABLE_TYPE_NONE 0
+#define VARIABLE_TYPE_INT 1
+#define VARIABLE_TYPE_BOOLEAN 2
+#define VARIABLE_TYPE_STRING 3
+#define VARIABLE_TYPE_ARRAY 4
+#define VARIABLE_TYPE_FUNCTION 5
+#define VARIABLE_TYPE_OBJECT 6
+#define VARIABLE_TYPE_CLASS 7

@@ -1,7 +1,0 @@
-The interpreter will attempt to load the entire script into memory.
-
-it then compiles the code to a memory structure and executes that.
-
-The local variables are managed in a stack!
-
-There is ONE register that is used for temporary variable storage.
