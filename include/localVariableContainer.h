@@ -10,7 +10,7 @@ struct localVariableContainer
 {
 	char* name;
 	variable* variable;
-	localVariableContainer* left;
+	localVariableContainer* left; //all names that are smaller than the name currently being looked at
 	localVariableContainer* right;
 };
 

@@ -5,7 +5,7 @@ VPATH      = src include
 ODIR       = ./bin
 SHAREFLAGS = -pipe -Wall
 CPPCFLAGS  = $(SHAREFLAGS) -std=c++11
-CCFLAGS    = $(SHAREFLAGS)
+CCFLAGS    = $(SHAREFLAGS) -std=gnu99
 LINKFLAGS  = $(SHAREFLAGS)
 CPPCOMPILER= $(CXX)
 CCOMPILER  = $(CC)
