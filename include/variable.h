@@ -2,7 +2,7 @@
 
 typedef struct variable
 {
-	char type;
+	unsigned char type;
 	unsigned int refcount;
 	void* ref;
 } variable;
@@ -20,6 +20,10 @@ void _variable_free( variable* v );
 //returns a new variable with a refcount initialized to 1 to prevent it
 //from being deleted immediately
 variable* variable_new();
+
+//sets the variable to a new type.
+//errors if the variable was not undefined before.
+void variable_set_type( variable* v, unsigned char type );
 
 /*
 Variable types:

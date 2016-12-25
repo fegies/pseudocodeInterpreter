@@ -3,7 +3,7 @@
 PROG       = pseudocode
 VPATH      = src include
 ODIR       = ./bin
-SHAREFLAGS = -pipe -Wall -pedantic
+SHAREFLAGS = -pipe -Wall -pedantic -Og
 CPPCFLAGS  = $(SHAREFLAGS) -std=c++14
 CCFLAGS    = $(SHAREFLAGS)
 LINKFLAGS  = $(SHAREFLAGS)
@@ -16,7 +16,7 @@ SUBPATHS   = .
 #The Objects that are compiled
 OBJS       = $(BASEOBS)
 
-BASEOBS    = main.o variable.o nameStore.o execStack.o
+BASEOBS    = main.o variable.o nameStore.o execStack.o array.o variableString.o
 
 OPROG = $(addprefix $(ODIR)/, $(PROG))
 RUNFLAGS = testscript.pseudocode
@@ -38,7 +38,7 @@ clean:
 
 #linking
 $(OPROG): $(addprefix $(ODIR)/, $(OBJS))
-	$(CCOMPILER) -o $@ $^ $(LINKFLAGS)
+	$(CCOMPILER) $(LINKFLAGS) -o $@ $^
 
 #compiling
 $(ODIR)/%.o : %.cpp

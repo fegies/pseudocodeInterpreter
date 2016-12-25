@@ -3,3 +3,5 @@
 
 
 #define EXECSTACKSIZE 200
+
+#define ARRAYSEGMENTSIZE 50
