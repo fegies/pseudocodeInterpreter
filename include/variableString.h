@@ -21,7 +21,7 @@ typedef struct  variableString
 }variableString;
 
 
-variableString* variableString_new();
+variable* variableString_new();
 
 unsigned int variableString_get_length( variable* s );
 
@@ -34,8 +34,18 @@ void variableString_assign( variable* to, variable* from );
 
 variable* variableString_concat( variable* first, variable* second );
 
+//returns 0 if the strings are equal
+//-1 if the first string is smaller,
+//1 if the first is bigger
+char variableString_compare( variable* s1, variable* s2 );
+
+//DO NOT MODIFY THE BYTES GIVEN OUT HERE!
+char* variableString_getBytes( variable* s );
+
 //from and to are given in unicode chars, not bytes
-variable* variableString_substring( variable* s, unsigned int from, unsigned int to );
+//to is the index of the first char that will be in the substring
+//from is exclusive
+variable* variableString_substring( variable* s, unsigned int from, unsigned int length );
 
 void variableString_destroy( variableString* v );
 

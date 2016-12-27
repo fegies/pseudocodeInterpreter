@@ -4,9 +4,12 @@
 #include <string.h>
 #include <stdlib.h>
 
-variableString* variableString_new()
+variable* variableString_new()
 {
-	return calloc( 1, sizeof(variableString) );
+	variable* v = variable_new();
+	variable_set_type( v, VARIABLE_TYPE_STRING );
+	v-> ref = calloc( 1, sizeof(variableString) );
+	return v;
 }
 
 unsigned int variableString_get_length( variable* s )
@@ -129,7 +132,7 @@ variable* variableString_concat( variable* first, variable* second )
 	if( variableString_has_attribute(second, VARIABLESTRING_FLAGS_COW) )
 		second = ((variableString*)second-> ref)-> data;
 
-	variableString* vsres = variableString_new();
+	variableString* vsres = calloc( 1, sizeof(variableString) );
 	variableString* vsfir = (variableString*)first-> ref;
 	variableString* vssec = (variableString*)second-> ref;
 
@@ -145,7 +148,45 @@ variable* variableString_concat( variable* first, variable* second )
 	return res;
 }
 
+char variableString_compare( variable* s1, variable* s2 )
+{
+	assert( s1 != 0 );
+	assert( s1-> type == VARIABLE_TYPE_STRING );
+	assert( s2 != 0 );
+	assert( s2-> type == VARIABLE_TYPE_STRING );
 
+	char s1cow = variableString_has_attribute( s1, VARIABLESTRING_FLAGS_COW );
+	char s2cow = variableString_has_attribute( s2, VARIABLESTRING_FLAGS_COW );
+
+	if( s1cow )
+	{
+		if( s2cow ) //If they are both COW, the reference can be compared to
+					//test for equaltiy
+			if(    ((variableString*)s1-> ref)-> data 
+				== ((variableString*)s2-> ref)-> data )
+				return 0;
+
+		s1 = ((variableString*)s1-> ref)-> data;
+	}
+	if( s2cow )
+		s2 = ((variableString*)s2-> ref)-> data;
+
+	//this is allowed because UTF-8 preserves the ordering of the units
+	//if compared bytewise
+	return strcmp( ((variableString*)s1-> ref)-> data,
+		((variableString*)s2-> ref)-> data );
+}
+
+char* variableString_getBytes( variable* s )
+{
+	assert( s != 0 );
+	assert( s-> type == VARIABLE_TYPE_STRING );
+
+	if( variableString_has_attribute(s,VARIABLESTRING_FLAGS_COW) )
+		s = ((variableString*)s-> ref)-> data;
+
+	return ((variableString*)s-> ref)-> data;
+}
 
 //takes a position in code units on the given string and returns the position
 //in bytes on that same same string
@@ -168,8 +209,41 @@ unsigned int __variableString_unicode_pos_translate(
 	return bytepos;
 }
 
-//TODO: VARIABLE_STRING_SUBSTRING
+variable* variableString_substring(
+	variable* s, unsigned int from, unsigned int length )
+{
+	assert( s != 0 );
+	assert( s-> type == VARIABLE_TYPE_STRING );
 
+	if( variableString_has_attribute( s, VARIABLESTRING_FLAGS_COW ) )
+		s = ((variableString*)s->ref)-> data;
+
+	variableString* svs = s-> ref;
+
+	assert( from < svs-> length );
+
+	if( from + length > svs-> length )
+		length = svs-> length - from;
+
+	unsigned int bytefrom = __variableString_unicode_pos_translate(
+		svs-> data, from, svs-> bytecount-1 );
+	unsigned int to = from + length;
+	unsigned int byteto = __variableString_unicode_pos_translate(
+		svs-> data, to, svs-> bytecount-1 );
+
+	unsigned int bytecount = byteto - bytefrom + 1;
+	char* news = malloc( bytecount );
+	news[bytecount-1] = '\0';
+	strncpy( news, ((char*)svs-> data) + bytefrom, bytecount-1 );
+
+	variable* res = variableString_new();
+	variableString* resv = res-> ref;
+	resv-> length = length;
+	resv-> bytecount = bytecount;
+	resv-> data = news;
+
+	return res;
+}
 
 void variableString_destroy( variableString* v )
 {
@@ -181,4 +255,6 @@ void variableString_destroy( variableString* v )
 	else
 		free( v-> data );
 	free( v );
+
+
 }

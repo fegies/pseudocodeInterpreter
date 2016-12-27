@@ -16,7 +16,8 @@ SUBPATHS   = .
 #The Objects that are compiled
 OBJS       = $(BASEOBS)
 
-BASEOBS    = main.o variable.o nameStore.o execStack.o array.o variableString.o
+BASEOBS    = main.o variable.o nameStore.o execStack.o array.o variableString.o \
+	class.o object.o
 
 OPROG = $(addprefix $(ODIR)/, $(PROG))
 RUNFLAGS = testscript.pseudocode
