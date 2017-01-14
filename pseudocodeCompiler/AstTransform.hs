@@ -9,5 +9,5 @@ normaliseAst = flattenRepeat
 flattenRepeat :: [Statement] -> [Statement]
 flattenRepeat [] = []
 flattenRepeat ((StatementRepeat block exp):xs)
-    = block++(StatementWhile exp block):[]++(flattenRepeat xs)
+    = block++(StatementWhile (ExpressionLogicNot exp) block):[]++(flattenRepeat xs)
 flattenRepeat (x:xs) = x:(flattenRepeat xs)
