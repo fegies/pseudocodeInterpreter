@@ -2,11 +2,18 @@ import Lexer
 import PseudocodeParser
 import AstTransform
 
+import System.Environment
 --main = getContents >>= print . parsePSC . lexer
 
 
 main = do
-   putStr s
+   [f] <- getArgs
+   interpretFile f
+
+interpretFile f = do
+    s <- readFile $ f
+    let ast = show . normaliseAst . parsePSC . lexer $ s 
+    putStrLn ast
 
 pfs =parsePSC . lexer $ t
 
@@ -33,4 +40,5 @@ g = "function f (a,b,c) { print(a); print(b); } print( f (a) );"
 
 h = "f (); return a;"
 
+j = "for i <- 0 downto b; do { sleep(1); } od"
 i = normaliseAst . parsePSC . lexer

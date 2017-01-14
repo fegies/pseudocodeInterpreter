@@ -21,6 +21,9 @@ tokens :-
   od				  	  { \s -> TokenOd }
   repeat          { \s -> TokenRepeat }
   until           { \s -> TokenUntil }
+  for             { \s -> TokenFor }
+  to              { \s -> TokenTo }
+  downto          { \s -> TokenDownto }
   return          { \s -> TokenReturn }
   function        { \s -> TokenFunction }
   \;				  	  { \s -> TokenSemicolon }
@@ -37,7 +40,6 @@ tokens :-
   "<="            { \s -> TokenCompLeq }
   "&&"            { \s -> TokenLogicAnd }
   "||"            { \s -> TokenLogicOr }
-  '!'             { \s -> TokenLogicNot }
   \>              { \s -> TokenCompGt }
   \<              { \s -> TokenCompLt }
   \+              { \s -> TokenArithPlus }
@@ -49,7 +51,8 @@ tokens :-
   "--"            { \s -> TokenArithDec }
   \,              { \s -> TokenComma }
   \"$alpha+"      { \s -> TokenStringLit (reverse . tail . reverse . tail $ s) }
-  $digit+				  { \s -> TokenInt (read s) }
+  '!'             { \s -> TokenLogicNot }
+  $digit+         { \s -> TokenInt (read s) }
   $alpha+ 				{ \s -> TokenWord s}
 
 {

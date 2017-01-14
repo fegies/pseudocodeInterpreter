@@ -1,8 +1,15 @@
 
-a = "hi"
-while 1==1; do
+for a<-0 to 20; do
 {
-	print(a);
-	sleep(1);
+	while 1; do
+		print("true");
+	od
+	for b<-10 downto 4; do
+		if a==b; then
+			print("hi");
+		else
+			print("ho");
+		fi
+	od
 }
-done
+od

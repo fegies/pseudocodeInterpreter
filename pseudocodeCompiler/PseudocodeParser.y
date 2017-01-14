@@ -18,6 +18,9 @@ import Tokens
     od      { TokenOd }
     repeat  { TokenRepeat }
     until   { TokenUntil }
+    for     { TokenFor }
+    to      { TokenTo }
+    downto  { TokenDownto }
     function { TokenFunction }
     return  { TokenReturn }
     ';'     { TokenSemicolon}
@@ -49,7 +52,6 @@ import Tokens
     word    { TokenWord $$ }
     stringlit{ TokenStringLit $$ }
 
-%nonassoc FDEL
 %left ','
 %right "<-"
 %left "&&"
@@ -63,7 +65,7 @@ import Tokens
 %left '[' ']'
 %left '(' ')'
 %left "++" "--"
-%nonassoc in function 
+%nonassoc FDEL
 %%
 
 
@@ -98,6 +100,8 @@ StatementIf :: { Statement }
 StatementLoop :: { Statement }
     : while Expression ';' do Block od { StatementWhile $2 $5 }
     | repeat Block until Expression ';' { StatementRepeat $2 $4 }
+    | for ExpressionAssign to Expression ';' do Block od { StatementForTo $2 $4 $7}
+    | for ExpressionAssign downto Expression ';' do Block od { StatementForDownto $2 $4 $7}
 
 Expression :: { Expression }
     : stringlit { ExpressionConstant (ConstantString $1) }
@@ -108,8 +112,11 @@ Expression :: { Expression }
     | ExpressionArithmetic { $1 }
     | ExpressionLogic { $1 }
     | ExpressionCompare { $1 }
-    | Expression "<-" Expression { ExpressionAssign $1 $3 }
+    | ExpressionAssign { $1 }
     | word { ExpressionVar $1 }
+
+ExpressionAssign :: { Expression }
+    : Expression "<-" Expression { ExpressionAssign $1 $3 }
 
 ExpressionArithmetic :: { Expression }
     : Expression "++"   { ExpressionArithInc $1 }

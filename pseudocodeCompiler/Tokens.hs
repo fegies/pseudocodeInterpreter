@@ -10,6 +10,9 @@ data Token
     | TokenOd
     | TokenRepeat
     | TokenUntil
+    | TokenFor
+    | TokenTo
+    | TokenDownto
     | TokenFunction
     | TokenReturn
     | TokenSemicolon --Symbols

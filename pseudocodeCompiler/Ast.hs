@@ -8,10 +8,13 @@ data Statement
     = StatementIf Expression Block Block
     | StatementWhile Expression Block
     | StatementRepeat Block Expression
+    | StatementForTo Expression Expression Block
+    | StatementForDownto Expression Expression Block
     | StatementFunctionDeclaration String [String] Block -- name, arguments
     | StatementReturn Expression
     | StatementExpression Expression
     deriving (Show)
+
 
 data Constant
     = ConstantInt Integer
