@@ -1,56 +1,49 @@
 module Ast where
 
-data Statement
-    = EmptyStatement
-    | StatementIf Expression Block Block -- condition, then, else
-    | StatementWhile Expression Block -- condition , do 
-    | StatementFor StatementFor
-    | StatementExpr Expression
-    deriving (Show)
+type Program = Block 
 
 type Block = [Statement]
 
-data StatementFor
-    = ForTo String Integer Integer Block -- name, from, to, block
-    | ForDownto String Integer Integer Block
+data Statement
+    = StatementIf Expression Block Block
+    | StatementWhile Expression Block
+    | StatementRepeat Block Expression
+    | StatementFunctionDeclaration String [String] Block -- name, arguments
+    | StatementReturn Expression
+    | StatementExpression Expression
     deriving (Show)
 
-data Value
-    = Vs String
-    | Vi Integer
+data Constant
+    = ConstantInt Integer
+    | ConstantString String 
     deriving (Show)
+
+type FunctionArguments = [Expression]
 
 data Expression
-    = ExprConst Value
-    | ExprAssign String Expression
+    = ExpressionVar String
+    | ExpressionConstant Constant
+    | ExpressionFunctionCall Expression FunctionArguments --funciton name, Arguments
+    | ExpressionArrayAccess Expression Expression --array, position
+    | ExpressionAssign Expression Expression --to ,from
 
-    --variable handling
-    | ExprLookup String
-    | ExprCollection Expression Expression--For argument collection
-    | ExprFunctionCall Expression Expression -- name, arguments
-    | ExprMemberAccess Expression String -- object, member name
-    | ExprArrayAccess Expression Expression --object, Index
+    | ExpressionCompareEq Expression Expression
+    | ExpressionCompareNeq Expression Expression
+    | ExpressionCompareLt Expression Expression
+    | ExpressionCompareGt Expression Expression
+    | ExpressionCompareGeq Expression Expression
+    | ExpressionCompareLeq Expression Expression
 
-    --Arithmetic
-    | ExprPlus Expression Expression
-    | ExprMinus Expression Expression
-    | ExprMult Expression Expression
-    | ExprDiv Expression Expression
-    | ExprMod Expression Expression
-    | ExprInc Expression
-    | ExprDec Expression
+    | ExpressionArithPlus Expression Expression
+    | ExpressionArithMinus Expression Expression
+    | ExpressionArithMul Expression Expression
+    | ExpressionArithDiv Expression Expression
+    | ExpressionArithMod Expression Expression
+    | ExpressionArithInc Expression
+    | ExpressionArithDec Expression
 
-    --Comparisons
-    | ExprCompEq Expression Expression
-    | ExprCompNeq Expression Expression
-    | ExprCompLt Expression Expression
-    | ExprCompGt Expression Expression
-    | ExprCompLeq Expression Expression
-    | ExprCompGeq Expression Expression
+    | ExpressionLogicNot Expression
+    | ExpressionLogicAnd Expression Expression
+    | ExpressionLogicOr Expression Expression
 
-    --boolean Expressions
-    | ExprNot Expression
-    | ExprAnd Expression Expression
-    | ExprOr Expression Expression
     deriving (Show)
-

@@ -16,11 +16,11 @@ import Tokens
     while   { TokenWhile }
     do      { TokenDo }
     od      { TokenOd }
-    for     { TokenFor }
-    to      { TokenTo }
-    downto  { TokenDownto }
+    repeat  { TokenRepeat }
+    until   { TokenUntil }
+    function { TokenFunction }
+    return  { TokenReturn }
     ';'     { TokenSemicolon}
-    '.'     { TokenDot }
     ','     { TokenComma }
     '('     { TokenRBOpen }
     ')'     { TokenRBClose }
@@ -29,109 +29,121 @@ import Tokens
     '['     { TokenSBOpen }
     ']'     { TokenSBClose }
     "<-"    { TokenLeftarrow }
-    "=="    { TokenEq }
-    "!="    { TokenNeq }
-    '!'     { TokenNot }
-    "&&"    { TokenAnd }
-    "||"    { TokenOr }
-    "<="    { TokenLeq }
-    '<'     { TokenLt }
-    ">="    { TokenGeq }
-    '>'     { TokenGt }
-    "++"    { TokenInc }
-    "--"    { TokenDec }
-    '+'     { TokenPlus }
-    '-'     { TokenMinus }
-    '*'     { TokenMult }
-    '/'     { TokenDiv }
-    '%'     { TokenMod }
-    '='     { TokenEqualSign }
-    '"'     { TokenQuote}
+    "=="    { TokenCompEq }
+    "!="    { TokenCompNeq }
+    '<'     { TokenCompLt }
+    "<="    { TokenCompLeq }
+    '>'     { TokenCompGt }
+    ">="    { TokenCompGeq }
+    '+'     { TokenArithPlus }
+    '-'     { TokenArithMinus }
+    '*'     { TokenArithMul }
+    '/'     { TokenArithDiv }
+    '%'     { TokenArithMod }
+    "++"    { TokenArithInc }
+    "--"    { TokenArithDec }
+    "&&"    { TokenLogicAnd }
+    "||"    { TokenLogicOr }
+    '!'     { TokenLogicNot }
     int     { TokenInt $$ }
     word    { TokenWord $$ }
+    stringlit{ TokenStringLit $$ }
 
+%nonassoc FDEL
 %left ','
 %right "<-"
-%left "||"
 %left "&&"
+%left "||"
 %left "==" "!="
 %left '>' ">="
 %left '<' "<="
 %left '+' '-'
 %left '*' '/' '%'
 %right '!'
-%left '.'
 %left '[' ']'
 %left '(' ')'
 %left "++" "--"
-
+%nonassoc in function 
 %%
 
-Statement :: { Statement }
-          : StatementIf    { $1 }
-          | StatementWhile { $1 }
-          | StatementFor   { StatementFor $1 }
-          | Expression ';' { StatementExpr $1 }
 
-StatementIf :: { Statement }
-            : if Expression ';' then Block else Block fi { StatementIf $2 $5 $7 }
-            | if Expression ';' then Block fi            { StatementIf $2 $5 [] }
-
-StatementWhile :: { Statement }
-StatementWhile : while Expression ';' do Block od { StatementWhile $2 $5 }
-
-StatementFor :: { StatementFor }
-             : for word '=' int to int do Block od     { ForTo $2 $4 $6 $8 }
-             | for word '=' int downto int do Block od { ForDownto $2 $4 $6 $8 }
+Program :: { Program }
+    : Stmts { $1 }
 
 Block :: { Block }
 Block : {- empty -}         { [] }
       | Statement           { $1:[] }
       | '{' Stmts '}'       { $2 }
 
-Stmts :: { [Statement] }
+Stmts :: { Block }
       : Statement { $1:[] }
-      | Stmts Statement { $2:$1 }
+      | Stmts Statement { $1 ++ $2:[] }
+
+Statement :: { Statement }
+    : StatementIf { $1 }
+    | StatementLoop { $1 }
+    | return Expression ';' { StatementReturn $2 }
+    | function word '(' FunctionParams ')' Block { StatementFunctionDeclaration $2 $4 $6}
+    | Expression ';' { StatementExpression $1 }
+
+FunctionParams :: { [String] }
+    : {-empty -} { [] }
+    | word       { $1:[] }
+    | FunctionParams ',' word { $1 ++ $3:[] }
+
+StatementIf :: { Statement }
+    : if Expression ';' then Block else Block fi { StatementIf $2 $5 $7 }
+    | if Expression ';' then Block fi { StatementIf $2 $5 [] }
+
+StatementLoop :: { Statement }
+    : while Expression ';' do Block od { StatementWhile $2 $5 }
+    | repeat Block until Expression ';' { StatementRepeat $2 $4 }
 
 Expression :: { Expression }
-            : '(' Expression ')' { $2 }
+    : stringlit { ExpressionConstant (ConstantString $1) }
+    | Expression '(' FunctionArguments ')' { ExpressionFunctionCall $1 $3}
+    | Expression '[' Expression ']' { ExpressionArrayAccess $1 $3 }
+    | int { ExpressionConstant (ConstantInt $1) }
+    | '(' Expression ')' { $2 }
+    | ExpressionArithmetic { $1 }
+    | ExpressionLogic { $1 }
+    | ExpressionCompare { $1 }
+    | Expression "<-" Expression { ExpressionAssign $1 $3 }
+    | word { ExpressionVar $1 }
 
-            {- Constants -}
-            | '"' word '"'  { ExprConst (Vs $2) }
-            | int           { ExprConst (Vi $1) }
+ExpressionArithmetic :: { Expression }
+    : Expression "++"   { ExpressionArithInc $1 }
+    | Expression "--"   { ExpressionArithDec $1 }
+    | Expression '+' Expression { ExpressionArithPlus $1 $3 }
+    | Expression '-' Expression { ExpressionArithMinus $1 $3 }
+    | Expression '*' Expression { ExpressionArithMul $1 $3 }
+    | Expression '/' Expression { ExpressionArithDiv $1 $3 }
+    | Expression '%' Expression { ExpressionArithMod $1 $3 }
 
-            {- Assign and lookup -}
-            | word                            { ExprLookup $1 }
-            | word "<-" Expression            { ExprAssign $1 $3 }
-            | Expression '[' Expression ']'   { ExprArrayAccess $1 $3 }
-            | Expression '.' word             { ExprMemberAccess $1 $3 }
-            | Expression '(' Expression ')'   { ExprFunctionCall $1 $3 }
-            | Expression ',' Expression       { ExprCollection $1 $3 }
+ExpressionCompare :: { Expression }
+    : Expression "==" Expression { ExpressionCompareEq $1 $3 }
+    | Expression "!=" Expression { ExpressionCompareNeq $1 $3 }
+    | Expression '<' Expression { ExpressionCompareLt  $1 $3 }
+    | Expression "<=" Expression { ExpressionCompareLeq $1 $3 }
+    | Expression '>' Expression { ExpressionCompareGt $1 $3 }
+    | Expression ">=" Expression { ExpressionCompareGeq $1 $3 }
 
-            {- Comparison -}
-            | Expression "==" Expression {ExprCompEq $1 $3}
-            | Expression "!=" Expression {ExprCompNeq $1 $3}
-            | Expression "<=" Expression {ExprCompLeq $1 $3}
-            | Expression ">=" Expression {ExprCompGeq $1 $3}
-            | Expression '<' Expression  {ExprCompLt $1 $3}
-            | Expression '>' Expression  {ExprCompGt $1 $3}
+ExpressionLogic :: { Expression }
+    : Expression "&&" Expression { ExpressionLogicAnd $1 $3 }
+    | Expression "||" Expression { ExpressionLogicOr $1 $3 }
+    | '!' Expression { ExpressionLogicNot $2 }
 
-            {- Logic -}
-            | '!' Expression             { ExprNot $2 }
-            | Expression "&&" Expression { ExprAnd $1 $3 }
-            | Expression "||" Expression { ExprOr $1 $3 }
+FunctionArguments :: { [Expression] }
+    : {- empty -} { [] }
+    | Farglist { $1 }
 
-            {- Arithmetic -}
-            | Expression '+' Expression { ExprPlus $1 $3 }
-            | Expression '-' Expression { ExprMinus $1 $3 }
-            | Expression '*' Expression { ExprMult $1 $3 }
-            | Expression '/' Expression { ExprDiv $1 $3 }
-            | Expression '%' Expression { ExprMod $1 $3 }
-            | Expression "++"           { ExprInc $1 }
-            | Expression "--"           { ExprDec $1 }
+Farglist :: { [Expression] }
+    : Expression { $1 : [] }
+    | Farglist ',' Expression { $3 : $1 }
 
 {
 parseError :: [Token] -> a
-parseError _ = error "Parse error"
+parseError a = error $ "parse Error: "++ show a
+
 
 }

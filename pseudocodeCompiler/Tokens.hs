@@ -8,12 +8,11 @@ data Token
     | TokenWhile
     | TokenDo
     | TokenOd
-    | TokenFor
-    | TokenTo
-    | TokenDownto 
-    | TokenClass
+    | TokenRepeat
+    | TokenUntil
+    | TokenFunction
+    | TokenReturn
     | TokenSemicolon --Symbols
-    | TokenDot
     | TokenComma
     | TokenRBOpen --round brace
     | TokenRBClose
@@ -22,24 +21,24 @@ data Token
     | TokenSBOpen --square brackets
     | TokenSBClose
     | TokenLeftarrow -- <-
-    | TokenEq -- ==
-    | TokenNeq -- !=
-    | TokenNot -- !
-    | TokenAnd -- &&
-    | TokenOr -- ||
-    | TokenLeq -- <=
-    | TokenLt -- <
-    | TokenGeq -- >=
-    | TokenGt -- >
-    | TokenInc -- ++
-    | TokenDec -- --
-    | TokenPlus -- +
-    | TokenMinus -- -
-    | TokenMult -- *
-    | TokenDiv -- /
-    | TokenMod -- %
-    | TokenEqualSign -- =
     | TokenQuote -- "
     | TokenInt Integer
+    | TokenCompEq
+    | TokenCompNeq
+    | TokenCompLeq
+    | TokenCompLt
+    | TokenCompGeq
+    | TokenCompGt
+    | TokenArithPlus
+    | TokenArithMinus
+    | TokenArithMul
+    | TokenArithDiv
+    | TokenArithMod
+    | TokenArithInc
+    | TokenArithDec
+    | TokenLogicNot
+    | TokenLogicAnd
+    | TokenLogicOr
+    | TokenStringLit String
     | TokenWord String
     deriving (Show)
