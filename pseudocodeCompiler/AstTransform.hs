@@ -26,9 +26,9 @@ transformFor((StatementForDownto (ExpressionAssign to from) expc block):xs)
     ++(flattenRepeat xs)
 transformFor (x:xs) = x:(transformFor xs)
 
-transformToInstructions :: Program -> [Instruction]
+transformToInstructions :: Block -> [Instruction]
 transformToInstructions [] = []
-transformToInstructions x:xs = (serializeStatement x)++transformToInstructions xs
+transformToInstructions (x:xs) = (serializeStatement x)++transformToInstructions xs
 
 serializeStatement :: Statement -> [Instruction]
 serializeStatement (StatementIf expc bthen belse )
@@ -38,4 +38,23 @@ serializeStatement (StatementIf expc bthen belse )
       in ci ++ [InstrConditionalJump (length ti)] ++ ti ++ ei
 serializeStatement (StatementWhile exp block )
     = let ci = serializeExpression exp
-          bi = serializeExpression block
+          bi = transformToInstructions block
+          jf = length bi + 1
+          jb = - (jf + length ci)
+      in ci ++ [InstrConditionalJump jf] ++ bi ++ [InstrJump jb] 
+serializeStatement (StatementFunctionDeclaration name args block)
+    = let ins = transformToInstructions block
+          len = length ins
+      in (InstrFunctionDecl name args len) : ins
+serializeStatement (StatementReturn exp)
+    = serializeExpression exp ++ [InstrReturn]
+serializeStatement (StatementExpression exp)
+    = serializeExpression exp
+
+serializeExpression :: Expression -> [Instruction]
+serializeExpression (ExpressionVar name) = InstrVarLookup name : []
+serializeExpression (ExpressionConstant const)
+    = case const of
+        ConstantString s -> InstrPushConstStr s
+        ConstantInt i -> InstrPushConstInt $ fromIntegral i
+      : []
