@@ -6,10 +6,24 @@ import Instructions
 normaliseAst :: Program -> Program
 normaliseAst = normaliseStatements . checkTree
 
+--throw errors if an error in the grammar is found
+--returns the exact same AST if no errors were found
 checkTree :: Program -> Program
+checkTree (p @(StatementForTo (ExpressionVar _) (ExpressionConstant _) _) : xs) = p : checkTree xs
+checkTree (p @(StatementForTo (ExpressionArrayAccess _ _) (ExpressionConstant _) _) : xs) = p : checkTree xs
+checkTree (p @(StatementForTo _ _ _) : xs) = error "Deine For-Schleife ist behindert. Streng dich mehr an."
+checkTree (p @(StatementForDownto (ExpressionVar _) (ExpressionConstant _) _) : xs) = p : checkTree xs
+checkTree (p @(StatementForDownto (ExpressionArrayAccess _ _) (ExpressionConstant _) _) : xs) = p : checkTree xs
+checkTree (p @(StatementForDownto _ _ _) : xs) = error "Deine For-Schleife ist behindert. Streng dich mehr an."
+checkTree (p @(StatementExpression e):xs) = (StatementExpression $ checkExpression e) : checkTree xs
 checkTree a = a
 
---turns for.. loops into while loops
+--thows errors if a bad expression is found
+--returns the same expression otherwise
+checkExpression :: Expression -> Expression
+checkExpression a = a
+
+--turn all loops into while loops
 normaliseStatements :: [Statement] -> [Statement]
 normaliseStatements [] = []
 normaliseStatements((StatementForTo (ExpressionAssign to from) expc block):xs)
@@ -88,3 +102,9 @@ serializeExpression (ExpressionArithPlus l r )
     = argstolist l r ++ [InstrArithPlus]
 serializeExpression (ExpressionArithMinus l r)
     = argstolist l r ++ [InstrArithMinus]
+serializeExpression (ExpressionLogicAnd l r)
+    = argstolist l r ++ [InstrLogicAnd]
+serializeExpression (ExpressionLogicOr l r)
+    = argstolist l r ++ [InstrLogicOr]
+serializeExpression (ExpressionLogicNot e)
+    = serializeExpression e ++ [InstrLogicNot]

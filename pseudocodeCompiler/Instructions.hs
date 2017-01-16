@@ -26,8 +26,10 @@ data Instruction
     | InstrArithInc
     | InstrArithDec
 
-
-
+    | InstrLogicNot
+    | InstrLogicAnd
+    | InstrLogicOr
+    deriving (Show)
 
 
 
