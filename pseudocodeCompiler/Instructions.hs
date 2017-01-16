@@ -8,3 +8,26 @@ data Instruction
     | InstrVarLookup String
     | InstrPushConstStr String
     | InstrPushConstInt Int
+    | InstrFunctionCall
+    | InstrArrayAccess
+    | InstrAssign
+
+    | InstrCompareEq
+    | InstrCompareLt
+    | InstrCompareGt
+    | InstrCompareLeq
+    | InstrCompareGeq
+
+    | InstrArithPlus
+    | InstrArithMinus
+    | InstrArithMul
+    | InstrArithDiv
+    | InstrArithMod
+    | InstrArithInc
+    | InstrArithDec
+
+
+
+
+
+
