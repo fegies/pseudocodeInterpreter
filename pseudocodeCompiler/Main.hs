@@ -12,8 +12,16 @@ main = do
 
 interpretFile f = do
     s <- readFile $ f
-    let ast = show . normaliseAst . parsePSC . lexer $ s 
-    putStrLn ast
+    let tokens = lexer s
+    let ast = parsePSC tokens
+    let normast = normaliseAst ast
+    let instr = transformToInstructions normast
+
+    putStrLn $ "--source--\n\n" ++ s
+    putStrLn $ "\n--tokens--\n\n" ++ show tokens
+    putStrLn $ "\n--ast--\n\n" ++ show ast
+    putStrLn $ "\n--normalized ast--\n\n" ++ show normast
+    putStrLn $ "\n--Instructions--\n\n" ++ show instr
 
 pfs =parsePSC . lexer $ t
 
@@ -38,7 +46,7 @@ f = "repeat { i++; a[i] <- 4; } until i == 40;"
 
 g = "function f (a,b,c) { print(a); print(b); } print( f (a) );"
 
-h = "f (); return a;"
+h = "for i <- 0 to a; do print(i); od"
 
 j = "for i <- 0 downto b; do { sleep(1); } od"
 i = normaliseAst . parsePSC . lexer

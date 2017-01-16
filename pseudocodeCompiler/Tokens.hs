@@ -14,7 +14,9 @@ data Token
     | TokenTo
     | TokenDownto
     | TokenFunction
+    | TokenClass
     | TokenReturn
+    | TokenNew
     | TokenSemicolon --Symbols
     | TokenComma
     | TokenRBOpen --round brace
@@ -25,6 +27,7 @@ data Token
     | TokenSBClose
     | TokenLeftarrow -- <-
     | TokenQuote -- "
+    | TokenDot
     | TokenInt Integer
     | TokenCompEq
     | TokenCompNeq

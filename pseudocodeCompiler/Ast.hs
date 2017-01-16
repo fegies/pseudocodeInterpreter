@@ -11,6 +11,7 @@ data Statement
     | StatementForTo Expression Expression Block
     | StatementForDownto Expression Expression Block
     | StatementFunctionDeclaration String [String] Block -- name, arguments
+    | StatementClassDeclaration String [String] --name, contents
     | StatementReturn Expression
     | StatementExpression Expression
     deriving (Show)
@@ -24,11 +25,14 @@ data Constant
 type FunctionArguments = [Expression]
 
 data Expression
-    = ExpressionVar String
+    = EmptyExpression
+    | ExpressionVar String
     | ExpressionConstant Constant
     | ExpressionFunctionCall Expression FunctionArguments --funciton name, Arguments
     | ExpressionArrayAccess Expression Expression --array, position
     | ExpressionAssign Expression Expression --to ,from
+    | ExpressionObjectNew String --class to call
+    | ExpressionObjectMembAccess Expression String -- object, member
 
     | ExpressionCompareEq Expression Expression
     | ExpressionCompareNeq Expression Expression

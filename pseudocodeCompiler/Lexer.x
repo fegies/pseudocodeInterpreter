@@ -26,6 +26,8 @@ tokens :-
   downto          { \s -> TokenDownto }
   return          { \s -> TokenReturn }
   function        { \s -> TokenFunction }
+  "class"         { \s -> TokenClass}
+  new             { \s -> TokenNew }
   \;				  	  { \s -> TokenSemicolon }
   \(    		      { \s -> TokenRBOpen }
   \)				  	  { \s -> TokenRBClose }
@@ -50,6 +52,7 @@ tokens :-
   "++"            { \s -> TokenArithInc }
   "--"            { \s -> TokenArithDec }
   \,              { \s -> TokenComma }
+  \.              { \s -> TokenDot }
   \"$alpha+"      { \s -> TokenStringLit (reverse . tail . reverse . tail $ s) }
   '!'             { \s -> TokenLogicNot }
   $digit+         { \s -> TokenInt (read s) }

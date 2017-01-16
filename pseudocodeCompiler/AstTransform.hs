@@ -9,11 +9,9 @@ normaliseAst = normaliseStatements . checkTree
 --throw errors if an error in the grammar is found
 --returns the exact same AST if no errors were found
 checkTree :: Program -> Program
-checkTree (p @(StatementForTo (ExpressionVar _) (ExpressionConstant _) _) : xs) = p : checkTree xs
-checkTree (p @(StatementForTo (ExpressionArrayAccess _ _) (ExpressionConstant _) _) : xs) = p : checkTree xs
+checkTree (p @(StatementForTo (ExpressionAssign _ _) _ _) : xs) = p : checkTree xs
 checkTree (p @(StatementForTo _ _ _) : xs) = error "Deine For-Schleife ist behindert. Streng dich mehr an."
-checkTree (p @(StatementForDownto (ExpressionVar _) (ExpressionConstant _) _) : xs) = p : checkTree xs
-checkTree (p @(StatementForDownto (ExpressionArrayAccess _ _) (ExpressionConstant _) _) : xs) = p : checkTree xs
+checkTree (p @(StatementForDownto (ExpressionAssign _ _) _ _) : xs) = p : checkTree xs
 checkTree (p @(StatementForDownto _ _ _) : xs) = error "Deine For-Schleife ist behindert. Streng dich mehr an."
 checkTree (p @(StatementExpression e):xs) = (StatementExpression $ checkExpression e) : checkTree xs
 checkTree a = a
@@ -23,22 +21,33 @@ checkTree a = a
 checkExpression :: Expression -> Expression
 checkExpression a = a
 
---turn all loops into while loops
+
 normaliseStatements :: [Statement] -> [Statement]
 normaliseStatements [] = []
-normaliseStatements((StatementForTo (ExpressionAssign to from) expc block):xs)
-    = [StatementExpression (ExpressionAssign to from),
-    StatementWhile (ExpressionCompareEq to expc) (block++(StatementExpression $ ExpressionArithInc to):[])]
-    ++(normaliseStatements xs)
-normaliseStatements((StatementForDownto (ExpressionAssign to from) expc block):xs)
-    = [StatementExpression (ExpressionAssign to from),
-    StatementWhile (ExpressionCompareEq to expc) (block++(StatementExpression $ ExpressionArithDec to):[])]
-    ++(normaliseStatements xs)
-normaliseStatements((StatementRepeat block until):xs)
-    = block ++ [StatementWhile (ExpressionLogicNot until) block] ++ (normaliseStatements xs)
-normaliseStatements((StatementExpression exp):xs)
-    = (StatementExpression $ normaliseExpression exp) : (normaliseStatements xs)
-normaliseStatements (x:xs) = x:(normaliseStatements xs)
+normaliseStatements (x:xs) = normaliseStatement x ++ normaliseStatements xs
+
+
+--turn all loops into while loops
+normaliseStatement :: Statement -> [Statement]
+normaliseStatement (StatementForTo (ExpressionAssign to from) expc block)
+    = StatementExpression (ExpressionAssign to from)
+    : StatementWhile (ExpressionCompareLt to expc) (block++[StatementExpression $ ExpressionArithInc to])
+    : []
+normaliseStatement (StatementForDownto (ExpressionAssign to from) expc block)
+    = StatementExpression (ExpressionAssign to from)
+    : StatementWhile (ExpressionCompareGt to expc) (block++[StatementExpression $ ExpressionArithDec to])
+    : []
+normaliseStatement (StatementRepeat block until)
+    = block ++ [StatementWhile (ExpressionLogicNot until) block]
+normaliseStatement (StatementExpression exp)
+    = (StatementExpression $ normaliseExpression exp) : []
+normaliseStatement (StatementFunctionDeclaration name args block)
+    = StatementFunctionDeclaration name args (normaliseStatements block) : []
+normaliseStatement (StatementIf exp th el)
+    = StatementIf (normaliseExpression exp) (normaliseStatements th) (normaliseStatements el) : []
+normaliseStatement a = [a]
+
+
 
 normaliseExpression :: Expression -> Expression
 normaliseExpression (ExpressionCompareNeq e1 e2) = ExpressionLogicNot( ExpressionCompareEq e1 e2 )
@@ -64,16 +73,18 @@ serializeStatement (StatementFunctionDeclaration name args block)
     = let ins = transformToInstructions block
           len = length ins
       in (InstrFunctionDecl name args len) : ins
+serializeStatement (StatementClassDeclaration name args)
+    = InstrClassDecl name args : []
 serializeStatement (StatementReturn exp)
     = serializeExpression exp ++ [InstrReturn]
 serializeStatement (StatementExpression exp)
     = serializeExpression exp
 
-
 argstolist :: Expression -> Expression -> [Instruction]
 argstolist a b = serializeExpression b ++ serializeExpression a
 
 serializeExpression :: Expression -> [Instruction]
+serializeExpression EmptyExpression = []
 serializeExpression (ExpressionVar name) = InstrVarLookup name : []
 serializeExpression (ExpressionConstant const)
     = case const of
@@ -81,13 +92,20 @@ serializeExpression (ExpressionConstant const)
         ConstantInt i -> InstrPushConstInt $ fromIntegral i
       : []
 serializeExpression (ExpressionFunctionCall exp args)
-    = let l = serializeExpression exp
+    = let l = case exp of
+                (ExpressionVar s) -> [InstrGlobalLookup s]
+                a -> serializeExpression a
           r = concat $ map serializeExpression args
       in r ++ l ++ [InstrFunctionCall]
+serializeExpression (ExpressionObjectNew cla)
+    = InstrObjNew cla : []
+serializeExpression (ExpressionObjectMembAccess obj member)
+    = serializeExpression obj ++ [InstrPushConstStr member] ++ [InstrObjMemberAccess]
 serializeExpression (ExpressionArrayAccess exp pos)
     = argstolist exp pos ++ [InstrArrayAccess]
 serializeExpression (ExpressionAssign to what)
     = argstolist what to ++ [InstrAssign]
+
 serializeExpression (ExpressionCompareEq l r )
     = argstolist l r ++ [InstrCompareEq]
 serializeExpression (ExpressionCompareLt l r )
@@ -98,10 +116,22 @@ serializeExpression (ExpressionCompareGt l r )
     = argstolist l r ++ [InstrCompareGt]
 serializeExpression (ExpressionCompareGeq l r )
     = argstolist l r ++ [InstrCompareGeq]
+
 serializeExpression (ExpressionArithPlus l r )
     = argstolist l r ++ [InstrArithPlus]
 serializeExpression (ExpressionArithMinus l r)
     = argstolist l r ++ [InstrArithMinus]
+serializeExpression (ExpressionArithMul l r)
+    = argstolist l r ++ [InstrArithMul]
+serializeExpression (ExpressionArithDiv l r)
+    = argstolist l r ++ [InstrArithDiv]
+serializeExpression (ExpressionArithMod l r)
+    = argstolist l r ++ [InstrArithMod]
+serializeExpression (ExpressionArithInc e)
+    = serializeExpression e ++ [InstrArithInc]
+serializeExpression (ExpressionArithDec e)
+    = serializeExpression e ++ [InstrArithDec]
+
 serializeExpression (ExpressionLogicAnd l r)
     = argstolist l r ++ [InstrLogicAnd]
 serializeExpression (ExpressionLogicOr l r)

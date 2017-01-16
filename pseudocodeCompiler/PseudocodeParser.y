@@ -23,8 +23,11 @@ import Tokens
     downto  { TokenDownto }
     function { TokenFunction }
     return  { TokenReturn }
+    "class" { TokenClass }
+    new     { TokenNew }
     ';'     { TokenSemicolon}
     ','     { TokenComma }
+    '.'     { TokenDot }
     '('     { TokenRBOpen }
     ')'     { TokenRBClose }
     '{'     { TokenCBOpen }
@@ -62,10 +65,10 @@ import Tokens
 %left '+' '-'
 %left '*' '/' '%'
 %right '!'
+%left '.'
 %left '[' ']'
 %left '(' ')'
 %left "++" "--"
-%nonassoc FDEL
 %%
 
 
@@ -84,9 +87,17 @@ Stmts :: { Block }
 Statement :: { Statement }
     : StatementIf { $1 }
     | StatementLoop { $1 }
+    | return ';'    { StatementReturn EmptyExpression }
     | return Expression ';' { StatementReturn $2 }
-    | function word '(' FunctionParams ')' Block { StatementFunctionDeclaration $2 $4 $6}
+    | function word '(' FunctionParams ')' Block{ StatementFunctionDeclaration $2 $4 $6}
+    | "class" word '{' ClassParams '}' { StatementClassDeclaration $2 $4}
     | Expression ';' { StatementExpression $1 }
+
+ClassParams :: { [String] }
+    : {-empty -} { [] }
+    | word ';'      { $1:[] }
+    | ClassParams word ';' { $1 ++ $2:[] }
+
 
 FunctionParams :: { [String] }
     : {-empty -} { [] }
@@ -100,19 +111,21 @@ StatementIf :: { Statement }
 StatementLoop :: { Statement }
     : while Expression ';' do Block od { StatementWhile $2 $5 }
     | repeat Block until Expression ';' { StatementRepeat $2 $4 }
-    | for ExpressionAssign to Expression ';' do Block od { StatementForTo $2 $4 $7}
-    | for ExpressionAssign downto Expression ';' do Block od { StatementForDownto $2 $4 $7}
+    | for Expression to Expression ';' do Block od { StatementForTo $2 $4 $7}
+    | for Expression downto Expression ';' do Block od { StatementForDownto $2 $4 $7}
 
 Expression :: { Expression }
     : stringlit { ExpressionConstant (ConstantString $1) }
-    | Expression '(' FunctionArguments ')' { ExpressionFunctionCall $1 $3}
+    | Expression '(' FunctionArguments ')' {ExpressionFunctionCall $1 $3}
     | Expression '[' Expression ']' { ExpressionArrayAccess $1 $3 }
+    | Expression '.' word { ExpressionObjectMembAccess $1 $3 }
     | int { ExpressionConstant (ConstantInt $1) }
     | '(' Expression ')' { $2 }
     | ExpressionArithmetic { $1 }
     | ExpressionLogic { $1 }
     | ExpressionCompare { $1 }
     | ExpressionAssign { $1 }
+    | new word { ExpressionObjectNew $2 }
     | word { ExpressionVar $1 }
 
 ExpressionAssign :: { Expression }
