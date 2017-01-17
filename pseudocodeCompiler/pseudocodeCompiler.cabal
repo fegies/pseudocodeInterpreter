@@ -3,7 +3,7 @@
 
 name:                pseudocodeCompiler
 version:             0.1.0.0
-synopsis:            A bytecode Compiler for Pseudocode
+synopsis:            A bytecode compiler for pseudocode
 -- description:         
 license:             BSD3
 license-file:        LICENSE
@@ -15,11 +15,11 @@ build-type:          Simple
 extra-source-files:  ChangeLog.md
 cabal-version:       >=1.10
 
-library
-  exposed-modules:     Tokens, Lexer, Main, Ast, Instructions, Lexer, PseudocodeParser, ToBytecode, PseudocodeParser, AstTransform
-  -- other-modules:       
-  other-extensions:    CPP
-  build-depends:       base >=4.9 && <4.10, array >=0.5 && <0.6, bytestring >=0.10 && <0.11, binary >=0.8 && <0.9
+executable pseudocodeCompiler
+  main-is:             Main.hs
+  other-modules:       PseudocodeParser, Lexer
+  -- other-extensions:    
+  build-depends:       base >=4.9 && <4.10, bytestring >=0.10 && <0.11, binary >=0.8 && <0.9, array
   hs-source-dirs:      src
   build-tools:         alex, happy
   default-language:    Haskell2010
