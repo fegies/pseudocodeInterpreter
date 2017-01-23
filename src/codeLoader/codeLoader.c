@@ -38,6 +38,7 @@ Instruction* loadBytecode( char* bytes, size_t inputlength )
 
 		Instruction* curins = _instrAt( instrarr, instpos++ );
 		curins-> type = type;
+		curins-> next = _instrAt( instrarr, instpos+1 );
 		void* additionalData = 0;
 		switch( type )
 		{

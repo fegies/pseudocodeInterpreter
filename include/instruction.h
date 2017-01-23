@@ -1,11 +1,14 @@
 #pragma once
 #include <stdlib.h>
 
-typedef struct Instruction
+typedef struct Instruction Instruction;
+
+struct Instruction
 {
 	char type;
 	void* additionalData;
-} Instruction;
+	Instruction* next;
+};
 
 
 struct multistring_args
