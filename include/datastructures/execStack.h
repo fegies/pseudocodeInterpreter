@@ -17,6 +17,8 @@ variable* execStack_pop(execStack* e);
 
 variable* execStack_top(execStack* e);
 
+char execStack_isEmpty( execStack* e );
+
 variable** execStack_multi_top(execStack* e, unsigned int amount);
 
 execStack* execStack_create();

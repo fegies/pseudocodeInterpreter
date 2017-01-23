@@ -1,5 +1,5 @@
 #include "codeLoader/codeLoader.h"
-
+#include "interpreter.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -51,6 +51,11 @@ int main(int argc, char** argv)
 
 	if( usesFile )
 		fclose( f );
+
+	Instruction* entry = loadBytecode( bytes, length );
+
+	free( bytes );
+	//interpretPSC( entry );
 
 	return 0;
 }

@@ -11,7 +11,9 @@ void execStack_push( execStack* e, variable* v )
 	//Stack overflow checks
 	assert( e-> top < e-> size );
 
-	variable_increment_Refs( v );
+	//commented out because the stack does not count as a real reference
+	//holder.
+	//variable_increment_Refs( v );
 	(e-> data)[(e->top)++] = v;
 }
 
@@ -28,6 +30,11 @@ variable* execStack_top( execStack* e )
 	assert ( e != 0 );
 	assert ( e-> top > 0 );
 	return (e-> data)[(e-> top)-1];
+}
+
+char execStack_isEmpty( execStack* e )
+{
+	return e-> top > 0;
 }
 
 variable** execStack_multi_top( execStack* e, unsigned int amount )

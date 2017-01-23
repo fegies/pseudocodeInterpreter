@@ -17,6 +17,7 @@ struct multistring_args
 	char** args;
 };
 
+#define InstrType_NOP 0
 #define InstrType_Jump 1
 #define InstrType_ConditionalJump 2
 #define InstrType_FunctionDecl 3

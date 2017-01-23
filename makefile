@@ -5,7 +5,7 @@ VPATH      = src include
 ODIR       = ./bin
 SHAREFLAGS = -pipe -Wall -pedantic -Og
 CPPCFLAGS  = $(SHAREFLAGS) -std=c++14
-CCFLAGS    = $(SHAREFLAGS)
+CCFLAGS    = $(SHAREFLAGS) -std=c11
 LINKFLAGS  = $(SHAREFLAGS)
 CPPCOMPILER= $(CXX)
 CCOMPILER  = $(CC)
@@ -17,7 +17,7 @@ SUBPATHS   = . datastructures codeLoader
 OBJS       = $(BASEOBS) $(addprefix datastructures/, $(DATASTRUCTS)) \
 	$(addprefix codeLoader/, $(CODELOADER))
 
-BASEOBS    = main.o boolean.o operation.o
+BASEOBS    = main.o boolean.o operation.o interpreter.o
 
 DATASTRUCTS= class.o object.o variable.o nameStore.o execStack.o array.o \
 	variableString.o function.o
