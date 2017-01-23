@@ -1,19 +1,15 @@
 #pragma once
 
 #include "datastructures/variable.h"
-
-struct class_entry
-{
-	char vartype;
-	variable* name; //A string variable
-};
+#include "instruction.h"
+#include <stdlib.h>
 
 typedef struct class
 {
-	unsigned char entrycount;
-	struct class_entry* entries;
+	size_t entrycount;
+	variable** names;
 }class;
 
-variable* class_new(unsigned char entryconut, struct class_entry* entries);
+variable* class_new( struct multistring_args* args );
 
 void class_destroy(class* c);

@@ -4,7 +4,8 @@
 #include "instruction.h"
 #include <stdio.h>
 
-//loads the bytecode after the function and class definitions have run through
+//loads the bytecode and adds class and function declarations to the
+//global namestore.
 Instruction* loadBytecode( char* bytes, size_t inputLength );
 
 struct function_Data

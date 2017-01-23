@@ -15,19 +15,6 @@ variable* object_initialize( variable* prototype, variable** entries )
 
 	variable_increment_Refs( prototype );
 
-	class* c = prototype-> ref;
-	for( unsigned char i = 0; i < c->entrycount; ++i )
-	{
-		struct class_entry e = c-> entries[i];
-		variable* v = entries[i];
-		if( e.vartype != v-> type )
-		{
-			fprintf(stderr,"Invalid object initialization, Type mismatch\n");
-			exit(1);
-		}
-		variable_increment_Refs( v );
-	}
-
 	variable* objvar = variable_new();
 	variable_set_type( objvar, VARIABLE_TYPE_OBJECT );
 	object* o = calloc( 1, sizeof(object) );
@@ -48,9 +35,9 @@ variable* object_member_access( variable* ob, variable* name )
 
 	object* o = (object*)ob-> ref;
 	class* cl = o-> prototype-> ref;
-	for( unsigned char i = 0; i < cl-> entrycount; ++i )
+	for( size_t i = 0; i < cl-> entrycount; ++i )
 	{
-		if( variableString_compare(name, (cl->entries)[i].name) == 0 )
+		if( variableString_compare(name, (cl->names)[i] ) == 0 )
 			return o-> entries[i];
 	}
 

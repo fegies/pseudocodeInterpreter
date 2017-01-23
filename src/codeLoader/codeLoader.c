@@ -1,10 +1,12 @@
-#include "codeLoader.h"
+#include "codeLoader/codeLoader.h"
 
 #include "constants.h"
 #include "codeLoader/byteops.h"
+#include "datastructures/function.h"
+#include "datastructures/class.h"
+#include "globals.h"
 #include <stdio.h>
 #include <string.h>
-#include <arpa/inet.h>
 #include <stdlib.h>
 
 Instruction* _instrAt( Instruction** instrarr, size_t pos )
@@ -15,6 +17,8 @@ Instruction* _instrAt( Instruction** instrarr, size_t pos )
 
 Instruction* loadBytecode( char* bytes, size_t inputlength )
 {
+	globalVariables = nameStore_create();
+
 	size_t instpos = 0;
 	size_t instarrnum = 0;
 	size_t bytepos = 0;
@@ -47,9 +51,40 @@ Instruction* loadBytecode( char* bytes, size_t inputlength )
 			}
 			case InstrType_FunctionDecl:
 			{
-				
+				struct multistring_args* args;
+				char* name;
+				bytepos += stringlitcpy( &name, bytes+bytepos );
+				bytepos += getMultiargs( &args, bytes+bytepos );
+
+				int32_t jpos = bytesToInt( bytes+bytepos );
+				bytepos += 4;
+				additionalData = _instrAt( instrarr, instpos + jpos );
+				curins -> type = InstrType_Jump;
+
+				variable* v = variableFunction_new( _instrAt( instrarr, instpos+1),
+					args );
+
+				nameStore_put( globalVariables, name, v );
+
+				break;
 			}
 			case InstrType_ClassDecl:
+			{
+				struct multistring_args* args;
+				char* name;
+				bytepos += stringlitcpy( &name, bytes+bytepos );
+				bytepos += getMultiargs( &args, bytes+bytepos );
+
+				curins -> type = 0;
+
+				variable* v = class_new( args );
+				free( name );
+				free( args );
+
+				nameStore_put( globalVariables, name, v );
+
+				break;
+			}
 
 			case InstrType_VarLookup:
 			case InstrType_GlobalLookup:

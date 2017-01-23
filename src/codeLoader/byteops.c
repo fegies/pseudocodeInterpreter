@@ -23,8 +23,9 @@ size_t stringlitcpy( char** to, char* bytes )
 	return length+1;
 }
 
-struct multistring_args* getMultiargs( char* bytes )
+size_t getMultiargs( struct multistring_args** m, char* bytes )
 {
+	char* bo = bytes;
 
 	size_t count = 0;
 
@@ -42,9 +43,10 @@ struct multistring_args* getMultiargs( char* bytes )
 	for( size_t i = 0; i < count; ++i )
 		bytes += stringlitcpy( args+i, bytes );
 
-	struct multistring_args* m = malloc( sizeof(struct multistring_args) );
-	m-> count = count;
-	m-> args = args;
 
-	return m;
+	*m = malloc( sizeof(struct multistring_args) );
+	(*m)-> count = count;
+	(*m)-> args = args;
+
+	return bytes - bo;
 }

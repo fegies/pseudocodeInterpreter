@@ -20,7 +20,7 @@ OBJS       = $(BASEOBS) $(addprefix datastructures/, $(DATASTRUCTS)) \
 BASEOBS    = main.o boolean.o operation.o
 
 DATASTRUCTS= class.o object.o variable.o nameStore.o execStack.o array.o \
-	variableString.o
+	variableString.o function.o
 
 CODELOADER = codeLoader.o byteops.o
 

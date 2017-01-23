@@ -10,4 +10,5 @@ int32_t bytesToInt( char* bytes );
 //returns the length of the string( including the )
 size_t stringlitcpy( char** to, char* bytes  );
 
-struct multistring_args* getMultiargs( char* bytes );
+//returns the number of bytes used by the definition
+size_t getMultiargs( struct multistring_args** to, char* bytes );
