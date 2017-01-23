@@ -3,7 +3,7 @@
 //string variables and the operations that can be done with them.
 //Unicode aware. Supports only UTF-8 encoding though.
 
-#include "variable.h"
+#include "datastructures/variable.h"
 
 //A string can be copy on write.
 //if it is, data is set to be a reference to another string variable

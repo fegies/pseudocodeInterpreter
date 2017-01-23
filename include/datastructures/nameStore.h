@@ -2,7 +2,7 @@
 //A data structure to bind names to variables
 //Its implementation should make it so cheap that every function can have one.
 
-#include "variable.h"
+#include "datastructures/variable.h"
 
 struct nameStore_node;
 

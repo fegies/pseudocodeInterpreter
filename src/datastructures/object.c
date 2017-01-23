@@ -1,6 +1,6 @@
-#include "object.h"
+#include "datastructures/object.h"
 
-#include "variableString.h"
+#include "datastructures/variableString.h"
 
 #include <assert.h>
 #include <stdio.h>

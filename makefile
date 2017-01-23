@@ -11,13 +11,18 @@ CPPCOMPILER= $(CXX)
 CCOMPILER  = $(CC)
 
 #Name of subpaths inside Odir (Must be the same in ./include and ./src as well)
-SUBPATHS   = .
+SUBPATHS   = . datastructures codeLoader
 
 #The Objects that are compiled
-OBJS       = $(BASEOBS)
+OBJS       = $(BASEOBS) $(addprefix datastructures/, $(DATASTRUCTS)) \
+	$(addprefix codeLoader/, $(CODELOADER))
 
-BASEOBS    = main.o variable.o nameStore.o execStack.o array.o variableString.o \
-	class.o object.o
+BASEOBS    = main.o boolean.o operation.o
+
+DATASTRUCTS= class.o object.o variable.o nameStore.o execStack.o array.o \
+	variableString.o
+
+CODELOADER = codeLoader.o byteops.o
 
 OPROG = $(addprefix $(ODIR)/, $(PROG))
 RUNFLAGS = testscript.pseudocode
@@ -28,14 +33,23 @@ run : all
 
 all : buildbin $(OPROG)
 
-debug: all
+flagless : all
+	$(OPROG)
+
+memcheck: all
 	valgrind $(OPROG) $(RUNFLAGS)
+
+memcheckfull: all
+	valgrind --leak-check=full $(OPROG) $(RUNFLAGS)
+
+debug: all
+	gdb $(OPROG)
 
 clean:
 	find bin -name '*.o' -delete
 	rm -f $(OPROG)
 
-.PHONY: run all clean debug flagless
+.PHONY: run all clean memcheck memcheckfull flagless
 
 #linking
 $(OPROG): $(addprefix $(ODIR)/, $(OBJS))
@@ -43,9 +57,9 @@ $(OPROG): $(addprefix $(ODIR)/, $(OBJS))
 
 #compiling
 $(ODIR)/%.o : %.cpp
-	$(CPPCOMPILER) $(CPPCFLAGS) -c -o $@ $< $(addprefix -I./include/,$(SUBPATHS))
+	$(CPPCOMPILER) $(CPPCFLAGS) -c -o $@ $< -I./include
 $(ODIR)/%.o : %.c
-	$(CCOMPILER) $(CCFLAGS) -c -o $@ $< $(addprefix -I./include/,$(SUBPATHS))
+	$(CCOMPILER) $(CCFLAGS) -c -o $@ $< -I./include
 
 #Building the Directories if they don't exist
 buildbin: | $(ODIR) $(addprefix $(ODIR)/,$(SUBPATHS))

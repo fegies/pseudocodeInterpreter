@@ -1,6 +1,6 @@
 #pragma once
 
-#include "variable.h"
+#include "datastructures/variable.h"
 
 struct class_entry
 {

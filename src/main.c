@@ -1,61 +1,56 @@
-#include "variable.h"
-#include "variableString.h"
+#include "codeLoader.h"
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
 
-void printData( variable* v )
-{
-	printf("string: %s\nlength: %d\nbytes: %d\n",
-		variableString_getBytes( v ),
-		variableString_get_length( v ), ((variableString*)v->ref)->bytecount );
-}
+#include "globals.h"
+
+#define READ_BUF_SIZE 1024
 
 int main(int argc, char** argv)
 {
-	/*
-	char usesFile = 0;
 	FILE* f = stdin;
+	char usesFile = 0;
 	if( argc > 1 )
+		f = fopen(argv[1],"rb");
+	else
+		freopen( 0 , "rb", f );
+
+	char* bytes=0;
+
+	if( (bytes = malloc ( READ_BUF_SIZE )) == 0 )
 	{
-		usesFile = 1;
-		f = fopen(argv[1],"r");
+		fprintf(stderr, "Buffer allocation failed\n");
+		exit(1);
 	}
-	
-	if(usesFile)
-		fclose(f);
-	*/
 
-	variable* v = variableString_new();
-	variableString_setContents( v, "ööΔB" );
-	variable* v2 = variable_new();
-	variableString_assign( v2, v );
-	variable_decrement_Refs( v );
-	printData( v2 );
-	v = v2;
+	size_t length = 0;
 
-	variable* s = variableString_new();
-	variableString_setContents( s, "lälü" );
-	variable* s2 = variable_new();
-	variableString_assign( s2, s );
-	variable_decrement_Refs( s );
-	s = s2;
-	printData( s );
+	while (!feof(f))
+	{
+		size_t readbytes = fread( bytes+length , sizeof(char), READ_BUF_SIZE, f);
+		length += readbytes;
 
-	variable* con = variableString_concat( v, s );
+		if( readbytes == READ_BUF_SIZE )
+		{
+			size_t news = sizeof(char) * (length + READ_BUF_SIZE);
+			printf("realloc with size: %ld\n", news);
+			char* newbuf = realloc( bytes, news );
+			if( newbuf == 0 )
+			{
+				fprintf(stderr, "realloc of input buffer failed. Exiting\n");
+				exit(1);
+			}
+			bytes = newbuf;
+		}
+	}
 
-	variable_decrement_Refs( v );
-	variable_decrement_Refs( s );
+	puts( bytes );
 
-	variable* con2 = variable_new();
-	variableString_assign( con2, con );
-	variable_decrement_Refs( con );
-	con = con2;
-	printData( con );
-
-	variable* subs = variableString_substring( con, 5, 3);
-
-	printData( subs );
+	if( usesFile )
+		fclose( f );
 
 	return 0;
 }

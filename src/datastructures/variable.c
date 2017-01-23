@@ -1,8 +1,9 @@
-#include "variable.h"
+#include "datastructures/variable.h"
 
-#include "array.h"
-#include "variableString.h"
-#include "object.h"
+#include "datastructures/array.h"
+#include "datastructures/variableString.h"
+#include "datastructures/class.h"
+#include "datastructures/object.h"
 
 #include <assert.h>
 #include <stdlib.h>
@@ -34,8 +35,8 @@ void _variable_free( variable* v )
 	switch( v -> type )
 	{
 		case VARIABLE_TYPE_NONE:
-		case VARIABLE_TYPE_INT:
 		case VARIABLE_TYPE_BOOLEAN:
+		case VARIABLE_TYPE_INT:
 			break;
 		case VARIABLE_TYPE_STRING:
 			variableString_destroy( v-> ref ); break;
@@ -43,7 +44,8 @@ void _variable_free( variable* v )
 			array_destroy( v-> ref ); break;
 		case VARIABLE_TYPE_OBJECT:
 			object_destroy( v-> ref ); break;
-
+		case VARIABLE_TYPE_CLASS:
+			class_destroy( v-> ref ); break;
 	}
 
 	free( v );

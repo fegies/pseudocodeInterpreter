@@ -1,4 +1,4 @@
-#include "execStack.h"
+#include "datastructures/execStack.h"
 #include "constants.h"
 
 #include <assert.h>
@@ -20,7 +20,6 @@ variable* execStack_pop( execStack* e )
 	assert ( e != 0 );
 	assert ( e-> top > 0 );
 	variable* v = (e-> data)[--(e-> top)];
-	variable_decrement_Refs( v );
 	return v;
 }
 
@@ -51,7 +50,7 @@ void execStack_destroy( execStack* e )
 	if( e == 0 )
 		return;
 	while ( e-> top > 0 )
-		execStack_pop( e );
+		variable_decrement_Refs(execStack_pop( e ));
 	free( e-> data );
 	free( e );
 }

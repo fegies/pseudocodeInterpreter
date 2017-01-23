@@ -1,4 +1,4 @@
-#include "nameStore.h"
+#include "datastructures/nameStore.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -26,6 +26,7 @@ void nameStore_put( nameStore* n, char* name, variable* var )
 		{
 			if( curn-> var != 0 )
 				variable_decrement_Refs( curn-> var );
+			variable_increment_Refs( var );
 			curn-> var = var;
 		}
 		else if( lor == -1 )

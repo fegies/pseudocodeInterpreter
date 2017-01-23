@@ -1,7 +1,7 @@
 #pragma once
 
-#include "class.h"
-#include "variable.h"
+#include "datastructures/class.h"
+#include "datastructures/variable.h"
 
 
 typedef struct object

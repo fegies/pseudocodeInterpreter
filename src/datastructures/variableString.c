@@ -1,4 +1,4 @@
-#include "variableString.h"
+#include "datastructures/variableString.h"
 
 #include <assert.h>
 #include <string.h>
@@ -97,7 +97,7 @@ void variableString_assign( variable* to, variable* from )
 	if( to-> type != VARIABLE_TYPE_STRING )
 	{
 		variable_set_type( to, VARIABLE_TYPE_STRING );
-		to-> ref = variableString_new();
+		to-> ref = calloc( 1, sizeof(variableString) );
 	}
 
 	variableString* tov = (variableString*)to-> ref;
@@ -173,8 +173,14 @@ char variableString_compare( variable* s1, variable* s2 )
 
 	//this is allowed because UTF-8 preserves the ordering of the units
 	//if compared bytewise
-	return strcmp( ((variableString*)s1-> ref)-> data,
+	int cmpres = strcmp( ((variableString*)s1-> ref)-> data,
 		((variableString*)s2-> ref)-> data );
+
+	if( cmpres < 0 )
+		return -1;
+	if( cmpres > 0 )
+		return 1;
+	return 0;
 }
 
 char* variableString_getBytes( variable* s )

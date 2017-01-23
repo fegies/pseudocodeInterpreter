@@ -1,17 +1,26 @@
-#include "array.h"
+#include "datastructures/array.h"
 #include "constants.h"
 
 #include <stdlib.h>
 #include <assert.h>
 
-array* array_new()
+
+array* _array_new()
 {
 	array* a = calloc( 1,sizeof(array) );
 	a-> data = calloc( ARRAYSEGMENTSIZE, sizeof(variable*) );
 	return a;
 }
 
-void array_put(array* a, unsigned int position, variable* v)
+variable* array_new()
+{
+	variable* v = variable_new();
+	variable_set_type( v, VARIABLE_TYPE_ARRAY );
+	v-> ref = _array_new();
+	return v;
+}
+
+void _array_put(array* a, unsigned int position, variable* v)
 {
 	if( a == 0 )
 		return;
@@ -19,8 +28,8 @@ void array_put(array* a, unsigned int position, variable* v)
 	if( position >= ARRAYSEGMENTSIZE )
 	{
 		if( a-> nextSegment == 0 )
-			a-> nextSegment = array_new();
-		array_put( a-> nextSegment, position - ARRAYSEGMENTSIZE, v );
+			a-> nextSegment = _array_new();
+		_array_put( a-> nextSegment, position - ARRAYSEGMENTSIZE, v );
 	}
 	else
 	{
@@ -31,7 +40,14 @@ void array_put(array* a, unsigned int position, variable* v)
 	}
 }
 
-variable* array_get( array* a, unsigned int position )
+void array_put( variable* a, unsigned int position, variable* v )
+{
+	assert( a != 0 );
+	assert( a -> type == VARIABLE_TYPE_ARRAY );
+	_array_put( a-> ref, position, v );
+}
+
+variable* _array_get( array* a, unsigned int position )
 {
 	if( a == 0 )
 		return 0;
@@ -39,8 +55,8 @@ variable* array_get( array* a, unsigned int position )
 	if( position >= ARRAYSEGMENTSIZE )
 	{
 		if( a-> nextSegment == 0 )
-			a-> nextSegment = array_new();
-		return array_get( a-> nextSegment, position - ARRAYSEGMENTSIZE );
+			a-> nextSegment = _array_new();
+		return _array_get( a-> nextSegment, position - ARRAYSEGMENTSIZE );
 	}
 	else
 	{
@@ -48,6 +64,13 @@ variable* array_get( array* a, unsigned int position )
 			(a-> data)[position] = variable_new();
 		return (a-> data)[position];
 	}
+}
+
+variable* array_get( variable* array, unsigned int position )
+{
+	assert( array != 0 );
+	assert( array-> type == VARIABLE_TYPE_ARRAY );
+	return _array_get( array-> ref, position );
 }
 
 void array_destroy( array* a )
@@ -64,4 +87,5 @@ void array_destroy( array* a )
 			variable_decrement_Refs( d[i] );
 	}
 	free( d );
+	free( a );
 }

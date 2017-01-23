@@ -4,24 +4,172 @@
 		"selected_items":
 		[
 			[
-				"var",
-				"variable_new"
+				"InstrType_Pu",
+				"InstrType_PushConstInt\t(instruction.h)"
+			],
+			[
+				"InstrType_pu",
+				"InstrType_PushConstInt\t(instruction.h)"
+			],
+			[
+				"bytes",
+				"bytesToInt\t(codeLoader.c)"
+			],
+			[
+				"size",
+				"sizeof"
 			],
 			[
 				"by",
-				"bytecount"
+				"bytepos"
+			],
+			[
+				"inst",
+				"instrarr"
+			],
+			[
+				"mem",
+				"memcpy\t(main.c)"
+			],
+			[
+				"instr",
+				"instructions"
+			],
+			[
+				"newbuf",
+				"newbufsize"
+			],
+			[
+				"new",
+				"newbuf"
+			],
+			[
+				"red",
+				"readbytes"
+			],
+			[
+				"ma",
+				"malloc"
+			],
+			[
+				"name",
+				"nameStore_get"
+			],
+			[
+				"exe",
+				"execStack_pop"
+			],
+			[
+				"variableString_s",
+				"variableString_setContents\t(variableString.c)"
+			],
+			[
+				"exec",
+				"execStack_push"
+			],
+			[
+				"execS",
+				"execStack_pop"
+			],
+			[
+				"OP",
+				"OPCOMMONEND"
+			],
+			[
+				"O",
+				"OPCOMMONSTART"
+			],
+			[
+				"OPM",
+				"OPCOMMONEND"
+			],
+			[
+				"OPCOMM",
+				"OPCOMMONSTART"
+			],
+			[
+				"variableStrign_get",
+				"variableString_getBytes\t(main.c)"
+			],
+			[
+				"con",
+				"continue"
+			],
+			[
+				"variab",
+				"variableFunction"
+			],
+			[
+				"arg",
+				"argnames"
+			],
+			[
+				"entr",
+				"entryPoint"
+			],
+			[
+				"vari",
+				"variable_new\t(class.c)"
+			],
+			[
+				"byt",
+				"bytefrom"
+			],
+			[
+				"__var",
+				"__variableString_unicode_pos_translate"
+			],
+			[
+				"__variab",
+				"__variableString_unicode_pos_translate"
+			],
+			[
+				"vrai",
+				"variableString_new"
+			],
+			[
+				"ref",
+				"refcount"
+			],
+			[
+				"variableString_get",
+				"variableString_getBytes\t(object.c)"
+			],
+			[
+				"VARI",
+				"VARIABLE_TYPE_STRING"
+			],
+			[
+				"VAR",
+				"VARIABLESTRING_FLAGS_COW"
+			],
+			[
+				"V",
+				"VARIABLE_TYPE_STRING"
+			],
+			[
+				"ent",
+				"entrycount"
+			],
+			[
+				"ojb",
+				"objvar"
+			],
+			[
+				"var",
+				"variable_new\t(class.c)"
+			],
+			[
+				"e",
+				"entrycount\t(class.c)"
+			],
+			[
+				"ty",
+				"type\tunsigned char type"
 			],
 			[
 				"b",
 				"bytecount"
-			],
-			[
-				"byt",
-				"bytecount"
-			],
-			[
-				"__var",
-				"__variableString_unicodeUnitLength"
 			],
 			[
 				"variableString_uni",
@@ -44,20 +192,8 @@
 				"VARIABLE_TYPE_STRING"
 			],
 			[
-				"VARI",
-				"VARIABLESTRING_FLAGS_COW"
-			],
-			[
-				"V",
-				"VARIABLESTRING_FLAGS_COW"
-			],
-			[
 				"VARIAB",
 				"VARIABLESTRING_FLAGS_COW"
-			],
-			[
-				"vari",
-				"variableString"
 			],
 			[
 				"nameStor",
@@ -378,142 +514,6 @@
 			[
 				"Col",
 				"ColorGroupNr"
-			],
-			[
-				"bind_par",
-				"bind_param"
-			],
-			[
-				"colgr",
-				"colgroupselect"
-			],
-			[
-				"cog",
-				"colgroupselectchange"
-			],
-			[
-				"remo",
-				"removeChild"
-			],
-			[
-				"getEle",
-				"getElementsByClassName"
-			],
-			[
-				"getE",
-				"getElementById"
-			],
-			[
-				"appe",
-				"appendChild"
-			],
-			[
-				"app",
-				"appendChild"
-			],
-			[
-				"chi",
-				"childNodes"
-			],
-			[
-				"text",
-				"text-align"
-			],
-			[
-				"colorcod",
-				"colorcode"
-			],
-			[
-				"bea",
-				"beadselectcolorname"
-			],
-			[
-				"addPer",
-				"addProjectBeadSelOps"
-			],
-			[
-				"beads",
-				"beadselectHTML"
-			],
-			[
-				"fun",
-				"function"
-			],
-			[
-				"mak",
-				"makernr"
-			],
-			[
-				"dur",
-				"durnum"
-			],
-			[
-				"colorn",
-				"colorname"
-			],
-			[
-				"colorc",
-				"colorcode"
-			],
-			[
-				"mar",
-				"margin-left"
-			],
-			[
-				"bac",
-				"background-color"
-			],
-			[
-				"label",
-				"labelquery"
-			],
-			[
-				"min",
-				"min-height"
-			],
-			[
-				"_PO",
-				"_POST"
-			],
-			[
-				"res",
-				"responseText"
-			],
-			[
-				"formda",
-				"formdata"
-			],
-			[
-				"colorC",
-				"colorCode"
-			],
-			[
-				"le",
-				"length"
-			],
-			[
-				"con",
-				"console"
-			],
-			[
-				"non",
-				"nonickel"
-			],
-			[
-				"amount",
-				"amountgreater"
-			],
-			[
-				"url",
-				"urlbase"
-			],
-			[
-				"re",
-				"request"
-			],
-			[
-				"mari",
-				"margin"
 			]
 		]
 	},
@@ -523,51 +523,52 @@
 			"file": "src/main.c",
 			"settings":
 			{
-				"buffer_size": 188,
+				"buffer_size": 959,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "makefile",
+			"file": "src/codeLoader/codeLoader.c",
 			"settings":
 			{
-				"buffer_size": 1255,
+				"buffer_size": 2034,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/variable.c",
+			"file": "include/constants.h",
 			"settings":
 			{
-				"buffer_size": 1017,
+				"buffer_size": 133,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/class.c",
+			"file": "src/codeLoader/byteops.c",
 			"settings":
 			{
-				"buffer_size": 113,
+				"buffer_size": 385,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "pseudocodeInterpreter.sublime-project",
+			"file": "include/instruction.h",
 			"settings":
 			{
-				"buffer_size": 45,
+				"buffer_size": 1043,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/array.c",
+			"file": "include/codeLoader/byteops.h",
 			"settings":
 			{
-				"buffer_size": 1256,
+				"buffer_size": 235,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -696,10 +697,30 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 206.0,
-		"last_filter": "easyc",
+		"height": 400.0,
+		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"",
+				"EasyClangComplete: Settings"
+			],
+			[
+				"meun",
+				"View: Toggle Menu"
+			],
+			[
+				"menu",
+				"View: Toggle Menu"
+			],
+			[
+				"setting",
+				"EasyClangComplete: Settings"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
 			[
 				"easyc",
 				"EasyClangComplete: Settings"
@@ -717,10 +738,6 @@
 				"Project: Save As"
 			],
 			[
-				"menu",
-				"View: Toggle Menu"
-			],
-			[
 				"inst",
 				"Package Control: Install Package"
 			],
@@ -735,10 +752,6 @@
 			[
 				"men",
 				"View: Toggle Menu"
-			],
-			[
-				"setting",
-				"Preferences: Settings"
 			],
 			[
 				"latex",
@@ -809,10 +822,6 @@
 				"HTML: Encode Special Characters"
 			],
 			[
-				"meun",
-				"View: Toggle Menu"
-			],
-			[
 				"make",
 				"Build With: Make"
 			],
@@ -875,13 +884,9 @@
 			[
 				"vme",
 				"View: Toggle Menu"
-			],
-			[
-				"",
-				"Package Control: Install Package"
 			]
 		],
-		"width": 484.0
+		"width": 493.0
 	},
 	"console":
 	{
@@ -907,14 +912,36 @@
 	[
 		"/home/felix/programming/cpp/pseudocodeInterpreter",
 		"/home/felix/programming/cpp/pseudocodeInterpreter/include",
-		"/home/felix/programming/cpp/pseudocodeInterpreter/src"
+		"/home/felix/programming/cpp/pseudocodeInterpreter/include/codeLoader",
+		"/home/felix/programming/cpp/pseudocodeInterpreter/include/datastructures",
+		"/home/felix/programming/cpp/pseudocodeInterpreter/src",
+		"/home/felix/programming/cpp/pseudocodeInterpreter/src/codeLoader",
+		"/home/felix/programming/cpp/pseudocodeInterpreter/src/datastructures"
 	],
 	"file_history":
 	[
+		"/home/felix/programming/cpp/pseudocodeInterpreter/src/codeLoader/byteops.c",
+		"/home/felix/programming/cpp/pseudocodeInterpreter/.clang_complete",
+		"/home/felix/programming/cpp/pseudocodeInterpreter/pseudocodeInterpreter.sublime-project",
+		"/home/felix/programming/cpp/pseudocodeInterpreter/src/datastructures/execStack.c",
+		"/home/felix/programming/cpp/pseudocodeInterpreter/src/codeLoader.c",
+		"/home/felix/programming/cpp/pseudocodeInterpreter/src/variable.c",
+		"/home/felix/programming/cpp/pseudocodeInterpreter/src/codeLoader.h",
+		"/home/felix/programming/cpp/pseudocodeInterpreter/src/function.c",
+		"/home/felix/programming/cpp/pseudocodeInterpreter/include/globals.h",
+		"/home/felix/programming/cpp/pseudocodeInterpreter/src/main.c",
+		"/home/felix/programming/cpp/pseudocodeInterpreter/src/class.c",
 		"/home/felix/programming/cpp/pseudocodeInterpreter/src/variableString.c",
-		"/srv/http/Taijiseite/v15/pages/main.php",
+		"/home/felix/programming/cpp/pseudocodeInterpreter/src/array.c",
+		"/home/felix/programming/cpp/pseudocodeInterpreter/src/boolean.c",
 		"/home/felix/programming/cpp/pseudocodeInterpreter/src/execStack.c",
 		"/home/felix/programming/cpp/pseudocodeInterpreter/src/nameStore.c",
+		"/home/felix/programming/cpp/pseudocodeInterpreter/src/operation.c",
+		"/home/felix/programming/cpp/pseudocodeInterpreter/src/object.c",
+		"/home/felix/programming/cpp/pseudocodeInterpreter/program.psc",
+		"/home/felix/programming/cpp/pseudocodeInterpreter/include/constants.h",
+		"/home/felix/programming/cpp/pseudocodeInterpreter/makefile",
+		"/srv/http/Taijiseite/v15/pages/main.php",
 		"/home/felix/programming/cpp/pseudocodeInterpreter/documentation/languageDefinition.txt",
 		"/home/felix/programming/cpp/pseudocodeInterpreter/src/localVariableContainer.c",
 		"/home/felix/programming/java/proguebung/sem2/7/PalindromeCounter.java",
@@ -1001,7 +1028,6 @@
 		"/home/felix/programming/java/proguebung/sem2/3/*.java",
 		"/home/felix/documents/sem2/übungen/diskreteStrukturen/3/u3.tex",
 		"/home/felix/Downloads/scintilla/scripts/FileGenerator.py",
-		"/home/felix/programming/cpp/pseudocodeInterpreter/src/main.c",
 		"/home/felix/Downloads/scintilla/lexers/LexJSON.cxx",
 		"/home/felix/other/exploit/exploit.c",
 		"/home/felix/other/exploit/shell_injection.c",
@@ -1018,27 +1044,10 @@
 		"/run/user/1000/gvfs/ftp:host=fiverling.bplaced.net/Taiji/Memberhash.txt",
 		"/run/user/1000/gvfs/ftp:host=fiverling.bplaced.net/Taiji/visitors.txt",
 		"/home/felix/programming/cpp/pseudocodeInterpreter/include/file.hx",
-		"/home/felix/programming/cpp/pseudocodeInterpreter/include/constants.h",
 		"/home/felix/programming/cpp/pseudocodeInterpreter/documentation/statements.txt",
 		"/home/felix/programming/cpp/pseudocodeInterpreter/include/variable.h",
 		"/home/felix/documents/sem2/übungen/diskreteStrukturen/u1/u1.tex",
-		"/home/felix/programming/cpp/pseudocodeInterpreter/include/localVariableContainer.h",
-		"/home/felix/programming/cpp/pseudocodeInterpreter/include/executionStack.h",
-		"/home/felix/programming/cpp/pseudocodeInterpreter/include/executionStack..h",
-		"/home/felix/programming/cpp/pseudocodeInterpreter/include/stack.h",
-		"/run/user/1000/gvfs/smb-share:server=beadpi,share=familie/Taijifächer_notes.txt",
-		"/home/felix/texmaker.ini",
-		"/home/felix/programming/cpp/pseudocodeInterpreter/documentation/keywords.txt",
-		"/home/felix/programming/cpp/pseudocodeInterpreter/documentation/dataDefinitions.txt",
-		"/home/felix/programming/cpp/pseudocodeInterpreter/documentation/arrays.txt",
-		"/home/felix/programming/cpp/pseudocodeInterpreter/documentation/functions.txt",
-		"/home/felix/programming/cpp/pseudocodeInterpreter/documentation/usage.txt",
-		"/home/felix/programming/cpp/pseudocodeInterpreter/documentation/interpretation.txt",
-		"/home/felix/programming/cpp/pseudocodeInterpreter/include/functions.h",
-		"/home/felix/programming/cpp/pseudocodeInterpreter/include/operations.h",
-		"/home/felix/programming/cpp/pseudocodeInterpreter/include/objects.h",
-		"/home/felix/programming/cpp/pseudocodeInterpreter/include/array.h",
-		"/home/felix/programming/cpp/pseudocodeInterpreter/todo.txt"
+		"/home/felix/programming/cpp/pseudocodeInterpreter/include/localVariableContainer.h"
 	],
 	"find":
 	{
@@ -1133,7 +1142,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -1142,15 +1151,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 188,
+						"buffer_size": 959,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								18,
-								18
+								864,
+								864
 							]
 						],
 						"settings":
@@ -1162,29 +1171,87 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "makefile",
+					"file": "src/codeLoader/codeLoader.c",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1255,
+						"buffer_size": 2034,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								524,
-								524
+								1094,
+								1094
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Makefile/Makefile.sublime-syntax"
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 180.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "include/constants.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 133,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								133,
+								133
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/codeLoader/byteops.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 385,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								385,
+								385
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1192,22 +1259,28 @@
 					},
 					"stack_index": 4,
 					"type": "text"
-				},
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
 				{
-					"buffer": 2,
-					"file": "src/variable.c",
+					"buffer": 4,
+					"file": "include/instruction.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1017,
+						"buffer_size": 1043,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								327,
-								327
+								82,
+								82
 							]
 						],
 						"settings":
@@ -1222,87 +1295,31 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "src/class.c",
+					"buffer": 5,
+					"file": "include/codeLoader/byteops.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 113,
+						"buffer_size": 235,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								110,
-								110
+								235,
+								235
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/C++/C.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "pseudocodeInterpreter.sublime-project",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 45,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								42,
-								42
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "src/array.c",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1256,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								717,
-								717
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -1325,11 +1342,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.5,
 			1.0
 		],
 		"rows":
@@ -1344,6 +1368,10 @@
 		"height": 98.0
 	},
 	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.hex_viewer_inspector":
 	{
 		"height": 0.0
 	},
@@ -1369,12 +1397,16 @@
 	},
 	"select_project":
 	{
-		"height": 0.0,
+		"height": 500.0,
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"",
+				"~/documents/sem2/übungen/diskreteStrukturen/ds.sublime-project"
+			]
 		],
-		"width": 0.0
+		"width": 380.0
 	},
 	"select_symbol":
 	{

@@ -1,4 +1,4 @@
-#include "class.h"
+#include "datastructures/class.h"
 
 #include <stdlib.h>
 
