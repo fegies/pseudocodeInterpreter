@@ -27,6 +27,10 @@ CODELOADER = codeLoader.o byteops.o
 OPROG = $(addprefix $(ODIR)/, $(PROG))
 RUNFLAGS = testscript.pseudocode
 
+DEPDIR := deps
+DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)/$*.d
+COMPILE.c = $(CCOMPILER) $(DEPFLAGS) $(CCFLAGS) -c
+POSTCOMPILE= mv -f $(DEPDIR)/$*.TD $(DEPDIR)/$*.d
 
 run : all
 	$(OPROG) $(RUNFLAGS)
@@ -46,8 +50,7 @@ debug: all
 	gdb $(OPROG)
 
 clean:
-	find bin -name '*.o' -delete
-	rm -f $(OPROG)
+	rm -r ./bin $(DEPDIR)
 
 .PHONY: run all clean memcheck memcheckfull flagless
 
@@ -58,14 +61,27 @@ $(OPROG): $(addprefix $(ODIR)/, $(OBJS))
 #compiling
 $(ODIR)/%.o : %.cpp
 	$(CPPCOMPILER) $(CPPCFLAGS) -c -o $@ $< -I./include
-$(ODIR)/%.o : %.c
-	$(CCOMPILER) $(CCFLAGS) -c -o $@ $< -I./include
+	$(POSTCOMPILE)
+$(ODIR)/%.o : %.c $(DEPDIR)/%.d
+	$(COMPILE.c) -o $@ $< -I./include
 
 #Building the Directories if they don't exist
-buildbin: | $(ODIR) $(addprefix $(ODIR)/,$(SUBPATHS))
+buildbin: | $(ODIR) $(addprefix $(ODIR)/,$(SUBPATHS)) $(DEPDIR) \
+	$(addprefix $(DEPDIR)/,$(SUBPATHS))
 
 $(ODIR):
 	mkdir $(ODIR)
 
+$(DEPDIR):
+	mkdir $(DEPDIR)
+
+$(addprefix $(DEPDIR)/,$(SUBPATHS)):
+	mkdir $@
+
 $(addprefix $(ODIR)/,$(SUBPATHS)):
 	mkdir $@
+
+$(addprefix $(DEPDIR)/,$(OBJS:.o=.d)): ;
+.PRECIOUS: $(DEPDIR)/%.d
+
+-include $(addprefix $(DEPDIR)/,$(OBJS:.o=.d))
