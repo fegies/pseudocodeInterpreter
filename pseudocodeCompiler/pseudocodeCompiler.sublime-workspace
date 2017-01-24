@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"checkR",
+				"checkReturnStatement"
+			],
+			[
+				"chec",
+				"checkRetunStatement"
+			],
+			[
+				"che",
+				"checkRetunStatement"
+			],
+			[
 				"ser",
 				"serializeExpression"
 			],
@@ -502,38 +514,34 @@
 			[
 				"call",
 				"callstackEntry"
-			],
-			[
-				"st",
-				"statement"
-			],
-			[
-				"bl",
-				"blocklist"
-			],
-			[
-				"return",
-				"returnValue"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "src/AstTransform.hs",
+			"file": "src/Main.hs",
 			"settings":
 			{
-				"buffer_size": 6384,
+				"buffer_size": 1476,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/Main.hs",
+			"file": "src/ToBytecode.hs",
 			"settings":
 			{
-				"buffer_size": 1434,
+				"buffer_size": 2109,
 				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Ast.hs",
+			"settings":
+			{
+				"buffer_size": 1844,
 				"line_ending": "Unix"
 			}
 		}
@@ -895,6 +903,8 @@
 	],
 	"file_history":
 	[
+		"/home/felix/programming/haskell/pseudocodeCompiler/pseudocodeCompiler.cabal",
+		"/home/felix/programming/haskell/pseudocodeCompiler/src/AstTransform.hs",
 		"/home/felix/programming/haskell/pseudocodeCompiler/src/Ast.hs",
 		"/home/felix/programming/haskell/pseudocodeCompiler/src/ToBytecode.hs",
 		"/home/felix/programming/haskell/pseudocodeCompiler/file.psbc",
@@ -1020,9 +1030,7 @@
 		"/home/felix/Downloads/scintilla/lexers/LexJSON.cxx",
 		"/home/felix/other/exploit/exploit.c",
 		"/home/felix/other/exploit/shell_injection.c",
-		"/home/felix/other/exploit/killtest.c",
-		"/home/felix/programming/cpp/pseudocodeInterpreter/include/interpreter.h",
-		"/home/felix/programming/cpp/pseudocodeInterpreter/src/interpreter.c"
+		"/home/felix/other/exploit/killtest.c"
 	],
 	"find":
 	{
@@ -1128,19 +1136,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "src/AstTransform.hs",
+					"file": "src/Main.hs",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6384,
+						"buffer_size": 1476,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1131,
-								1131
+								228,
+								228
 							]
 						],
 						"settings":
@@ -1158,25 +1166,25 @@
 				},
 				{
 					"buffer": 1,
-					"file": "src/Main.hs",
+					"file": "src/ToBytecode.hs",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1434,
+						"buffer_size": 2109,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								923,
-								923
+								525,
+								525
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Haskell/Haskell.sublime-syntax",
-							"tab_size": 2,
+							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
@@ -1184,6 +1192,42 @@
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 2,
+					"file": "src/Ast.hs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1844,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Haskell/Haskell.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -1206,11 +1250,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.609994086339,
 			1.0
 		],
 		"rows":

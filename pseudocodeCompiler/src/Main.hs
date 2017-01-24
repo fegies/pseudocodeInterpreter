@@ -4,6 +4,7 @@ import PseudocodeParser
 import AstTransform
 import ToBytecode
 import System.Environment
+import Hexdump
 import qualified Data.ByteString.Lazy as BL
 --main = getContents >>= print . parsePSC . lexer
 
@@ -29,7 +30,7 @@ interpretFile f = do
     putStrLn $ "\n--normalized ast--\n\n" ++ show normast
     putStrLn $ "\n--Instructions--\n\n" ++ show instr
     putStrLn "\n--Bytecode\n\n"
-    BL.putStr bytecode
+    putStrLn . prettyHex . BL.toStrict $ bytecode
 
 pfs =parsePSC . lexer $ t
 
