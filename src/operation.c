@@ -17,6 +17,7 @@ variable* operation_add( variable* v1, variable* v2)
 	{
 		case VARIABLE_TYPE_INT:
 			result = variable_new();
+			variable_set_type( result, VARIABLE_TYPE_INT );
 			result -> ref = (void*)((long int)v1-> ref + (long int)v2-> ref);
 			break;
 		case VARIABLE_TYPE_STRING:

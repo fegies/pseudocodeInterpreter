@@ -98,8 +98,10 @@ variable* interpretFunction( Instruction* entry, nameStore* args )
 					variable_decrement_Refs( v );
 				}
 				variable* retval = interpretFunction( vf->entrypoint, args );
-				if( retval != 0 )
-					execStack_push( stack, retval );
+				
+				//the execStack catches attempts to push 0 variables,
+				//so this is fine.
+				execStack_push( stack, retval );
 				nameStore_destroy( args );
 				break;
 			}
@@ -215,7 +217,8 @@ variable* interpretFunction( Instruction* entry, nameStore* args )
 				nameStore_decrefs( args );
 				break;
 			case InstrType_StackPop:
-				execStack_pop( stack );
+				if( !execStack_isEmpty( stack ) )
+					execStack_pop( stack );
 				break;
 			case InstrType_Print:
 			{
@@ -230,10 +233,10 @@ variable* interpretFunction( Instruction* entry, nameStore* args )
 							printf("False\n");
 						break;
 					case VARIABLE_TYPE_INT:
-						printf("%ld", (long)v-> ref );
+						printf("%ld\n", (long)v-> ref );
 						break;
 					case VARIABLE_TYPE_STRING:
-						printf("%s", variableString_getBytes(v) );
+						printf("%s\n", variableString_getBytes(v) );
 						break;
 					default:
 						fprintf(stderr,

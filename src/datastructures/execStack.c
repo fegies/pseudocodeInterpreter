@@ -34,7 +34,7 @@ variable* execStack_top( execStack* e )
 
 char execStack_isEmpty( execStack* e )
 {
-	return e-> top > 0;
+	return e-> top == 0;
 }
 
 variable** execStack_multi_top( execStack* e, unsigned int amount )
