@@ -59,6 +59,8 @@ toB a = putWord8 $
             InstrLogicNot        -> 27
             InstrLogicAnd        -> 28
             InstrLogicOr         -> 29
+            InstrBlockEnter      -> 30
+            InstrBlockLeave      -> 31
 
 putstrs :: [String] -> Put
 putstrs [] = putWord8 0

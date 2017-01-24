@@ -4,6 +4,66 @@
 		"selected_items":
 		[
 			[
+				"ser",
+				"serializeExpression"
+			],
+			[
+				"Instr",
+				"InstrBlockLeave"
+			],
+			[
+				"InstrB",
+				"InstrBlockEnter"
+			],
+			[
+				"seri",
+				"serializeStatement"
+			],
+			[
+				"len",
+				"length"
+			],
+			[
+				"InstB",
+				"InstrBlockLeave"
+			],
+			[
+				"put",
+				"putWord8"
+			],
+			[
+				"InstrObj",
+				"InstrObjMemberAccess"
+			],
+			[
+				"InstrLog",
+				"InstrLogicOr\t(Instructions.hs)"
+			],
+			[
+				"InstrCLe",
+				"InstrCompareLeq\t(Instructions.hs)"
+			],
+			[
+				"InstrComp",
+				"InstrCompareLt\t(Instructions.hs)"
+			],
+			[
+				"InstrF",
+				"InstrFunctionCall\t(Instructions.hs)"
+			],
+			[
+				"toB",
+				"toByecode"
+			],
+			[
+				"norm",
+				"normaliseAst"
+			],
+			[
+				"toy",
+				"toBytes"
+			],
+			[
 				"no",
 				"normaliseExpression"
 			],
@@ -14,10 +74,6 @@
 			[
 				"normaliseSt",
 				"normaliseStatement"
-			],
-			[
-				"norm",
-				"normaliseStatements"
 			],
 			[
 				"Instrp",
@@ -458,72 +514,26 @@
 			[
 				"return",
 				"returnValue"
-			],
-			[
-				"lo",
-				"localVariableContainer"
-			],
-			[
-				"a",
-				"argc"
-			],
-			[
-				"mark",
-				"markassold"
-			],
-			[
-				"hid",
-				"hideframe"
-			],
-			[
-				"vis",
-				"visibility"
-			],
-			[
-				"visib",
-				"visibility"
-			],
-			[
-				"cli",
-				"clicklayer"
-			],
-			[
-				"des",
-				"designerselect"
-			],
-			[
-				"Desi",
-				"DesignerName"
-			],
-			[
-				"xht",
-				"xhttp"
-			],
-			[
-				"xh",
-				"xhttp"
-			],
-			[
-				"sub",
-				"subrow"
-			],
-			[
-				"typ",
-				"typename"
-			],
-			[
-				"Des",
-				"DesignerNr"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "Tokens.hs",
+			"file": "src/AstTransform.hs",
 			"settings":
 			{
-				"buffer_size": 977,
+				"buffer_size": 6384,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Main.hs",
+			"settings":
+			{
+				"buffer_size": 1434,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		}
@@ -651,10 +661,18 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 172.0,
-		"last_filter": "menu",
+		"height": 240.0,
+		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"meun",
+				"View: Toggle Menu"
+			],
+			[
+				"space",
+				"Indentation: Convert to Spaces"
+			],
 			[
 				"menu",
 				"View: Toggle Menu"
@@ -662,10 +680,6 @@
 			[
 				"ins",
 				"Package Control: Install Package"
-			],
-			[
-				"meun",
-				"View: Toggle Menu"
 			],
 			[
 				"inde",
@@ -852,7 +866,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 484.0
+		"width": 493.0
 	},
 	"console":
 	{
@@ -876,15 +890,21 @@
 	},
 	"expanded_folders":
 	[
-		"/home/felix/programming/haskell/pseudocodeCompiler"
+		"/home/felix/programming/haskell/pseudocodeCompiler",
+		"/home/felix/programming/haskell/pseudocodeCompiler/src"
 	],
 	"file_history":
 	[
+		"/home/felix/programming/haskell/pseudocodeCompiler/src/Ast.hs",
+		"/home/felix/programming/haskell/pseudocodeCompiler/src/ToBytecode.hs",
+		"/home/felix/programming/haskell/pseudocodeCompiler/file.psbc",
+		"/home/felix/programming/haskell/pseudocodeCompiler/ToBytecode.hs",
+		"/home/felix/programming/haskell/pseudocodeCompiler/Main.hs",
 		"/home/felix/programming/haskell/pseudocodeCompiler/Instructions.hs",
+		"/home/felix/programming/haskell/pseudocodeCompiler/F.hs",
 		"/home/felix/programming/haskell/pseudocodeCompiler/Ast.hs",
 		"/home/felix/programming/haskell/pseudocodeCompiler/source.psc",
 		"/home/felix/programming/haskell/pseudocodeCompiler/AstTransform.hs",
-		"/home/felix/programming/haskell/pseudocodeCompiler/Main.hs",
 		"/home/felix/programming/haskell/pseudocodeCompiler/PseudocodeParser.y",
 		"/home/felix/programming/haskell/pseudocodeCompiler/source2.psc",
 		"/home/felix/programming/haskell/pseudocodeCompiler/Lexer.x",
@@ -1002,12 +1022,7 @@
 		"/home/felix/other/exploit/shell_injection.c",
 		"/home/felix/other/exploit/killtest.c",
 		"/home/felix/programming/cpp/pseudocodeInterpreter/include/interpreter.h",
-		"/home/felix/programming/cpp/pseudocodeInterpreter/src/interpreter.c",
-		"/home/felix/documents/sem2/übungen/diskreteStrukturen/2/u2.tex",
-		"/home/felix/programming/java/proguebung/sem2/2/Car.java",
-		"/home/felix/programming/java/proguebung/sem2/2/cars.txt",
-		"/srv/http/Taijiseite/v15/visitors.txt",
-		"/srv/http/Taijiseite/v15/index.php"
+		"/home/felix/programming/cpp/pseudocodeInterpreter/src/interpreter.c"
 	],
 	"find":
 	{
@@ -1108,30 +1123,60 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "Tokens.hs",
-					"semi_transient": true,
+					"file": "src/AstTransform.hs",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 977,
+						"buffer_size": 6384,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1131,
+								1131
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Haskell/Haskell.sublime-syntax",
-							"tab_size": 4,
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/Main.hs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1434,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								923,
+								923
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Haskell/Haskell.sublime-syntax",
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
@@ -1174,7 +1219,7 @@
 			1.0
 		]
 	},
-	"menu_visible": true,
+	"menu_visible": false,
 	"output.exec":
 	{
 		"height": 98.0
@@ -1215,7 +1260,7 @@
 		[
 			[
 				"",
-				"~/curüb/datenbanksysteme/datenbanksysteme.sublime-project"
+				"~/programming/cpp/pseudocodeInterpreter/pseudocodeInterpreter.sublime-project"
 			]
 		],
 		"width": 380.0

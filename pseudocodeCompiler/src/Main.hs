@@ -1,3 +1,4 @@
+module Main where
 import Lexer
 import PseudocodeParser
 import AstTransform

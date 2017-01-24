@@ -37,17 +37,22 @@ normaliseStatement (StatementForDownto (ExpressionAssign to from) expc block)
     = StatementExpression (ExpressionAssign to from)
     : StatementWhile (ExpressionCompareGt to expc) (block++[StatementExpression $ ExpressionArithDec to])
     : []
-normaliseStatement (StatementRepeat block until)
-    = block ++ [StatementWhile (ExpressionLogicNot until) block]
 normaliseStatement (StatementExpression exp)
     = (StatementExpression $ normaliseExpression exp) : []
 normaliseStatement (StatementFunctionDeclaration name args block)
-    = StatementFunctionDeclaration name args (normaliseStatements block) : []
+    = StatementFunctionDeclaration name args 
+        (checkReturnStatement . normaliseStatements $ block) : []
 normaliseStatement (StatementIf exp th el)
     = StatementIf (normaliseExpression exp) (normaliseStatements th) (normaliseStatements el) : []
 normaliseStatement a = [a]
 
-
+--checks if a block ends with a return statement
+--if it does not, adds one to the end.
+checkReturnStatement :: [Statement] -> [Statement]
+checkReturnStatement [] = []
+checkReturnStatement (r @(StatementReturn _) : [] ) = r : []
+checkReturnStatement (x:[]) = x : (StatementReturn EmptyExpression) : []
+checkReturnStatement (x:xs) = x : checkReturnStatement xs
 
 normaliseExpression :: Expression -> Expression
 normaliseExpression (ExpressionCompareNeq e1 e2) = ExpressionLogicNot( ExpressionCompareEq e1 e2 )
@@ -60,15 +65,21 @@ transformToInstructions (x:xs) = (serializeStatement x)++transformToInstructions
 serializeStatement :: Statement -> [Instruction]
 serializeStatement (StatementIf expc bthen belse )
     = let ci = serializeExpression expc
-          ti = transformToInstructions bthen
-          ei = transformToInstructions belse
-      in ci ++ [InstrConditionalJump (length ti)] ++ ti ++ ei
-serializeStatement (StatementWhile exp block )
+          ei = InstrBlockEnter : transformToInstructions belse ++ [InstrBlockLeave]
+          ti = InstrBlockEnter : transformToInstructions bthen ++ 
+            [InstrBlockLeave,InstrJump (length ei+1)]
+      in ci ++ [InstrConditionalJump (length ti+1)] ++ ti ++ ei
+serializeStatement (StatementWhile exp block)
     = let ci = serializeExpression exp
-          bi = transformToInstructions block
-          jf = length bi + 1
+          bi = InstrBlockEnter : transformToInstructions block ++ [InstrBlockLeave]
+          jf = length bi + 2 -- +2 because of the jump statement on the end
           jb = - (jf + length ci)
-      in ci ++ [InstrConditionalJump jf] ++ bi ++ [InstrJump jb] 
+      in ci ++ [InstrConditionalJump jf] ++ bi ++ [InstrJump jb]
+serializeStatement (StatementRepeat block expr)
+    = let bi = InstrBlockEnter : transformToInstructions block ++ [InstrBlockLeave]
+          ei = serializeExpression expr
+          jb = -(length bi + length ei)
+      in bi ++ ei ++ [InstrConditionalJump jb]
 serializeStatement (StatementFunctionDeclaration name args block)
     = let ins = transformToInstructions block
           len = length ins

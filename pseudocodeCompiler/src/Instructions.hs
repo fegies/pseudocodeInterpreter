@@ -1,7 +1,7 @@
 module Instructions where
 
 data Instruction
-    = InstrJump Int
+    = InstrJump Int --jumps give the number of the node where execution should resume
     | InstrConditionalJump Int --jump if false
     | InstrFunctionDecl String [String] Int --number of instructions in the function block
     | InstrClassDecl String [String]
@@ -33,6 +33,9 @@ data Instruction
     | InstrLogicNot
     | InstrLogicAnd
     | InstrLogicOr
+
+    | InstrBlockEnter   --these are used to implement scoping
+    | InstrBlockLeave
     deriving (Show)
 
 
