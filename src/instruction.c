@@ -11,7 +11,7 @@ void printInstruction( Instruction* i )
 			printf("Jump to %lx", i-> additionalData);
 			break;
 		case InstrType_Return:
-			printf("Funcion return");
+			printf("Function return");
 			break;
 		case InstrType_VarLookup:
 			printf("Local Lookup of: %s", i-> additionalData );

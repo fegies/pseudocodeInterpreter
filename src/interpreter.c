@@ -217,6 +217,32 @@ variable* interpretFunction( Instruction* entry, nameStore* args )
 			case InstrType_StackPop:
 				execStack_pop( stack );
 				break;
+			case InstrType_Print:
+			{
+				variable* v = execStack_pop( stack );
+
+				switch( v-> type )
+				{
+					case VARIABLE_TYPE_BOOLEAN:
+						if( boolean_isTrue(v) )
+							printf("True\n");
+						else
+							printf("False\n");
+						break;
+					case VARIABLE_TYPE_INT:
+						printf("%ld", (long)v-> ref );
+						break;
+					case VARIABLE_TYPE_STRING:
+						printf("%s", variableString_getBytes(v) );
+						break;
+					default:
+						fprintf(stderr,
+							"Cannot print variable of type %d\n", v-> type);
+				}
+
+				variable_decrement_Refs( v );
+				break;
+			}
 			default:
 			{
 				fprintf(stderr, "Invalid Type: %d\n", curins-> type);
