@@ -4,7 +4,7 @@ import Ast
 import Instructions
 
 normaliseAst :: Program -> Program
-normaliseAst = normaliseStatements . checkTree
+normaliseAst = checkReturnStatement . normaliseStatements . checkTree
 
 --throw errors if an error in the grammar is found
 --returns the exact same AST if no errors were found
