@@ -149,7 +149,7 @@ long _eq (long o1, long o2 ){ return o1 == o2; }
 long _lt (long o1, long o2 ){ return o1 < o2; }
 long _gt (long o1, long o2 ){ return o1 > o2; }
 long _leq (long o1, long o2 ){ return o1 <= o2; }
-long _geq (long o1, long o2 ){ return o1 <= o2; }
+long _geq (long o1, long o2 ){ return o1 >= o2; }
 
 variable* _operation_compare( variable* v1, variable* v2, unsigned char mode )
 {

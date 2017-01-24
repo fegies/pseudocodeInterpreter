@@ -55,3 +55,5 @@ void printInstruction( Instruction* i );
 #define InstrType_BlockEnter 30
 #define InstrType_BlockLeave 31
 #define InstrType_StackPop 32
+
+#define InstrType_Print 33

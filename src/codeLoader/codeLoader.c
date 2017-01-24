@@ -4,6 +4,7 @@
 #include "codeLoader/byteops.h"
 #include "datastructures/function.h"
 #include "datastructures/class.h"
+#include "standartLibrary.h"
 #include "globals.h"
 #include <stdio.h>
 #include <string.h>
@@ -15,9 +16,12 @@ Instruction* _instrAt( Instruction** instrarr, size_t pos )
 }
 
 
+
 Instruction* loadBytecode( char* bytes, size_t inputlength )
 {
 	globalVariables = nameStore_create();
+
+	preloadLibraryFunctions();
 
 	size_t instpos = 0;
 	size_t instarrnum = 0;
