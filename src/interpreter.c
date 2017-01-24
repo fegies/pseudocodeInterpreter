@@ -3,6 +3,7 @@
 #include "boolean.h"
 #include "globals.h"
 #include "datastructures/variableString.h"
+#include "datastructures/function.h"
 
 void interpretPSC( Instruction* entry )
 {
@@ -65,6 +66,23 @@ variable* interpretFunction( Instruction* entry, nameStore* args )
 				v-> ref = curins-> additionalData;
 				execStack_push( stack, v );
 				break;
+			}
+			case InstrType_FunctionCall:
+			{
+				variable* f = execStack_pop( stack );
+				variableFunction* vf = (variableFunction*)f-> ref;
+				nameStore* args = nameStore_create();
+				for( size_t i = 0; i < (vf->args).count; ++i )
+				{
+					variable* v = execStack_pop( stack );
+					char* argname = ((vf->args).args)[i];
+					nameStore_put( args, argname, v );
+					variable_decrement_Refs( v );
+				}
+				variable* retval = interpretFunction( vf->entrypoint, args );
+				if( retval != 0 )
+					execStack_push( stack, retval );
+				nameStore_destroy( args );
 			}
 		}
 		curins = curins -> next;

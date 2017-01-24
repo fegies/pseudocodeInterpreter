@@ -40,6 +40,7 @@ Instruction* loadBytecode( char* bytes, size_t inputlength )
 		curins-> type = type;
 		curins-> next = _instrAt( instrarr, instpos+1 );
 		void* additionalData = 0;
+
 		switch( type )
 		{
 			case InstrType_Jump:
@@ -53,7 +54,7 @@ Instruction* loadBytecode( char* bytes, size_t inputlength )
 			case InstrType_FunctionDecl:
 			{
 				struct multistring_args* args;
-				char* name;
+				char* name = 0;
 				bytepos += stringlitcpy( &name, bytes+bytepos );
 				bytepos += getMultiargs( &args, bytes+bytepos );
 
@@ -72,18 +73,17 @@ Instruction* loadBytecode( char* bytes, size_t inputlength )
 			case InstrType_ClassDecl:
 			{
 				struct multistring_args* args;
-				char* name;
+				char* name = 0;
 				bytepos += stringlitcpy( &name, bytes+bytepos );
 				bytepos += getMultiargs( &args, bytes+bytepos );
 
 				curins -> type = 0;
 
 				variable* v = class_new( args );
-				free( name );
-				free( args );
 
 				nameStore_put( globalVariables, name, v );
 
+				free( args );
 				break;
 			}
 
@@ -101,6 +101,14 @@ Instruction* loadBytecode( char* bytes, size_t inputlength )
 				int32_t i = bytesToInt( bytes+bytepos );
 				bytepos += 4;
 				additionalData = (void*)(long)i;
+				break;
+			}
+			default:
+			{
+				if( type <= 31 )
+					break;
+				printf("Code error: invalid type: %d\n", type);
+				exit(1);
 			}
 
 		}
@@ -124,5 +132,7 @@ Instruction* loadBytecode( char* bytes, size_t inputlength )
 		}
 	}
 
-	return *instrarr;
+	Instruction * e = *instrarr;
+	free( instrarr );
+	return e;
 }

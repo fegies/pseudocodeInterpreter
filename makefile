@@ -25,7 +25,7 @@ DATASTRUCTS= class.o object.o variable.o nameStore.o execStack.o array.o \
 CODELOADER = codeLoader.o byteops.o
 
 OPROG = $(addprefix $(ODIR)/, $(PROG))
-RUNFLAGS = testscript.pseudocode
+RUNFLAGS = psc.pscb
 
 DEPDIR := deps
 DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)/$*.d
@@ -44,7 +44,7 @@ memcheck: all
 	valgrind $(OPROG) $(RUNFLAGS)
 
 memcheckfull: all
-	valgrind --leak-check=full $(OPROG) $(RUNFLAGS)
+	valgrind --leak-check=full $(OPROG) $(RUNFLAGS) #2>&1 | head -n 40
 
 debug: all
 	gdb $(OPROG)

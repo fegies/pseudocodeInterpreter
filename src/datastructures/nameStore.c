@@ -16,7 +16,9 @@ void nameStore_put( nameStore* n, char* name, variable* var )
 		n-> root = newnode;
 		n-> root-> name = name;
 		n-> root-> var = var;
+		return;
 	}
+
 	struct nameStore_node* curn = n-> root;
 
 	while ( 1 )
@@ -28,6 +30,7 @@ void nameStore_put( nameStore* n, char* name, variable* var )
 				variable_decrement_Refs( curn-> var );
 			variable_increment_Refs( var );
 			curn-> var = var;
+			return;
 		}
 		else if( lor == -1 )
 		{

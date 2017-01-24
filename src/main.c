@@ -47,7 +47,7 @@ int main(int argc, char** argv)
 		}
 	}
 
-	puts( bytes );
+//	puts( bytes );
 
 	if( usesFile )
 		fclose( f );

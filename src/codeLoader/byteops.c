@@ -19,7 +19,7 @@ size_t stringlitcpy( char** to, char* bytes )
 	size_t length = strlen( bytes );
 	*to = malloc( sizeof(char)* (length + 1) );
 	strcpy( *to, bytes );
-	*to[length] = 0;
+	(*to)[length] = 0;
 	return length+1;
 }
 
@@ -48,5 +48,5 @@ size_t getMultiargs( struct multistring_args** m, char* bytes )
 	(*m)-> count = count;
 	(*m)-> args = args;
 
-	return bytes - bo;
+	return bytes - bo + 1;
 }
