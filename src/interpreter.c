@@ -137,8 +137,8 @@ variable* interpretFunction( Instruction* entry, nameStore* args )
 			}
 			case InstrType_Assign:
 			{
-				variable* to = execStack_pop( stack );
 				variable* from = execStack_pop( stack );
+				variable* to = execStack_pop( stack );
 				operation_assign( to, from );
 				execStack_push( stack, to );
 				variable_decrement_Refs( from );
