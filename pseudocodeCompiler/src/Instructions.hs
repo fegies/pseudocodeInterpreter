@@ -36,6 +36,8 @@ data Instruction
 
     | InstrBlockEnter   --these are used to implement scoping
     | InstrBlockLeave
+
+    | InstrStackPop --used to discard the to element of the stack.
     deriving (Show)
 
 

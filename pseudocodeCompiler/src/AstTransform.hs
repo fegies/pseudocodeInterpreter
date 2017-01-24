@@ -89,7 +89,7 @@ serializeStatement (StatementClassDeclaration name args)
 serializeStatement (StatementReturn exp)
     = serializeExpression exp ++ [InstrReturn]
 serializeStatement (StatementExpression exp)
-    = serializeExpression exp
+    = serializeExpression exp ++ [InstrStackPop]
 
 argstolist :: Expression -> Expression -> [Instruction]
 argstolist a b = serializeExpression b ++ serializeExpression a
