@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"exec",
+				"execStack_push"
+			],
+			[
+				"ent",
+				"entries"
+			],
+			[
+				"add",
+				"additionalData"
+			],
+			[
+				"ex",
+				"execStack_pop"
+			],
+			[
 				"ret",
 				"retval"
 			],
@@ -18,10 +34,6 @@
 			[
 				"data",
 				"datastructures"
-			],
-			[
-				"exec",
-				"execStack_pop"
 			],
 			[
 				"InstrTypeF",
@@ -178,10 +190,6 @@
 			[
 				"V",
 				"VARIABLE_TYPE_STRING"
-			],
-			[
-				"ent",
-				"entrycount"
 			],
 			[
 				"ojb",
@@ -506,33 +514,16 @@
 			[
 				"Size",
 				"SizeName"
-			],
-			[
-				"alt",
-				"alttype"
-			],
-			[
-				"Delic",
-				"DelicaCode"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "src/codeLoader/codeLoader.c",
-			"settings":
-			{
-				"buffer_size": 3081,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "src/datastructures/nameStore.c",
 			"settings":
 			{
-				"buffer_size": 1990,
+				"buffer_size": 2111,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -541,7 +532,7 @@
 			"file": "src/datastructures/object.c",
 			"settings":
 			{
-				"buffer_size": 1371,
+				"buffer_size": 1526,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -559,7 +550,16 @@
 			"file": "src/interpreter.c",
 			"settings":
 			{
-				"buffer_size": 2371,
+				"buffer_size": 4818,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/operation.c",
+			"settings":
+			{
+				"buffer_size": 4197,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -592,10 +592,18 @@
 			}
 		},
 		{
+			"file": "include/datastructures/array.h",
+			"settings":
+			{
+				"buffer_size": 532,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "include/datastructures/object.h",
 			"settings":
 			{
-				"buffer_size": 442,
+				"buffer_size": 422,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -606,6 +614,31 @@
 			{
 				"buffer_size": 1199,
 				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "include/datastructures/variableString.h",
+			"settings":
+			{
+				"buffer_size": 1617,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "include/operation.h",
+			"settings":
+			{
+				"buffer_size": 969,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "include/datastructures/variable.h",
+			"settings":
+			{
+				"buffer_size": 1034,
 				"line_ending": "Unix"
 			}
 		},
@@ -931,7 +964,7 @@
 				"View: Toggle Menu"
 			]
 		],
-		"width": 493.0
+		"width": 484.0
 	},
 	"console":
 	{
@@ -965,7 +998,9 @@
 	],
 	"file_history":
 	[
+		"/home/felix/programming/cpp/pseudocodeInterpreter/src/codeLoader/codeLoader.c",
 		"/home/felix/programming/cpp/pseudocodeInterpreter/src/codeLoader/byteops.c",
+		"/home/felix/programming/haskell/pseudocodeCompiler/src/ToBytecode.hs",
 		"/home/felix/programming/cpp/pseudocodeInterpreter/src/datastructures/nameStore.c",
 		"/home/felix/programming/cpp/pseudocodeInterpreter/.gitignore",
 		"/home/felix/programming/cpp/pseudocodeInterpreter/src/datastructures/function.c",
@@ -974,7 +1009,6 @@
 		"/home/felix/programming/cpp/pseudocodeInterpreter/src/main.c",
 		"/home/felix/programming/cpp/pseudocodeInterpreter/include/codeLoader.h",
 		"/home/felix/programming/cpp/pseudocodeInterpreter/src/datastructures/execStack.c",
-		"/home/felix/programming/cpp/pseudocodeInterpreter/src/codeLoader/codeLoader.c",
 		"/home/felix/programming/cpp/pseudocodeInterpreter/src/datastructures/array.c",
 		"/home/felix/programming/cpp/pseudocodeInterpreter/src/datastructures/variable.c",
 		"/home/felix/programming/cpp/pseudocodeInterpreter/src/datastructures/class.c",
@@ -1091,8 +1125,7 @@
 		"/home/felix/Downloads/scintilla/lexers/LexCPP.cxx",
 		"/home/felix/Downloads/scintilla/include/SciLexer.h",
 		"/home/felix/programming/java/proguebung/sem2/3/*.java",
-		"/home/felix/documents/sem2/übungen/diskreteStrukturen/3/u3.tex",
-		"/home/felix/Downloads/scintilla/scripts/FileGenerator.py"
+		"/home/felix/documents/sem2/übungen/diskreteStrukturen/3/u3.tex"
 	],
 	"find":
 	{
@@ -1208,53 +1241,24 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/codeLoader/codeLoader.c",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3081,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1019,
-								1019
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 419.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "src/datastructures/nameStore.c",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1990,
+						"buffer_size": 2111,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								334,
-								334
+								1414,
+								1414
 							]
 						],
 						"settings":
@@ -1263,27 +1267,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 720.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 1,
 					"file": "src/datastructures/object.c",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1371,
+						"buffer_size": 1526,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								968,
-								968
+								291,
+								291
 							]
 						],
 						"settings":
@@ -1296,11 +1300,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 2,
 					"file": "src/main.c",
 					"semi_transient": false,
 					"settings":
@@ -1312,8 +1316,8 @@
 						"selection":
 						[
 							[
-								934,
-								934
+								1056,
+								1056
 							]
 						],
 						"settings":
@@ -1322,27 +1326,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 270.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 3,
 					"file": "src/interpreter.c",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2371,
+						"buffer_size": 4818,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2252,
-								2252
+								3947,
+								3947
 							]
 						],
 						"settings":
@@ -1351,10 +1355,39 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 562.0,
+						"translation.y": 1710.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/operation.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4197,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3667,
+								3667
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2025.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -1383,7 +1416,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 13,
 					"type": "text"
 				},
 				{
@@ -1412,13 +1445,13 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 14,
 					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 2,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -1446,24 +1479,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 12,
 					"type": "text"
 				},
 				{
 					"buffer": 8,
-					"file": "include/datastructures/object.h",
+					"file": "include/datastructures/array.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 442,
+						"buffer_size": 532,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								442,
-								442
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1474,11 +1507,39 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 11,
 					"type": "text"
 				},
 				{
 					"buffer": 9,
+					"file": "include/datastructures/object.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 422,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								277,
+								277
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
 					"file": "include/instruction.h",
 					"semi_transient": false,
 					"settings":
@@ -1490,8 +1551,36 @@
 						"selection":
 						[
 							[
-								332,
-								332
+								985,
+								985
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "include/datastructures/variableString.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1617,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1506,7 +1595,63 @@
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 12,
+					"file": "include/operation.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 969,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								780,
+								780
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "include/datastructures/variable.h",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1034,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								678,
+								678
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 14,
 					"file": "include/datastructures/class.h",
 					"semi_transient": false,
 					"settings":
@@ -1530,7 +1675,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 8,
 					"type": "text"
 				}
 			]
@@ -1564,7 +1709,7 @@
 		"cols":
 		[
 			0.0,
-			0.5,
+			0.506505026611,
 			1.0
 		],
 		"rows":

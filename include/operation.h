@@ -19,3 +19,17 @@ variable* operation_multiply( variable* v1, variable* v2 );
 variable* operation_divide( variable* v1, variable* v2 );
 
 variable* operation_modulo( variable* v1, variable* v2 );
+
+long integer_get( variable* v );
+
+void operation_assign( variable* to, variable* from );
+
+
+variable* operation_compareEq( variable* v1, variable* v2 );
+variable* operation_compareLt( variable* v1, variable* v2 );
+variable* operation_compareGt( variable* v1, variable* v2 );
+variable* operation_compareLeq( variable* v1, variable* v2 );
+variable* operation_compareGeq( variable* v1, variable* v2 );
+
+variable* operation_inc( variable* v );
+variable* operation_dec( variable* v );

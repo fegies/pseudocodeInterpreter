@@ -90,6 +90,7 @@ Instruction* loadBytecode( char* bytes, size_t inputlength )
 			case InstrType_VarLookup:
 			case InstrType_GlobalLookup:
 			case InstrType_PushConstStr:
+			case InstrType_ObjNew:
 			{
 				char * b; 
 				bytepos += stringlitcpy( &b, bytes+bytepos );
@@ -105,7 +106,7 @@ Instruction* loadBytecode( char* bytes, size_t inputlength )
 			}
 			default:
 			{
-				if( type <= 31 )
+				if( type <= 32 )
 					break;
 				printf("Code error: invalid type: %d\n", type);
 				exit(1);

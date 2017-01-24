@@ -32,6 +32,7 @@ struct multistring_args
 #define InstrType_ObjNew 12
 #define InstrType_ObjMemberAcc 13
 #define InstrType_Assign 14
+
 #define InstrType_CompareEq 15
 #define InstrType_CompareLt 16
 #define InstrType_CompareGt 17
@@ -42,10 +43,12 @@ struct multistring_args
 #define InstrType_ArithMul 22
 #define InstrType_ArithDiv 23
 #define InstrType_ArithMod 24
+
 #define InstrType_ArithInc 25
 #define InstrType_ArithDec 26
 #define InstrType_LogicNot 27
 #define InstrType_LogicAnd 28
-#define InstrType_LogicOR 29
+#define InstrType_LogicOr 29
 #define InstrType_BlockEnter 30
 #define InstrType_BlockLeave 31
+#define InstrType_StackPop 32

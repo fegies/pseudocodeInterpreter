@@ -22,6 +22,9 @@ variable* nameStore_get( nameStore* n, char* name );
 //destroys and frees the nameStore. Decrements the references to all vars in it.
 void nameStore_destroy( nameStore* n );
 
+void nameStore_increfs( nameStore* n );
+void nameStore_decrefs( nameStore* n );
+
 nameStore* nameStore_create();
 
 //Implementation detail

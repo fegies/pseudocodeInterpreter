@@ -7,11 +7,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-variable* object_initialize( variable* prototype, variable** entries )
+variable* object_initialize( variable* prototype )
 {
 	assert( prototype != 0 );
 	assert( prototype-> type == VARIABLE_TYPE_CLASS );
-	assert( entries != 0 );
 
 	variable_increment_Refs( prototype );
 
@@ -19,6 +18,12 @@ variable* object_initialize( variable* prototype, variable** entries )
 	variable_set_type( objvar, VARIABLE_TYPE_OBJECT );
 	object* o = calloc( 1, sizeof(object) );
 	objvar-> ref = o;
+
+	size_t entrycount = ((class*)prototype-> ref)-> entrycount;
+	variable** entries = malloc( sizeof(variable*) * entrycount );
+
+	for( size_t i = 0; i < entrycount; ++i )
+		entries[i] = variable_new();
 
 	o-> prototype = prototype;
 	o-> entries = entries;
