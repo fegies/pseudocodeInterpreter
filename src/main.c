@@ -55,7 +55,7 @@ int main(int argc, char** argv)
 	Instruction* entry = loadBytecode( bytes, length );
 
 	free( bytes );
-	//interpretPSC( entry );
+	interpretPSC( entry );
 
 	return 0;
 }

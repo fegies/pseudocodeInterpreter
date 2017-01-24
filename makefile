@@ -17,7 +17,7 @@ SUBPATHS   = . datastructures codeLoader
 OBJS       = $(BASEOBS) $(addprefix datastructures/, $(DATASTRUCTS)) \
 	$(addprefix codeLoader/, $(CODELOADER))
 
-BASEOBS    = main.o boolean.o operation.o interpreter.o
+BASEOBS    = main.o boolean.o operation.o interpreter.o instruction.o
 
 DATASTRUCTS= class.o object.o variable.o nameStore.o execStack.o array.o \
 	variableString.o function.o

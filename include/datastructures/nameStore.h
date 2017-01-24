@@ -25,6 +25,10 @@ void nameStore_destroy( nameStore* n );
 void nameStore_increfs( nameStore* n );
 void nameStore_decrefs( nameStore* n );
 
+//prints the content of the namestore to stdout
+//used for debugging
+void nameStore_print( nameStore* n );
+
 nameStore* nameStore_create();
 
 //Implementation detail

@@ -17,6 +17,9 @@ struct multistring_args
 	char** args;
 };
 
+//prints debugging info about the instruction to stdout
+void printInstruction( Instruction* i );
+
 #define InstrType_NOP 0
 #define InstrType_Jump 1
 #define InstrType_ConditionalJump 2

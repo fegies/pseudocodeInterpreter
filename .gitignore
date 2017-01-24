@@ -2,3 +2,6 @@ bin/**
 deps/**
 bin
 deps
+pcompile
+*.psc
+*.pscb

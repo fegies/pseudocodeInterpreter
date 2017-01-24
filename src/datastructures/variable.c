@@ -7,6 +7,7 @@
 
 #include <assert.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 void variable_increment_Refs( variable* v )
 {
@@ -67,4 +68,15 @@ void variable_set_type( variable* v, unsigned char type )
 	assert( v-> type == VARIABLE_TYPE_NONE );
 
 	v-> type = type;
+}
+
+void variable_print( variable* v )
+{
+	printf("Refs : %d, Type: %d ", v-> refcount, v-> type );
+	switch( v-> type )
+	{
+		case VARIABLE_TYPE_INT:
+			printf("Content: %ld",(long)v-> ref);
+	}
+	printf("\n");
 }

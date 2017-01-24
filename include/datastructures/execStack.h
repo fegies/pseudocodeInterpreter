@@ -5,7 +5,6 @@
 
 typedef struct execStack
 {
-	int size;
 	int top;
 	variable** data;
 }execStack;

@@ -7,11 +7,16 @@
 #include "datastructures/array.h"
 #include "datastructures/object.h"
 #include "operation.h"
+#include "constants.h"
 
 #include <stdio.h>
 
 void interpretPSC( Instruction* entry )
 {
+	#ifndef NDEBUG
+	printf("\nBeginning Execution\n\n");
+	#endif
+
 	nameStore* args = nameStore_create();
 	variable* ret = interpretFunction( entry, args );
 	variable_decrement_Refs( ret );
@@ -20,6 +25,11 @@ void interpretPSC( Instruction* entry )
 
 variable* interpretFunction( Instruction* entry, nameStore* args )
 {
+	#ifndef NDEBUG
+	printf("Entering function at %lx\n Args:\n", entry);
+	nameStore_print( args );
+	#endif
+
 	execStack* stack = execStack_create();
 	variable* retval = 0;
 
@@ -27,6 +37,9 @@ variable* interpretFunction( Instruction* entry, nameStore* args )
 	char running = 1;
 	while( running )
 	{
+		#ifndef NDEBUG
+		printInstruction( curins );
+		#endif
 		switch( curins -> type )
 		{
 			case InstrType_NOP: break;

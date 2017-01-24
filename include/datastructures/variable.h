@@ -25,6 +25,9 @@ variable* variable_new();
 //errors if the variable was not undefined before.
 void variable_set_type( variable* v, unsigned char type );
 
+//prints a string representation of the variable to stdout
+void variable_print( variable* v );
+
 /*
 Variable types:
 0: none (Undefined)

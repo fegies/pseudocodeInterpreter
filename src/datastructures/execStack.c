@@ -9,7 +9,7 @@ void execStack_push( execStack* e, variable* v )
 	if( e == 0 || v == 0 )
 		return;
 	//Stack overflow checks
-	assert( e-> top < e-> size );
+	assert( e-> top < EXECSTACKSIZE );
 
 	//commented out because the stack does not count as a real reference
 	//holder.

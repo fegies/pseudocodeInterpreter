@@ -38,7 +38,7 @@ Instruction* loadBytecode( char* bytes, size_t inputlength )
 
 		Instruction* curins = _instrAt( instrarr, instpos++ );
 		curins-> type = type;
-		curins-> next = _instrAt( instrarr, instpos+1 );
+		curins-> next = _instrAt( instrarr, instpos );
 		void* additionalData = 0;
 
 		switch( type )
@@ -63,7 +63,7 @@ Instruction* loadBytecode( char* bytes, size_t inputlength )
 				additionalData = _instrAt( instrarr, instpos + jpos );
 				curins -> type = InstrType_Jump;
 
-				variable* v = variableFunction_new( _instrAt( instrarr, instpos+1),
+				variable* v = variableFunction_new( _instrAt( instrarr, instpos),
 					args );
 
 				nameStore_put( globalVariables, name, v );
@@ -131,7 +131,16 @@ Instruction* loadBytecode( char* bytes, size_t inputlength )
 				exit(1);
 			}
 		}
+
 	}
+
+	#ifndef NDEBUG
+	printf("Finished Loading the code.. Layout:\n");
+	for( int i = 0; i < instpos; ++i )
+	{
+		printInstruction( _instrAt(instrarr, i ) );
+	}
+	#endif
 
 	Instruction * e = *instrarr;
 	free( instrarr );

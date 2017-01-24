@@ -2,6 +2,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 #define newnode calloc( 1, sizeof(struct nameStore_node) )
 
@@ -102,6 +103,22 @@ variable* nameStore_get( nameStore* n, char* name )
 }
 
 #undef newnode
+
+void _nameStore_print( struct nameStore_node* n )
+{
+	if( n == 0 )
+		return;
+	_nameStore_print( n -> left );
+	_nameStore_print( n -> right );
+	printf("Name store contains: %s ", n-> name);
+	variable_print( n-> var );
+}
+
+void nameStore_print( nameStore* n )
+{
+	if( n != 0 )
+		_nameStore_print( n -> root );
+}
 
 void _nameStore_increfs( struct nameStore_node* n )
 {
