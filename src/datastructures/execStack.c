@@ -6,7 +6,7 @@
 
 void execStack_push( execStack* e, variable* v )
 {
-	if( e == 0 || v == 0 )
+	if( e == 0 )
 		return;
 	//Stack overflow checks
 	assert( e-> top < EXECSTACKSIZE );
