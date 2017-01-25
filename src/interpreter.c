@@ -37,6 +37,9 @@ variable* interpretFunction( Instruction* entry, nameStore* args )
 	char running = 1;
 	while( running )
 	{
+		if( curins == 0 )
+			break;
+
 		#ifndef NDEBUG
 		printInstruction( curins );
 		#endif
@@ -52,7 +55,10 @@ variable* interpretFunction( Instruction* entry, nameStore* args )
 				char c = boolean_isTrue( v );
 				variable_decrement_Refs( v );
 				if( !c )
+				{
 					curins = curins -> additionalData;
+					continue;
+				}
 				break;
 			}
 			case InstrType_Return:

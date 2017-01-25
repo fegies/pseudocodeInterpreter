@@ -25,6 +25,9 @@ void printInstruction( Instruction* i )
 		case InstrType_GlobalLookup:
 			printf("Global Lookup of: %s", (char*)ad );
 			break;
+		case InstrType_PushConstStr:
+			printf("Push Constant String: %s", (char*)i-> additionalData );
+			break;
 		case InstrType_PushConstInt:
 			printf("Push Constant Int: %ld", (long)i-> additionalData);
 			break;
@@ -54,6 +57,9 @@ void printInstruction( Instruction* i )
 			break;
 		case InstrType_BlockLeave:
 			printf("Leave Block");
+			break;
+		case InstrType_Print:
+			printf("Print");
 			break;
 	}
 		printf("\n");
