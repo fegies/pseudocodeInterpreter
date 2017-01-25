@@ -9,11 +9,24 @@ import qualified Data.ByteString.Lazy as BL
 --main = getContents >>= print . parsePSC . lexer
 
 
-main = do
-   [f] <- getArgs
-   s <- readFile $ f
-   let instr = transformToInstructions . normaliseAst . parsePSC . lexer $ s
-   BL.putStr . toByecode $ instr
+main = getArgs >>= parseArgs
+
+parseArgs [] = usage
+parseArgs ("-h":_) = usage
+parseArgs ("-d":xs) = interfiles xs
+parseArgs x = prfiles x
+
+prfiles [] = return ()
+prfiles (x:xs) = do
+    s <- readFile $ x
+    let instr = transformToInstructions . normaliseAst . parsePSC . lexer $ s
+    BL.putStr . toByecode $ instr
+    prfiles xs
+
+interfiles [] = return ()
+interfiles (x:xs) = interpretFile x >> interfiles xs
+
+usage = putStrLn "Usage: pcompile [-d] file[s]"
 
 
 interpretFile f = do
