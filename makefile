@@ -35,13 +35,16 @@ DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)/$*.d
 COMPILE.c = $(CCOMPILER) $(DEPFLAGS) $(CCFLAGS) -c
 POSTCOMPILE= mv -f $(DEPDIR)/$*.TD $(DEPDIR)/$*.d
 
-run : all
+run : all psc.pscb
 	$(OPROG) $(RUNFLAGS)
 
 all : buildbin $(OPROG)
 
 flagless : all
 	$(OPROG)
+
+psc.pscb: program.psc
+	./pcompile program.psc > psc.pscb
 
 memcheck: all
 	valgrind $(OPROG) $(RUNFLAGS)

@@ -43,6 +43,7 @@ variable* operation_subtract( variable* v1, variable* v2)
 	if( v1-> type == VARIABLE_TYPE_INT )
 	{
 		result = variable_new();
+		variable_set_type( result, VARIABLE_TYPE_INT );
 		result-> ref = (void*)((long int)v1-> ref - (long int)v2-> ref);
 	}
 	else
@@ -66,6 +67,7 @@ variable* operation_multiply( variable* v1, variable* v2)
 	if( v1-> type == VARIABLE_TYPE_INT )
 	{
 		result = variable_new();
+		variable_set_type( result, VARIABLE_TYPE_INT );
 		result-> ref = (void*)((long int)v1-> ref * (long int)v2-> ref);
 	}
 	else
@@ -89,6 +91,7 @@ variable* operation_divide( variable* v1, variable* v2 )
 	if( v1-> type == VARIABLE_TYPE_INT )
 	{
 		result = variable_new();
+		variable_set_type( result, VARIABLE_TYPE_INT );
 		result-> ref = (void*)((long int)v1-> ref / (long int)v2-> ref);
 	}
 	else
@@ -112,6 +115,7 @@ variable* operation_modulo( variable* v1, variable* v2)
 	if( v1-> type == VARIABLE_TYPE_INT )
 	{
 		result = variable_new();
+		variable_set_type( result, VARIABLE_TYPE_INT );
 		result-> ref = (void*)((long int)v1-> ref % (long int)v2-> ref);
 	}
 	else
@@ -154,7 +158,6 @@ long _geq (long o1, long o2 ){ return o1 >= o2; }
 
 variable* _operation_compare( variable* v1, variable* v2, unsigned char mode )
 {
-	return 0;
 	assert( v1 != 0 );
 	assert( v2 != 0 );
 	assert( v1 -> type == v2 -> type && v1 -> type != 0 );
