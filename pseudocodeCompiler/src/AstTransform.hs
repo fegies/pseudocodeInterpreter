@@ -72,8 +72,8 @@ serializeStatement (StatementIf expc bthen belse )
 serializeStatement (StatementWhile exp block)
     = let ci = serializeExpression exp
           bi = InstrBlockEnter : transformToInstructions block ++ [InstrBlockLeave]
-          jf = length bi + 2 -- +2 because of the jump statement on the end
-          jb = - (jf + length ci)
+          jf = length bi + 1 -- +2 because of the jump statement on the end
+          jb = - (jf + length ci + 1)
       in ci ++ [InstrConditionalJump jf] ++ bi ++ [InstrJump jb]
 serializeStatement (StatementRepeat block expr)
     = let bi = InstrBlockEnter : transformToInstructions block ++ [InstrBlockLeave]

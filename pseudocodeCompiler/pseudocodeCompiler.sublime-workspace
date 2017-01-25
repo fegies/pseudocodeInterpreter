@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"normal",
+				"normaliseExpression"
+			],
+			[
+				"pars",
+				"parsePSC"
+			],
+			[
+				"norma",
+				"normaliseAst"
+			],
+			[
+				"int",
+				"interfiles"
+			],
+			[
+				"len",
+				"length\t(AstTransform.hs)"
+			],
+			[
 				"checkR",
 				"checkReturnStatement"
 			],
@@ -30,10 +50,6 @@
 			[
 				"seri",
 				"serializeStatement"
-			],
-			[
-				"len",
-				"length"
 			],
 			[
 				"InstB",
@@ -78,10 +94,6 @@
 			[
 				"no",
 				"normaliseExpression"
-			],
-			[
-				"normal",
-				"normaliseStatements"
 			],
 			[
 				"normaliseSt",
@@ -360,10 +372,6 @@
 				"parseFormel"
 			],
 			[
-				"pars",
-				"parseFormel"
-			],
-			[
 				"drop",
 				"dropSpaces"
 			],
@@ -464,10 +472,6 @@
 				"abstract"
 			],
 			[
-				"int",
-				"interface"
-			],
-			[
 				"T",
 				"TwoWheeler\t(TwoWheeler.java)"
 			],
@@ -510,10 +514,6 @@
 			[
 				"_",
 				"_SESSION"
-			],
-			[
-				"call",
-				"callstackEntry"
 			]
 		]
 	},
@@ -523,7 +523,7 @@
 			"file": "src/Main.hs",
 			"settings":
 			{
-				"buffer_size": 1476,
+				"buffer_size": 1777,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -1148,15 +1148,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1476,
+						"buffer_size": 1777,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								305,
-								305
+								623,
+								623
 							]
 						],
 						"settings":
@@ -1169,7 +1169,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -1199,7 +1199,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -1215,18 +1215,18 @@
 						"selection":
 						[
 							[
-								996,
-								996
+								2683,
+								2683
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Haskell/Haskell.sublime-syntax",
-							"tab_size": 2,
+							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 393.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
