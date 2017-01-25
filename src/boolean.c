@@ -49,9 +49,9 @@ variable* boolean_or( variable* v1, variable* v2 )
 	return _boolean_op( v1, v2, 1 );
 }
 
-variable* boolean_not( variable* v )
+void boolean_not( variable* v )
 {
-	return _boolean_op( v, v, 2 );
+	v -> ref =(void*) ((long)!((long) v -> ref));
 }
 
 variable* boolean_xor( variable* v1, variable* v2 )

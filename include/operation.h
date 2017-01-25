@@ -31,5 +31,5 @@ variable* operation_compareGt( variable* v1, variable* v2 );
 variable* operation_compareLeq( variable* v1, variable* v2 );
 variable* operation_compareGeq( variable* v1, variable* v2 );
 
-variable* operation_inc( variable* v );
-variable* operation_dec( variable* v );
+void operation_inc( variable* v );
+void operation_dec( variable* v );

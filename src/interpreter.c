@@ -195,8 +195,8 @@ variable* interpretFunction( Instruction* entry, nameStore* args )
 			case InstrType_LogicNot:
 			{
 				variable* o = execStack_pop( stack );
-
-				variable* (*ops[3])(variable*) =
+				//these modify the content of the variable!
+				void (*ops[3])(variable*) =
 				{
 					&operation_inc,
 					&operation_dec,
@@ -204,10 +204,8 @@ variable* interpretFunction( Instruction* entry, nameStore* args )
 				};
 
 				unsigned char offset = curins-> type - InstrType_ArithInc;
-				variable* res = (*ops[offset])(o);
-
-				variable_decrement_Refs( o );
-				execStack_push( stack, res );
+				(*ops[offset])(o);
+				execStack_push( stack, o );
 				break;
 			}
 			case InstrType_BlockEnter:

@@ -216,21 +216,16 @@ variable* operation_compareGeq( variable* v1, variable* v2 )
 	return _operation_compare( v1, v2, 4);
 }
 
-variable* operation_inc( variable* v )
+void operation_inc( variable* v )
 {
-	variable* v2 = variable_new();
-	variable_set_type( v2, VARIABLE_TYPE_INT );
-	v2-> ref = (void*) 1;
-	variable* res = operation_add( v, v2 );
-	variable_decrement_Refs( v2 );
-	return res;
+	long l = (long) v-> ref;
+	++l;
+	v-> ref = (void*) l;
+
 }
-variable* operation_dec( variable* v )
+void operation_dec( variable* v )
 {
-	variable* v2 = variable_new();
-	variable_set_type( v2, VARIABLE_TYPE_INT );
-	v2-> ref = (void*) 1;
-	variable* res = operation_subtract( v, v2 );
-	variable_decrement_Refs( v2 );
-	return res;
+	long l = (long) v-> ref;
+	--l;
+	v-> ref = (void*) l;
 }

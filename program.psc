@@ -6,6 +6,6 @@ function a ( a, b )
 
 a( 2,2 );
 
-for a <- 0 to 10; do
+for a <- 0 to 1; do
 	a( a, 0 );
 od
