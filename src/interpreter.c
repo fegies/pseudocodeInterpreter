@@ -113,8 +113,8 @@ variable* interpretFunction( Instruction* entry, nameStore* args )
 			}
 			case InstrType_ArrayAccess:
 			{
-				variable* pos = execStack_pop( stack );
 				variable* arr = execStack_pop( stack );
+				variable* pos = execStack_pop( stack );
 				long l = integer_get( pos );
 				variable_decrement_Refs( pos );
 				variable* v = array_get( arr, (unsigned int)l );

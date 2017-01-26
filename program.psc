@@ -1,18 +1,18 @@
 
-function printc( a )
+function printArray( a, l )
 {
-	print( a.l );
-	print( a.r );
+	i <- 0;
+	while ( i < l ); do 
+	{
+		print( a[i] );
+		i++;
+	}od
 }
 
-class c
-{
-	l;
-	r;
-}
+a[0] <- 1;
+a[1] <- 4;
+a[2] <- 5;
+a[3] <- 2;
+a[4] <- 3;
 
-b <- new c;
-b.l <- "hi";
-b.r <- "you";
-
-printc( b );
+printArray( a, 6 );

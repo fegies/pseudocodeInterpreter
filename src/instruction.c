@@ -31,6 +31,9 @@ void printInstruction( Instruction* i )
 		case InstrType_PushConstInt:
 			printf("Push Constant Int: %ld", (long)i-> additionalData);
 			break;
+		case InstrType_ArrayAccess:
+			printf("Array Access at position: %ld",(unsigned long)i-> additionalData);
+			break;
 		case InstrType_FunctionCall:
 			printf("Function Call");
 			break;
@@ -45,6 +48,15 @@ void printInstruction( Instruction* i )
 			break;
 		case InstrType_ArithMinus:
 			printf("Minus");
+			break;
+		case InstrType_ArithMul:
+			printf("Multiply");
+			break;
+		case InstrType_ArithDiv:
+			printf("Divide");
+			break;
+		case InstrType_ArithMod:
+			printf("Modulo");
 			break;
 		case InstrType_StackPop:
 			printf("Discard top stack element");
