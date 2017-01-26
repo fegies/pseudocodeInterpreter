@@ -87,7 +87,7 @@ Instruction* loadBytecode( char* bytes, size_t inputlength )
 
 				nameStore_put( globalVariables, name, v );
 
-			//	free( args );
+				free( args );
 				break;
 			}
 
