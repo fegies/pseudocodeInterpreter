@@ -34,6 +34,12 @@ void printInstruction( Instruction* i )
 		case InstrType_FunctionCall:
 			printf("Function Call");
 			break;
+		case InstrType_ObjNew:
+			printf("Object initialization of: %s",(char*) i-> additionalData );
+			break;
+		case InstrType_ObjMemberAcc:
+			printf("Object Member access" );
+			break;
 		case InstrType_ArithPlus:
 			printf("Plus");
 			break;

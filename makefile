@@ -3,7 +3,7 @@
 PROG       = pseudocode
 VPATH      = src include
 ODIR       = ./bin
-SHAREFLAGS = -pipe -Wall -pedantic -Og
+SHAREFLAGS = -pipe -Wall -pedantic -g
 CPPCFLAGS  = $(SHAREFLAGS) -std=c++14
 CCFLAGS    = $(SHAREFLAGS) -std=c11
 LINKFLAGS  = $(SHAREFLAGS)

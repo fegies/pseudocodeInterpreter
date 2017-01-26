@@ -6,3 +6,4 @@ pcompile
 *.psc
 *.pscb
 *.sublime-workspace
+vgcore.*

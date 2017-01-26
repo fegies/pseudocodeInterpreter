@@ -1,13 +1,18 @@
 
-function a ( a, b )
+function printc( a )
 {
-	print( a + b );
+	print( a.l );
+	print( a.r );
 }
 
-a( 2,2 );
+class c
+{
+	l;
+	r;
+}
 
-for a <- 0 to 1; do
-	a( a, 0 );
-od
+b <- new c;
+b.l <- "hi";
+b.r <- "you";
 
-print( "hallo" );
+printc( b );

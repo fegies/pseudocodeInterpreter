@@ -9,8 +9,6 @@ variable* class_new( struct multistring_args* args )
 	size_t count = args-> count;
 	variable** names = malloc( count * sizeof(variable*) );
 	class* c = malloc( sizeof(class) );
-	c-> entrycount = count;
-	c-> names = names;
 
 	for( size_t i = 0; i < count; ++i )
 	{
@@ -19,7 +17,9 @@ variable* class_new( struct multistring_args* args )
 		names[i] = v;
 	}
 
-	v-> ref = args;
+	c-> entrycount = count;
+	c-> names = names;
+	v-> ref = c;
 	return v;
 }
 

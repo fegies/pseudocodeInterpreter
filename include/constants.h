@@ -7,4 +7,3 @@
 #define ARRAYSEGMENTSIZE 50
 
 #define INSTRBUFSIZE 512
-

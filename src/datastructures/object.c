@@ -39,7 +39,8 @@ variable* object_member_access( variable* ob, variable* name )
 	assert( name-> type == VARIABLE_TYPE_STRING );
 
 	object* o = (object*)ob-> ref;
-	class* cl = o-> prototype-> ref;
+	variable* p = o-> prototype;
+	class* cl = p-> ref;
 	for( size_t i = 0; i < cl-> entrycount; ++i )
 	{
 		if( variableString_compare(name, (cl->names)[i] ) == 0 )

@@ -26,7 +26,7 @@ void interpretPSC( Instruction* entry )
 variable* interpretFunction( Instruction* entry, nameStore* args )
 {
 	#ifndef NDEBUG
-	printf("Entering function at %lx\n Args:\n", entry);
+	printf("Entering function at %lx\n Args:\n", (unsigned long)entry);
 	nameStore_print( args );
 	#endif
 
@@ -133,14 +133,12 @@ variable* interpretFunction( Instruction* entry, nameStore* args )
 			}
 			case InstrType_ObjMemberAcc:
 			{
+				variable* membername = execStack_pop( stack );
 				variable* obj = execStack_pop( stack );
-				char* name = (char*) curins-> additionalData;
-				variable* n = variableString_new();
-				variableString_setContents( n, name );
-				variable* mem = object_member_access( obj, n );
-				variable_decrement_Refs( n );
-				variable_decrement_Refs( obj );
+				variable* mem = object_member_access( obj, membername );
 				execStack_push( stack, mem );
+				variable_decrement_Refs( membername );
+				variable_decrement_Refs( obj );
 				break;
 			}
 			case InstrType_Assign:

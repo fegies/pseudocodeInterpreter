@@ -23,3 +23,5 @@ variable** execStack_multi_top(execStack* e, unsigned int amount);
 execStack* execStack_create();
 
 void execStack_destroy(execStack* e);
+
+void execStack_print( execStack* e );

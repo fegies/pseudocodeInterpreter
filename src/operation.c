@@ -145,6 +145,9 @@ void operation_assign( variable* to, variable* from )
 	v-> ref = to-> ref;
 	variable_decrement_Refs( v );
 
+	//I think that this is fundamentally a design problem that needs to be fixed.
+	variable_increment_Refs( from );
+
 	to -> type = from -> type;
 	to -> ref = from -> ref;
 }
@@ -193,6 +196,7 @@ variable* _operation_compare( variable* v1, variable* v2, unsigned char mode )
 	variable* r = variable_new();
 	variable_set_type( r, VARIABLE_TYPE_BOOLEAN );
 	r-> ref = (void*) res;
+	return r;
 }
 
 variable* operation_compareEq( variable* v1, variable* v2 )

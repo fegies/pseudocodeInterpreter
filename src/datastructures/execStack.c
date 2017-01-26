@@ -3,6 +3,7 @@
 
 #include <assert.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 void execStack_push( execStack* e, variable* v )
 {
@@ -60,4 +61,13 @@ void execStack_destroy( execStack* e )
 		variable_decrement_Refs(execStack_pop( e ));
 	free( e-> data );
 	free( e );
+}
+
+void execStack_print( execStack* e )
+{
+	if( e == 0 )
+		return;
+	printf( "Stack contains: \n");
+	for( size_t i = 0; i < e-> top; ++i )
+		variable_print( (e->data)[i] );
 }

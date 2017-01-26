@@ -28,23 +28,12 @@ void variable_set_type( variable* v, unsigned char type );
 //prints a string representation of the variable to stdout
 void variable_print( variable* v );
 
-/*
-Variable types:
-0: none (Undefined)
-1: int
-2: boolean
-3: String
-4: Array
-5: Function
-6: Object
-7: Class
-*/
 
 #define VARIABLE_TYPE_NONE 0
 #define VARIABLE_TYPE_BOOLEAN 1
 #define VARIABLE_TYPE_INT 2
-#define VARIABLE_TYPE_STRING 4
-#define VARIABLE_TYPE_ARRAY 5
-#define VARIABLE_TYPE_FUNCTION 6
-#define VARIABLE_TYPE_OBJECT 7
-#define VARIABLE_TYPE_CLASS 8
+#define VARIABLE_TYPE_STRING 3
+#define VARIABLE_TYPE_ARRAY 4
+#define VARIABLE_TYPE_FUNCTION 5
+#define VARIABLE_TYPE_OBJECT 6
+#define VARIABLE_TYPE_CLASS 7
