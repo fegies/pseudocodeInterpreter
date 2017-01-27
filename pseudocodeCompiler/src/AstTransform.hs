@@ -67,7 +67,7 @@ serializeStatement (StatementIf expc bthen belse )
     = let ci = serializeExpression expc
           ei = InstrBlockEnter : transformToInstructions belse ++ [InstrBlockLeave]
           ti = InstrBlockEnter : transformToInstructions bthen ++ 
-            [InstrBlockLeave,InstrJump (length ei+1)]
+            [InstrBlockLeave,InstrJump (length ei)]
       in ci ++ [InstrConditionalJump (length ti)] ++ ti ++ ei
 serializeStatement (StatementWhile exp block)
     = let ci = serializeExpression exp

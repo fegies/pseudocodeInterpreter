@@ -540,7 +540,7 @@
 			"file": "src/AstTransform.hs",
 			"settings":
 			{
-				"buffer_size": 6821,
+				"buffer_size": 6819,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -1208,15 +1208,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6821,
+						"buffer_size": 6819,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3270,
-								3270
+								3218,
+								3218
 							]
 						],
 						"settings":
