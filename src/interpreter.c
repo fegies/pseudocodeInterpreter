@@ -13,7 +13,7 @@
 
 void interpretPSC( Instruction* entry )
 {
-	#ifndef NDEBUG
+	#ifndef NINSPRINT
 	printf("\nBeginning Execution\n\n");
 	#endif
 
@@ -25,7 +25,7 @@ void interpretPSC( Instruction* entry )
 
 variable* interpretFunction( Instruction* entry, nameStore* args )
 {
-	#ifndef NDEBUG
+	#ifndef NINSPRINT
 	printf("Entering function at %lx\n Args:\n", (unsigned long)entry);
 	nameStore_print( args );
 	#endif
@@ -40,7 +40,7 @@ variable* interpretFunction( Instruction* entry, nameStore* args )
 		if( curins == 0 )
 			break;
 
-		#ifndef NDEBUG
+		#ifndef NINSPRINT
 		printInstruction( curins );
 		#endif
 		switch( curins -> type )

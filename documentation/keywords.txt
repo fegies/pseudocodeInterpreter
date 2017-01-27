@@ -1,0 +1,14 @@
+<-
+class
+do
+else
+elseif
+fi
+if
+new
+od
+print
+repeat
+then
+until
+while

@@ -138,7 +138,7 @@ Instruction* loadBytecode( char* bytes, size_t inputlength )
 
 	}
 
-	#ifndef NDEBUG
+	#ifndef NINSPRINT
 	printf("Finished Loading the code.. Layout:\n");
 	for( int i = 0; i < instpos; ++i )
 	{
