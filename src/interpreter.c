@@ -117,8 +117,8 @@ variable* interpretFunction( Instruction* entry, nameStore* args )
 				variable* pos = execStack_pop( stack );
 				long l = integer_get( pos );
 				variable_decrement_Refs( pos );
-				variable* v = array_get( arr, (unsigned int)l );
 				variable_decrement_Refs( arr );
+				variable* v = array_get( arr, (unsigned int)l );
 				execStack_push( stack, v );
 				break;
 			}

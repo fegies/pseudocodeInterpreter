@@ -62,6 +62,7 @@ variable* _array_get( array* a, unsigned int position )
 	{
 		if ( (a-> data)[position] == 0 )
 			(a-> data)[position] = variable_new();
+		variable_increment_Refs( (a-> data)[position] );
 		return (a-> data)[position];
 	}
 }
@@ -69,6 +70,13 @@ variable* _array_get( array* a, unsigned int position )
 variable* array_get( variable* array, unsigned int position )
 {
 	assert( array != 0 );
+
+	//undefined variables may be turned into arrays on use
+	if( array -> type == VARIABLE_TYPE_NONE )
+	{
+		variable_set_type( array, VARIABLE_TYPE_ARRAY );
+		array-> ref = _array_new();
+	}
 	assert( array-> type == VARIABLE_TYPE_ARRAY );
 	return _array_get( array-> ref, position );
 }

@@ -15,4 +15,4 @@ a[2] <- 5;
 a[3] <- 2;
 a[4] <- 3;
 
-printArray( a, 6 );
+printArray( a, 5 );

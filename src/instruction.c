@@ -32,7 +32,7 @@ void printInstruction( Instruction* i )
 			printf("Push Constant Int: %ld", (long)i-> additionalData);
 			break;
 		case InstrType_ArrayAccess:
-			printf("Array Access at position: %ld",(unsigned long)i-> additionalData);
+			printf("Array Access");
 			break;
 		case InstrType_FunctionCall:
 			printf("Function Call");
