@@ -540,7 +540,7 @@
 			"file": "src/AstTransform.hs",
 			"settings":
 			{
-				"buffer_size": 6819,
+				"buffer_size": 6821,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -1208,25 +1208,25 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6819,
+						"buffer_size": 6821,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2683,
-								2683
+								3270,
+								3270
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Haskell/Haskell.sublime-syntax",
-							"tab_size": 4,
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 393.0,
+						"translation.y": 678.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
