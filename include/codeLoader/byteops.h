@@ -7,7 +7,7 @@
 //turns four bytes into an integer
 int32_t bytesToInt( char* bytes );
 
-//returns the length of the string( including the )
+//returns the length of the string( including the \0)
 size_t stringlitcpy( char** to, char* bytes  );
 
 //returns the number of bytes used by the definition

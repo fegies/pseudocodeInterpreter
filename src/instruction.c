@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 
+//all this boilerplate only for the sake of debugging!
 void printInstruction( Instruction* i )
 {
 	printf("%lx--Type: %-2d, next: %lx ",

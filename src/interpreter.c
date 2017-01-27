@@ -11,6 +11,8 @@
 
 #include <stdio.h>
 
+//This file is the Heartpiece of the interpreter.
+
 void interpretPSC( Instruction* entry )
 {
 	#ifndef NINSPRINT
@@ -35,6 +37,7 @@ variable* interpretFunction( Instruction* entry, nameStore* args )
 
 	Instruction* curins = entry;
 	char running = 1;
+
 	while( running )
 	{
 		if( curins == 0 )
@@ -43,6 +46,7 @@ variable* interpretFunction( Instruction* entry, nameStore* args )
 		#ifndef NINSPRINT
 		printInstruction( curins );
 		#endif
+
 		switch( curins -> type )
 		{
 			case InstrType_NOP: break;
@@ -105,8 +109,8 @@ variable* interpretFunction( Instruction* entry, nameStore* args )
 				}
 				variable* retval = interpretFunction( vf->entrypoint, args );
 				
-				//the execStack catches attempts to push 0 variables,
-				//so this is fine.
+				//Because void funcitons return a null pointer, and
+				//the stack is being popped regularly this is fine.
 				execStack_push( stack, retval );
 				nameStore_destroy( args );
 				break;

@@ -27,7 +27,11 @@ Instruction* loadBytecode( char* bytes, size_t inputlength )
 	size_t instarrnum = 0;
 	size_t bytepos = 0;
 
+	//to facilitate allocating more space later without resorting to realloc()
+	//the instructions are not acessed directly, but through the use of the
+	//helper function _instrAt.
 	Instruction** instrarr;
+
 	if(( instrarr = malloc( sizeof(Instruction*) * INSTRBUFSIZE ) ) == 0
 		|| ((instrarr[0] = malloc( sizeof(Instruction) * INSTRBUFSIZE )) == 0 ) )
 	{
@@ -141,9 +145,7 @@ Instruction* loadBytecode( char* bytes, size_t inputlength )
 	#ifndef NINSPRINT
 	printf("Finished Loading the code.. Layout:\n");
 	for( int i = 0; i < instpos; ++i )
-	{
 		printInstruction( _instrAt(instrarr, i ) );
-	}
 	#endif
 
 	Instruction * e = *instrarr;

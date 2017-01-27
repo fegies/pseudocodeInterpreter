@@ -5,6 +5,7 @@
 #include "datastructures/function.h"
 #include "globals.h"
 
+//that is what happens if you manually put the instructions in.
 void preloadPrint()
 {
 	char* name = "print";
@@ -12,9 +13,10 @@ void preloadPrint()
 	char* argss = "a\0";
 	getMultiargs( &args, argss );
 
-	Instruction* lookup = malloc( sizeof(Instruction) );
-	Instruction* print = malloc( sizeof(Instruction) );
-	Instruction* ret = malloc( sizeof(Instruction) );
+	Instruction* is = malloc( 3 * sizeof(Instruction) );
+	Instruction* lookup = is;
+	Instruction* print = is+1;
+	Instruction* ret = is+2;
 
 	lookup-> type = InstrType_VarLookup;
 	lookup-> additionalData = "a";

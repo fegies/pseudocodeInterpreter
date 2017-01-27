@@ -6,6 +6,7 @@
 
 //loads the bytecode and adds class and function declarations to the
 //global namestore.
+//returns the entry point to the program.
 Instruction* loadBytecode( char* bytes, size_t inputLength );
 
 struct function_Data
