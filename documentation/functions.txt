@@ -1,4 +1,4 @@
-A function is a block of code with a return statement that may be called
+A function is a block of code with a optional return statement that may be called
 from anywhere in the code after it has been declared.
 
 After completion of the code inside the function control flow will return to the
@@ -16,10 +16,3 @@ A function call has the following syntax:
 
 [function name](Arguments seperated by , )
 
-Internally a function is represented by the following:
-
-function
-	unsigned char argcount
-	char* entryPoint
-	[char* argnames]
-	...

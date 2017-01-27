@@ -1,17 +1,18 @@
-The interpreter will attempt to load the entire script into memory.
+The interpreter will attempt to load the entire bytecode into memory.
 
-It then prepares the global variable tree and a local variable tree.
-(They are both empty at the beginning)
+It then prepares the global variable tree.
+
+The code loader steps in and transforms the bytecode into instructions that are
+easier to execute.
+
+In this step function and class declarations are caught, declared and added to the
+global variables.
+The declarations are replaced by jump statements during actual execution.
 
 it then begins to interpret the code as if it all was wrapped in a function.
 
-Upon encountering a block it will increment the reference counts of all
-variables inside the scoped tree.
-If the block is a loop of any kind it will save a returns address on the loop stack
-and continue execution.
-
-If control flow encounters a function or class definition it will save that
-definition in the global tree.
+Upon encountering a block it will increment the reference counts of all local
+variables.
 
 When control flow leaves a block of any kind it will decrement all references
 in its tree and free memory as appropriate.

@@ -6,15 +6,16 @@ Internally it works by using an execution stack that all operations are pushed o
 
 Features of the Language:
 
-Commands are seperated by line endings or by semicolons
-If multiple commands are on the same line, they MUST be separeted by semicolons
+Statements are separated by semicolons.
 
 Examples of valid syntax:
 
-command1
-command2
+command1;
+command2;
 command3;
-command4; command5
+command4; command5;
+
+Multiple Expressions in a Block MUST be enclosed by curly braces.
 
 There is no explicit variable declaration. They are instanciated on the fly.
 Value assingment is done using the following syntax:
@@ -22,11 +23,11 @@ variable <- value
 
 Conditional execution is possible using the following syntax:
 if expression then
-commands
+BLOCK
 elseif
-command
+BLOCK
 else
-command
+BLOCK
 fi
 
 The elseif and else statements including comments are optional.
@@ -34,19 +35,14 @@ The then-statement must be on the same line as the if statement.
 
 There is a number of loop syntaxes including the basic while, a repeat until and a for loop.
 The syntax for the while loop is
-while expression do
-command
+while expression; do
+BLOCK
 od
-
-The syntax for the repeat until loop is
-repeat
-command
-until expression
 
 There are two variants of the for loop. A  .. to and a ... downto variant.
 They both use the syntax
-for variable=initial value [to,downto] final value do
-command
+for variable<-initial value [to,downto] final value; do
+BLOCK
 od
 
 The language contains rudimentary objects.
@@ -61,5 +57,3 @@ and because they cannot contain functions.
 
 It is fundamentally impossible to copy objects. if the assingnment operator is used on an object, it will pass a reference.
 if the programmer really wishes to copy the object, he has to create a new object and overwrite all the fields inside the struct.
-
-Variable Names may not begin with an underscore ( _Name ), because that beginning is reserved for language-internal use.
