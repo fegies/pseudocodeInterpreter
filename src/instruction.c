@@ -67,8 +67,14 @@ void printInstruction( Instruction* i )
 		case InstrType_CompareLt:
 			printf("Compare_Lt");
 			break;
+		case InstrType_CompareGt:
+			printf("Compare_Gt");
+			break;
 		case InstrType_ArithInc:
 			printf("Increment");
+			break;
+		case InstrType_ArithDec:
+			printf("Decrement");
 			break;
 		case InstrType_BlockEnter:
 			printf("Enter Block");

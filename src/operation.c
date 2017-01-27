@@ -10,6 +10,9 @@ variable* operation_add( variable* v1, variable* v2)
 	assert( v1 != 0 );
 	assert( v2 != 0 );
 
+	v1 = variable_deref( v1 );
+	v2 = variable_deref( v2 );
+
 	assert( v1-> type == v2-> type );
 
 	variable* result;
@@ -36,6 +39,9 @@ variable* operation_subtract( variable* v1, variable* v2)
 	assert( v1 != 0 );
 	assert( v2 != 0 );
 
+	v1 = variable_deref( v1 );
+	v2 = variable_deref( v2 );
+
 	assert( v1-> type == v2-> type );
 
 	variable* result;
@@ -60,6 +66,9 @@ variable* operation_multiply( variable* v1, variable* v2)
 	assert( v1 != 0 );
 	assert( v2 != 0 );
 
+	v1 = variable_deref( v1 );
+	v2 = variable_deref( v2 );
+	
 	assert( v1-> type == v2-> type );
 
 	variable* result;
@@ -84,6 +93,9 @@ variable* operation_divide( variable* v1, variable* v2 )
 	assert( v1 != 0 );
 	assert( v2 != 0 );
 
+	v1 = variable_deref( v1 );
+	v2 = variable_deref( v2 );
+	
 	assert( v1-> type == v2-> type );
 
 	variable* result;
@@ -108,6 +120,9 @@ variable* operation_modulo( variable* v1, variable* v2)
 	assert( v1 != 0 );
 	assert( v2 != 0 );
 
+	v1 = variable_deref( v1 );
+	v2 = variable_deref( v2 );
+	
 	assert( v1-> type == v2-> type );
 
 	variable* result;
@@ -130,6 +145,9 @@ variable* operation_modulo( variable* v1, variable* v2)
 long integer_get( variable* v )
 {
 	assert( v != 0 );
+
+	v = variable_deref( v );
+
 	assert( v -> type == VARIABLE_TYPE_INT );
 	return (long)v -> ref; 
 }
@@ -139,17 +157,23 @@ void operation_assign( variable* to, variable* from )
 	assert( to != 0 );
 	assert( from != 0 );
 
-	//evil tricks to avoid memory leaks
-	variable* v = variable_new();
-	v-> type = to-> type;
-	v-> ref = to-> ref;
-	variable_decrement_Refs( v );
+	from = variable_deref( from );
 
-	//I think that this is fundamentally a design problem that needs to be fixed.
+	if( to-> type == VARIABLE_TYPE_REFERENCE )
+		variable_decrement_Refs( to -> ref );
+	else
+	{
+		//evil tricks to avoid memory leaks
+		variable* v = variable_new();
+		v-> type = to-> type;
+		v-> ref = to-> ref;
+		variable_decrement_Refs( v );
+	}
+
 	variable_increment_Refs( from );
 
-	to -> type = from -> type;
-	to -> ref = from -> ref;
+	to-> type = VARIABLE_TYPE_REFERENCE;
+	to-> ref = from;
 }
 
 //too sad there are no lambdas in c, so this had to do.
@@ -163,9 +187,14 @@ variable* _operation_compare( variable* v1, variable* v2, unsigned char mode )
 {
 	assert( v1 != 0 );
 	assert( v2 != 0 );
-	assert( v1 -> type == v2 -> type && v1 -> type != 0 );
 
+	v1 = variable_deref( v1 );
+	v2 = variable_deref( v2 );
 
+	assert( v1 -> type != 0 );
+	assert( v2 -> type != 0 );
+	assert( v1 -> type == v2 -> type );
+	
 	long o1, o2;
 	if( v1 -> type == VARIABLE_TYPE_INT )
 	{
@@ -222,6 +251,10 @@ variable* operation_compareGeq( variable* v1, variable* v2 )
 
 void operation_inc( variable* v )
 {
+	assert( v != 0 );
+	v = variable_deref( v );
+	assert( v -> type == VARIABLE_TYPE_INT );
+	
 	long l = (long) v-> ref;
 	++l;
 	v-> ref = (void*) l;
@@ -229,6 +262,10 @@ void operation_inc( variable* v )
 }
 void operation_dec( variable* v )
 {
+	assert( v != 0 );
+	v = variable_deref( v );
+	assert( v -> type == VARIABLE_TYPE_INT );
+	
 	long l = (long) v-> ref;
 	--l;
 	v-> ref = (void*) l;

@@ -224,8 +224,8 @@ variable* interpretFunction( Instruction* entry, nameStore* args )
 				break;
 			case InstrType_Print:
 			{
-				variable* v = execStack_pop( stack );
-
+				variable* vo = execStack_pop( stack );
+				variable* v = variable_deref( vo );
 				switch( v-> type )
 				{
 					case VARIABLE_TYPE_BOOLEAN:
@@ -245,7 +245,7 @@ variable* interpretFunction( Instruction* entry, nameStore* args )
 							"Cannot print variable of type %d\n", v-> type);
 				}
 
-				variable_decrement_Refs( v );
+				variable_decrement_Refs( vo );
 				break;
 			}
 			default:

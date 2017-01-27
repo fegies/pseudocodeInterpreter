@@ -47,6 +47,8 @@ void _variable_free( variable* v )
 			object_destroy( v-> ref ); break;
 		case VARIABLE_TYPE_CLASS:
 			class_destroy( v-> ref ); break;
+		case VARIABLE_TYPE_REFERENCE:
+			variable_decrement_Refs( v-> ref ); break;
 	}
 
 	free( v );
@@ -76,7 +78,20 @@ void variable_print( variable* v )
 	switch( v-> type )
 	{
 		case VARIABLE_TYPE_INT:
-			printf("Content: %ld",(long)v-> ref);
+			printf("Content: %ld",(long)v-> ref); break;
+		case VARIABLE_TYPE_REFERENCE:
+			printf("Reference to : ");
+			variable_print( v-> ref );
+			break;
 	}
 	printf("\n");
+}
+
+variable* variable_deref( variable* v )
+{
+	assert( v != 0 );
+	if( v-> type == VARIABLE_TYPE_REFERENCE )
+		return v-> ref;
+	else
+		return v;
 }

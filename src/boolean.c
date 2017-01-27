@@ -5,6 +5,9 @@
 char boolean_isTrue( variable* v )
 {
 	assert( v != 0 );
+
+	v = variable_deref( v );
+	
 	assert( v-> type == VARIABLE_TYPE_BOOLEAN );
 
 	return v-> ref != 0;
@@ -14,6 +17,10 @@ variable* _boolean_op( variable* v1, variable* v2, char op )
 {
 	assert( v1 != 0 );
 	assert( v2 != 0 );
+
+	v1 = variable_deref( v1 );
+	v2 = variable_deref( v2 );
+
 	assert( v1-> type == VARIABLE_TYPE_BOOLEAN );
 	assert( v2-> type == VARIABLE_TYPE_BOOLEAN );
 	long retval=0;

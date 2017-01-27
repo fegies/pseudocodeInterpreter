@@ -28,6 +28,9 @@ void variable_set_type( variable* v, unsigned char type );
 //prints a string representation of the variable to stdout
 void variable_print( variable* v );
 
+//returns the variable this variable references if it is a reference
+//otherwise returns the variable itself.
+variable* variable_deref( variable* v );
 
 #define VARIABLE_TYPE_NONE 0
 #define VARIABLE_TYPE_BOOLEAN 1
@@ -37,3 +40,4 @@ void variable_print( variable* v );
 #define VARIABLE_TYPE_FUNCTION 5
 #define VARIABLE_TYPE_OBJECT 6
 #define VARIABLE_TYPE_CLASS 7
+#define VARIABLE_TYPE_REFERENCE 8

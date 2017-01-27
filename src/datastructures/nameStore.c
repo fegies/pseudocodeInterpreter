@@ -140,9 +140,13 @@ void _nameStore_decrefs( struct nameStore_node* n )
 {
 	if( n == 0 )
 		return;
+
 	_nameStore_decrefs( n -> left );
 	_nameStore_decrefs( n -> right );
 
+	if( n-> var == 0 )
+		return;
+	
 	unsigned int r = n -> var -> refcount;
 	variable_decrement_Refs( n -> var );
 	//check if the variable was free()'ed

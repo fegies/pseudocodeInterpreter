@@ -22,6 +22,9 @@ unsigned int variableString_get_length( variable* s )
 char variableString_has_attribute( variable* s, char attrib )
 {
 	assert( s != 0 );
+
+	s = variable_deref( s );
+
 	assert( s-> type == VARIABLE_TYPE_STRING );
 
 	return (((variableString*)s-> ref)-> flags & attrib) == attrib;
@@ -30,6 +33,9 @@ char variableString_has_attribute( variable* s, char attrib )
 void variableString_set_attribute( variable* s, char attrib, char value )
 {
 	assert( s != 0 );
+
+	s = variable_deref( s );
+
 	assert( s-> type == VARIABLE_TYPE_STRING );
 
 	variableString* v = (variableString*)s-> ref;
@@ -124,6 +130,10 @@ variable* variableString_concat( variable* first, variable* second )
 {
 	assert( first != 0 );
 	assert( second != 0 );
+
+	first = variable_deref( first );
+	second = variable_deref( second );
+
 	assert( first-> type == VARIABLE_TYPE_STRING );
 	assert( second-> type == VARIABLE_TYPE_STRING );
 
@@ -151,8 +161,12 @@ variable* variableString_concat( variable* first, variable* second )
 char variableString_compare( variable* s1, variable* s2 )
 {
 	assert( s1 != 0 );
-	assert( s1-> type == VARIABLE_TYPE_STRING );
 	assert( s2 != 0 );
+
+	s1 = variable_deref( s1 );
+	s2 = variable_deref( s2 );
+
+	assert( s1-> type == VARIABLE_TYPE_STRING );
 	assert( s2-> type == VARIABLE_TYPE_STRING );
 
 	char s1cow = variableString_has_attribute( s1, VARIABLESTRING_FLAGS_COW );
@@ -186,6 +200,9 @@ char variableString_compare( variable* s1, variable* s2 )
 char* variableString_getBytes( variable* s )
 {
 	assert( s != 0 );
+
+	s = variable_deref( s );
+
 	assert( s-> type == VARIABLE_TYPE_STRING );
 
 	if( variableString_has_attribute(s,VARIABLESTRING_FLAGS_COW) )
@@ -219,6 +236,9 @@ variable* variableString_substring(
 	variable* s, unsigned int from, unsigned int length )
 {
 	assert( s != 0 );
+
+	s = variable_deref( s );
+
 	assert( s-> type == VARIABLE_TYPE_STRING );
 
 	if( variableString_has_attribute( s, VARIABLESTRING_FLAGS_COW ) )

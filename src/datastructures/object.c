@@ -12,6 +12,8 @@ variable* object_initialize( variable* prototype )
 	assert( prototype != 0 );
 	assert( prototype-> type == VARIABLE_TYPE_CLASS );
 
+	prototype = variable_deref( prototype );
+
 	variable_increment_Refs( prototype );
 
 	variable* objvar = variable_new();
@@ -34,8 +36,12 @@ variable* object_initialize( variable* prototype )
 variable* object_member_access( variable* ob, variable* name )
 {
 	assert( ob != 0 );
-	assert( ob-> type == VARIABLE_TYPE_OBJECT );
 	assert( name != 0 );
+
+	ob = variable_deref( ob );
+	name = variable_deref( name );
+
+	assert( ob-> type == VARIABLE_TYPE_OBJECT );
 	assert( name-> type == VARIABLE_TYPE_STRING );
 
 	object* o = (object*)ob-> ref;

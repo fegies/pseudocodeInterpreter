@@ -28,14 +28,17 @@ CODELOADER = codeLoader.o byteops.o
 STDLIBRARY = standartLibrary.o print.o
 
 OPROG = $(addprefix $(ODIR)/, $(PROG))
-RUNFLAGS = psc.pscb
+RUNFLAGS = $(PSEUDOCODE)
 
 DEPDIR := deps
 DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)/$*.d
 COMPILE.c = $(CCOMPILER) $(DEPFLAGS) $(CCFLAGS) -c
 POSTCOMPILE= mv -f $(DEPDIR)/$*.TD $(DEPDIR)/$*.d
 
-run : all psc.pscb
+
+PSEUDOCODE = bubblesort.pscb
+
+run : all $(PSEUDOCODE)
 	$(OPROG) $(RUNFLAGS)
 
 all : buildbin $(OPROG)
@@ -43,8 +46,9 @@ all : buildbin $(OPROG)
 flagless : all
 	$(OPROG)
 
-psc.pscb: program.psc
-	./pcompile program.psc > psc.pscb
+
+%.pscb: pseudocode/%.psc
+	./pcompile $< > $@
 
 memcheck: all
 	valgrind $(OPROG) $(RUNFLAGS)
