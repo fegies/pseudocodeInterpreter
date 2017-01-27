@@ -1,0 +1,22 @@
+The interpreter will attempt to load the entire bytecode into memory.
+
+It then prepares the global variable tree.
+
+The code loader steps in and transforms the bytecode into instructions that are
+easier to execute.
+
+In this step function and class declarations are caught, declared and added to the
+global variables.
+The declarations are replaced by jump statements during actual execution.
+
+it then begins to interpret the code as if it all was wrapped in a function.
+
+Upon encountering a block it will increment the reference counts of all local
+variables.
+
+When control flow leaves a block of any kind it will decrement all references
+in its tree and free memory as appropriate.
+
+If an attempt at calling a fuction is made, a new variable tree with only
+the arguments in it will be created and execution will resume at the beginning
+of the function block.

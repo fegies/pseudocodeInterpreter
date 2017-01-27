@@ -1,0 +1,8 @@
+bin/**
+deps/**
+bin
+deps
+pcompile
+*.pscb
+*.sublime-workspace
+vgcore.*
