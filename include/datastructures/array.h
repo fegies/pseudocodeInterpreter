@@ -13,6 +13,10 @@ struct array
 
 variable* array_new();
 
+//BOTH array_put and array_get may increase the memory footprint substancially if
+//a very high position is accessed.
+// TLDR: sparse arrays are inefficient.
+
 //handles the refcount accordingly.
 void array_put(variable* array, unsigned int position, variable* v);
 

@@ -1,6 +1,9 @@
 #pragma once
+
 //A data structure to bind names to variables
-//Its implementation should make it so cheap that every function can have one.
+//Its implementation SHOULD make it so cheap that every function can have one.
+//it is currently implemented using a b-tree and string comparisons, so it is currently not
+//the most efficient thing in existance
 
 #include "datastructures/variable.h"
 
@@ -22,6 +25,9 @@ variable* nameStore_get( nameStore* n, char* name );
 //destroys and frees the nameStore. Decrements the references to all vars in it.
 void nameStore_destroy( nameStore* n );
 
+//these walk throuh the entire nameStore and call variable_incRefs or decRefs
+//on every variable stored.
+//Used in the Enter-Leave Block instructions
 void nameStore_increfs( nameStore* n );
 void nameStore_decrefs( nameStore* n );
 

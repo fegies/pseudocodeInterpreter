@@ -11,6 +11,7 @@ typedef struct object
 }object;
 
 //the variables must match the definiton in the class provided.
+//increases the refcount to the prototype
 variable* object_initialize( variable* prototype );
 
 //name must be a string type variable

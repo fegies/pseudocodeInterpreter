@@ -26,6 +26,7 @@ variable* variable_new();
 void variable_set_type( variable* v, unsigned char type );
 
 //prints a string representation of the variable to stdout
+//used for debugging.
 void variable_print( variable* v );
 
 //returns the variable this variable references if it is a reference

@@ -25,12 +25,16 @@ variable* variableString_new();
 
 unsigned int variableString_get_length( variable* s );
 
+//currently only used in the implementation of variableString
 char variableString_has_attribute( variable* s, char attrib );
 void variableString_set_attribute( variable* s, char attrib, char value );
 
 void variableString_setContents( variable* s, char* cont );
 
+//currently unused, I think.
+//needed to make use of the variableString cow-facilities.
 void variableString_assign( variable* to, variable* from );
+
 
 variable* variableString_concat( variable* first, variable* second );
 
