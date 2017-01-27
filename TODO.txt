@@ -1,4 +1,0 @@
-Fix the problems with memory leak at variable assignment
-(the references to FROM are increased now to keep the contents of their shared content from being deleted by the other.)
-This leads to membory leaks because there are not really more references to FROM, only to theur shared state.
-(refer to operation.c, operation_assign, line 148)
