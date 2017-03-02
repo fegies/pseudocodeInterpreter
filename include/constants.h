@@ -13,4 +13,4 @@
 #define INSTRBUFSIZE 512
 
 //keeps the currently executing instruction from printing to stdout
-//#define NINSPRINT
+#define NINSPRINT

@@ -1,5 +1,3 @@
 -Iinclude
--Iinclude/codeLoader
--Iinclude/datestructures
 -I/usr/include
-"-I/usr/lib/clang/$clang_version/include"
+-I/usr/lib/clang/$clang_version/include

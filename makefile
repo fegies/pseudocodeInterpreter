@@ -33,10 +33,11 @@ RUNFLAGS = $(PSEUDOCODE)
 DEPDIR := deps
 DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)/$*.d
 COMPILE.c = $(CCOMPILER) $(DEPFLAGS) $(CCFLAGS) -c
+COMPILE.cpp = $(CPPCOMPILER) $(DEPFLAGS) $(CPPCFLAGS) -c
 POSTCOMPILE= mv -f $(DEPDIR)/$*.TD $(DEPDIR)/$*.d
 
 
-PSEUDOCODE = bubblesort.pscb
+PSEUDOCODE = program.pscb
 
 run : all $(PSEUDOCODE)
 	$(OPROG) $(RUNFLAGS)
@@ -69,9 +70,9 @@ $(OPROG): $(addprefix $(ODIR)/, $(OBJS))
 	$(CCOMPILER) $(LINKFLAGS) -o $@ $^
 
 #compiling
-$(ODIR)/%.o : %.cpp
-	$(CPPCOMPILER) $(CPPCFLAGS) -c -o $@ $< -I./include
-	$(POSTCOMPILE)
+$(ODIR)/%.o : %.cpp $(DEPDIR)/%.d
+	$(COMPILE.cpp) -o $@ $< -I./include
+
 $(ODIR)/%.o : %.c $(DEPDIR)/%.d
 	$(COMPILE.c) -o $@ $< -I./include
 

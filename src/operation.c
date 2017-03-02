@@ -170,10 +170,17 @@ void operation_assign( variable* to, variable* from )
 		variable_decrement_Refs( v );
 	}
 
-	variable_increment_Refs( from );
-
-	to-> type = VARIABLE_TYPE_REFERENCE;
-	to-> ref = from;
+	if( from -> type == VARIABLE_TYPE_INT )
+	{
+		to-> type = VARIABLE_TYPE_INT;
+		to-> ref = from-> ref;
+	}
+	else
+	{
+		variable_increment_Refs( from );
+		to-> type = VARIABLE_TYPE_REFERENCE;
+		to-> ref = from;
+	}
 }
 
 //too sad there are no lambdas in c, so this had to do.
