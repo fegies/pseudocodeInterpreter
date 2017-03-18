@@ -39,6 +39,9 @@ POSTCOMPILE= mv -f $(DEPDIR)/$*.TD $(DEPDIR)/$*.d
 
 PSEUDOCODE = program.pscb
 
+test: all
+	./test.sh
+
 run : all $(PSEUDOCODE)
 	$(OPROG) $(RUNFLAGS)
 
