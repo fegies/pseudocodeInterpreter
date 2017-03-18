@@ -1,0 +1,47 @@
+Bytecode Format:
+
+Every Instruction type is one byte long.
+An Instruction may have additional information appended after the type byte.
+
+The Endianness is Big endian.
+
+An int is a number consisting of four bytes in big endian format without delimiters
+A String is a zero terminated utf-8 String.
+NULL is a null byte
+
+List of additional Information by type:
+Type | Instruction Name  | Parameters
+0      NOP               : none
+1      JUMP              : signed int <- the relative location of the target instruction
+2      CONDITIONAL JUMP  : signed int <- the relative position of the target instruction, jumps only if the top of the stack is false
+3      FUNCTION DECLARE  : [String name] [String Arg1] [String Arg2]... NULL [int function length] <- the number of instructions in the Function
+4      CLASS DECLARE     : [String name] [String member1] [String Member2]... NULL
+5      RETURN            : none
+6      VAR LOOKUP        : String <- the name of the Variable to lookup
+7      GLOBAL LOOKUP     : String <- the name of the Variable to lookup
+8      PUSH CONST STR    : String <- the String to push to the stack
+9      PUSH CONST INT    : signed int <- the int to push to the stack
+10     FUNCTION CALL     : none
+11     ARRAY ACCESS      : none
+12     NEW OBJECT        : String <- the name of the class to base the object on
+13     OBECT MEMBER ACC  : none
+14     ASSIGN            : none
+15     COMPARE EQUALS    : none
+16     COMPARE LT        : none
+17     COMPARE GT        : none
+18     COMPARE LEQ       : none
+19     COMPARE GEQ       : none
+20     ARITH PLUS        : none
+21     ARITH MINUS       : none
+22     ARITH MUL         : none
+23     ARITH DIV         : none
+24     ARITH MOD         : none
+25     ARITH INCREMENT   : none
+26     ARITH DECREMENT   : none
+27     BOOLEAN NOT       : none
+28     BOOLEAN AND       : none
+29     BOOLEAN OR        : none
+30     ENTER BLOCK       : none
+31     LEAVE BLOCK       : none
+32     STACK TOP DISCARD : none
+33     PRINT             : none

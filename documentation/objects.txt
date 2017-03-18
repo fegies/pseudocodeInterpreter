@@ -11,13 +11,11 @@ class <name> {
 	member definitions
 };
 
-a member definiton consists of a type name
-(int,string,class name)
-and a reference name.
+a member definiton consists of a member name
 example:
 
-int num
-node left
+num
+left
 
 The member definitions may be delimited using newlines or semicolons.
 
@@ -29,29 +27,3 @@ object variable.
 
 The . operator is another builtin function that takes two arguments:
 The object being called and the name of the field being referenced.
-
-internally a object is
-
-object
-	unsigned char entryCount
-	class *prototype
-	char *entryName
-	variable *value
-	[char *entryName
-	variable *value]
-	...
-
-a class is represented internally using
-
-class
-	unsigned char entryCount
-	char type
-	char* entryName
-	...
-
-the type char describes the type of reference inside an object.
-it may take one of the following values:
-
-i: an integer
-s: a string
-r: a reference to another object
