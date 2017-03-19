@@ -158,8 +158,20 @@ Instruction* loadBytecode( char* bytes, size_t inputlength )
 	return e;
 }
 
+char* loadedFiles[255];
+unsigned char loadedFilenum = 0;
 void loadFile( char* filename )
 {
+
+	if( loadedFilenum + 1 == 0 )
+		fprintf(stderr, "Warning: checking of double file load damaged, too many files loaded\n");
+	for( unsigned char i = 0; i < loadedFilenum; ++i )
+	{
+		if( strcmp(filename, loadedFiles[i]) == 0 )
+			return;
+	}
+	loadedFiles[loadedFilenum++] = filename;
+
 	FILE* f = fopen( filename,"rb");
 
 	if( f == 0 )

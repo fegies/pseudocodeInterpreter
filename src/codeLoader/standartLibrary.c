@@ -27,7 +27,10 @@ void preloadLibraryFunctions()
 				strcpy( newpath, libpath );
 				strcat( strcat(newpath, "/"), ep->d_name );
 				loadFile( newpath );
-				free( newpath );
+
+				//newpath is not freed because it is remembered in loadFile
+				//to ensure it is not loaded twice.
+				//free( newpath );
 			}
 		}
 		closedir( libdir );
