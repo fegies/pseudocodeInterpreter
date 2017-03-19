@@ -3,6 +3,7 @@
 PROG       = pseudocode
 VPATH      = src include
 ODIR       = ./bin
+OBJDIR     = objs
 SHAREFLAGS = -pipe -Wall -pedantic -g
 CPPCFLAGS  = $(SHAREFLAGS) -std=c++14
 CCFLAGS    = $(SHAREFLAGS) -std=c11
@@ -41,7 +42,7 @@ PSEUDOCODE = program.pscb
 
 COMPILER_REPO_URL = "https://github.com/fegies/pseudocodeCompiler.git"
 
-test: all pcompile
+test: all $(ODIR)/pcompile
 	./scripts/test.sh
 
 run : all $(PSEUDOCODE)
@@ -53,8 +54,8 @@ flagless : all
 	$(OPROG)
 
 #Installs the pseudocodeCompiler in bin and links to pcompile
-pcompile:
-	./scripts/setupCompiler.sh "$(COMPILER_REPO_URL)"
+$(ODIR)/pcompile:
+	./scripts/setupCompiler.sh $(COMPILER_REPO_URL)
 
 memcheck: all
 	valgrind $(OPROG) $(RUNFLAGS)
@@ -66,27 +67,33 @@ debug: all
 	gdb $(OPROG)
 
 clean:
-	rm -rf ./bin $(DEPDIR) pcompile
+	rm -rf ./bin $(DEPDIR)
 
 .PHONY: run all clean memcheck memcheckfull flagless
 
 #linking
-$(OPROG): $(addprefix $(ODIR)/, $(OBJS))
+$(OPROG): $(addprefix $(ODIR)/$(OBJDIR)/, $(OBJS))
 	$(CCOMPILER) $(LINKFLAGS) -o $@ $^
 
 #compiling
-$(ODIR)/%.o : %.cpp $(DEPDIR)/%.d
+$(ODIR)/$(OBJDIR)/%.o : %.cpp $(DEPDIR)/%.d
 	$(COMPILE.cpp) -o $@ $< -I./include
 
-$(ODIR)/%.o : %.c $(DEPDIR)/%.d
+$(ODIR)/$(OBJDIR)/%.o : %.c $(DEPDIR)/%.d
 	$(COMPILE.c) -o $@ $< -I./include
 
 #Building the Directories if they don't exist
-buildbin: | $(ODIR) $(addprefix $(ODIR)/,$(SUBPATHS)) $(DEPDIR) \
+buildbin: | $(ODIR) \
+	$(ODIR)/$(OBJDIR) \
+	$(addprefix $(ODIR)/$(OBJDIR)/,$(SUBPATHS)) \
+	$(DEPDIR) \
 	$(addprefix $(DEPDIR)/,$(SUBPATHS))
 
 $(ODIR):
 	mkdir $(ODIR)
+
+$(ODIR)/$(OBJDIR):
+	mkdir $(ODIR)/$(OBJDIR)
 
 $(DEPDIR):
 	mkdir $(DEPDIR)
@@ -94,7 +101,7 @@ $(DEPDIR):
 $(addprefix $(DEPDIR)/,$(SUBPATHS)):
 	mkdir $@
 
-$(addprefix $(ODIR)/,$(SUBPATHS)):
+$(addprefix $(ODIR)/$(OBJDIR)/,$(SUBPATHS)):
 	mkdir $@
 
 $(addprefix $(DEPDIR)/,$(OBJS:.o=.d)): ;

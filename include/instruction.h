@@ -57,3 +57,4 @@ void printInstruction( Instruction* i );
 #define InstrType_StackPop 32
 
 #define InstrType_Print 33
+#define InstrType_Load 34

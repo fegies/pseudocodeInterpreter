@@ -24,4 +24,4 @@ cd "pseudocodeCompiler"
 
 cabal build
 
-ln -s "$(pwd)/dist/build/pseudocodeCompiler/pseudocodeCompiler" ../../pcompile
+ln -s "$(pwd)/dist/build/pseudocodeCompiler/pseudocodeCompiler" ../pcompile

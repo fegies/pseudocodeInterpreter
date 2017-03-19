@@ -15,7 +15,7 @@ passedTests=0
 for f in tests/*.txt; do
 	file=$(basename -s .txt "$f")
 
-	./pcompile pseudocode/$file.psc > bin/bytecode/$file.pscb
+	./bin/pcompile pseudocode/$file.psc > bin/bytecode/$file.pscb
 
 	bin/pseudocode bin/bytecode/$file.pscb > bin/testresults/$file.txt
 	diff="$(diff bin/testresults/$file.txt tests/$file.txt)"
