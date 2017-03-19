@@ -45,3 +45,4 @@ Type | Instruction Name  | Parameters
 31     LEAVE BLOCK       : none
 32     STACK TOP DISCARD : none
 33     PRINT             : none
+34     LOAD              : String <- The filename to load. The Code is loaded only once, during code Loading.

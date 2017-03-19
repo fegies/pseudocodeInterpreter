@@ -39,8 +39,10 @@ POSTCOMPILE= mv -f $(DEPDIR)/$*.TD $(DEPDIR)/$*.d
 
 PSEUDOCODE = program.pscb
 
-test: all
-	./test.sh
+COMPILER_REPO_URL = "https://github.com/fegies/pseudocodeCompiler.git"
+
+test: all pcompile
+	./scripts/test.sh
 
 run : all $(PSEUDOCODE)
 	$(OPROG) $(RUNFLAGS)
@@ -50,9 +52,9 @@ all : buildbin $(OPROG)
 flagless : all
 	$(OPROG)
 
-
-%.pscb: pseudocode/%.psc
-	./pcompile $< > $@
+#Installs the pseudocodeCompiler in bin and links to pcompile
+pcompile:
+	./scripts/setupCompiler.sh "$(COMPILER_REPO_URL)"
 
 memcheck: all
 	valgrind $(OPROG) $(RUNFLAGS)
@@ -64,7 +66,7 @@ debug: all
 	gdb $(OPROG)
 
 clean:
-	rm -r ./bin $(DEPDIR)
+	rm -rf ./bin $(DEPDIR) pcompile
 
 .PHONY: run all clean memcheck memcheckfull flagless
 
