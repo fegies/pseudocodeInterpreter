@@ -6,7 +6,7 @@ ODIR       = ./bin
 OBJDIR     = objs
 SHAREFLAGS = -pipe -Wall -pedantic -g
 CPPCFLAGS  = $(SHAREFLAGS) -std=c++14
-CCFLAGS    = $(SHAREFLAGS) -std=c11
+CCFLAGS    = $(SHAREFLAGS) -std=gnu11
 LINKFLAGS  = $(SHAREFLAGS)
 CPPCOMPILER= $(CXX)
 CCOMPILER  = $(CC)
@@ -38,7 +38,7 @@ POSTCOMPILE= mv -f $(DEPDIR)/$*.TD $(DEPDIR)/$*.d
 
 PSEUDOCODE = program.pscb
 
-COMPILER_REPO_URL = "loftpi:~/git/pseudocodeCompiler.git"
+COMPILER_REPO_URL = "/home/felix/programming/haskell/pseudocodeCompiler"
 
 test: all $(ODIR)/pcompile
 	./scripts/test.sh

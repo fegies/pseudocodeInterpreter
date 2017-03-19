@@ -15,6 +15,7 @@
 //keeps the currently executing instruction from printing to stdout
 #define NINSPRINT
 
+//the path of the directory to check for standart library files
 #define STDLIB_PATH "bin/bytecode/standartLibrary"
 
 //the buffer size used for input 

@@ -24,3 +24,6 @@ struct classData
 
 //frees the memory allocated during code loading
 void unloadBytecode();
+
+//loads the file specified by the path
+void loadFile( char* path );
