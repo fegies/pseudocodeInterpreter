@@ -4,7 +4,7 @@
 #include "codeLoader/byteops.h"
 #include "datastructures/function.h"
 #include "datastructures/class.h"
-#include "standartLibrary.h"
+#include "codeLoader/standartLibrary.h"
 #include "globals.h"
 #include <stdio.h>
 #include <string.h>

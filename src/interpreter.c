@@ -98,6 +98,11 @@ variable* interpretFunction( Instruction* entry, nameStore* args )
 			case InstrType_FunctionCall:
 			{
 				variable* f = execStack_pop( stack );
+				if( f->type != VARIABLE_TYPE_FUNCTION )
+				{
+					fprintf( stderr, "The Function you are trying to call is not a function.\n" );
+					exit(1);
+				}
 				variableFunction* vf = (variableFunction*)f-> ref;
 				nameStore* args = nameStore_create();
 				for( size_t i = 0; i < (vf->args).count; ++i )

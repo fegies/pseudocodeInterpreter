@@ -2,12 +2,12 @@
 
 #This script is supposed to be run from the makefile
 
+./scripts/compilePseudocode.sh
+
 if [ -n bin/testresults ]; then
 	mkdir -p bin/testresults
 fi
-if [ -n bin/bytecode ]; then
-	mkdir -p bin/bytecode
-fi
+
 
 failedTests=0
 passedTests=0
@@ -15,7 +15,6 @@ passedTests=0
 for f in tests/*.txt; do
 	file=$(basename -s .txt "$f")
 
-	./bin/pcompile pseudocode/$file.psc > bin/bytecode/$file.pscb
 
 	bin/pseudocode bin/bytecode/$file.pscb > bin/testresults/$file.txt
 	diff="$(diff bin/testresults/$file.txt tests/$file.txt)"

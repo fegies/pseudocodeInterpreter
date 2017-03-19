@@ -24,9 +24,7 @@ BASEOBS    = main.o boolean.o operation.o interpreter.o instruction.o
 DATASTRUCTS= class.o object.o variable.o nameStore.o execStack.o array.o \
 	variableString.o function.o
 
-CODELOADER = codeLoader.o byteops.o
-
-STDLIBRARY = standartLibrary.o print.o
+CODELOADER = codeLoader.o byteops.o standartLibrary.o
 
 OPROG = $(addprefix $(ODIR)/, $(PROG))
 RUNFLAGS = $(PSEUDOCODE)
@@ -40,7 +38,7 @@ POSTCOMPILE= mv -f $(DEPDIR)/$*.TD $(DEPDIR)/$*.d
 
 PSEUDOCODE = program.pscb
 
-COMPILER_REPO_URL = "https://github.com/fegies/pseudocodeCompiler.git"
+COMPILER_REPO_URL = "loftpi:~/git/pseudocodeCompiler.git"
 
 test: all $(ODIR)/pcompile
 	./scripts/test.sh
