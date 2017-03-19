@@ -19,11 +19,11 @@ Instruction* _instrAt( Instruction** instrarr, size_t pos )
 
 Instruction* loadBytecode( char* bytes, size_t inputlength )
 {
-	globalVariables = nameStore_create();
 
 	static char libLoaded = 0;
 	if( !libLoaded )
 	{
+		globalVariables = nameStore_create();
 		libLoaded = 1;
 		preloadLibraryFunctions();
 	}
@@ -115,6 +115,14 @@ Instruction* loadBytecode( char* bytes, size_t inputlength )
 				int32_t i = bytesToInt( bytes+bytepos );
 				bytepos += 4;
 				additionalData = (void*)(long)i;
+				break;
+			}
+			case InstrType_Load:
+			{
+				char* filename;
+				bytepos += stringlitcpy( &filename, bytes+bytepos );
+				loadFile( filename );
+				curins-> type = InstrType_NOP;
 				break;
 			}
 			default:
