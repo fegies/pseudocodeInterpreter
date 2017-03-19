@@ -21,7 +21,12 @@ Instruction* loadBytecode( char* bytes, size_t inputlength )
 {
 	globalVariables = nameStore_create();
 
-	preloadLibraryFunctions();
+	static char libLoaded = 0;
+	if( !libLoaded )
+	{
+		libLoaded = 1;
+		preloadLibraryFunctions();
+	}
 
 	size_t instpos = 0;
 	size_t instarrnum = 0;
@@ -114,9 +119,9 @@ Instruction* loadBytecode( char* bytes, size_t inputlength )
 			}
 			default:
 			{
-				if( type <= 32 )
+				if( type <= 33 )
 					break;
-				printf("Code error: invalid type: %d\n", type);
+				fprintf(stderr, "Code error: invalid type: %d\n", type);
 				exit(1);
 			}
 

@@ -14,3 +14,8 @@
 
 //keeps the currently executing instruction from printing to stdout
 #define NINSPRINT
+
+#define STDLIB_PATH "bin/bytecode/standartLibrary"
+
+//the buffer size used for input 
+#define READ_BUF_SIZE 1024

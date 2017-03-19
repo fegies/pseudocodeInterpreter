@@ -1,3 +1,4 @@
 -Iinclude
 -I/usr/include
 -I/usr/lib/clang/$clang_version/include
+-std=gnu11

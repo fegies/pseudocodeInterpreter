@@ -6,8 +6,8 @@
 #include <string.h>
 
 #include "globals.h"
+#include "constants.h"
 
-#define READ_BUF_SIZE 1024
 
 int main(int argc, char** argv)
 {

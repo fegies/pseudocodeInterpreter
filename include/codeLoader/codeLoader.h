@@ -21,3 +21,6 @@ struct classData
 	size_t membercount;
 	char** membernames;
 };
+
+//frees the memory allocated during code loading
+void unloadBytecode();
