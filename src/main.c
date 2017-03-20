@@ -58,5 +58,7 @@ int main(int argc, char** argv)
 	
 	interpretPSC( entry );
 
+	unloadBytecode();
+
 	return 0;
 }

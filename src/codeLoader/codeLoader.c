@@ -10,10 +10,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-Instruction* _instrAt( Instruction** instrarr, size_t pos )
-{
-	return instrarr[pos/INSTRBUFSIZE]+(pos%INSTRBUFSIZE);
-}
+#define _instrAt( instrarr, pos ) (instrarr + pos)
 
 size_t countInstructions( char* bytes, size_t inputlength )
 {
@@ -60,7 +57,8 @@ size_t countInstructions( char* bytes, size_t inputlength )
 	return instrcount;
 }
 
-
+Instruction* loadedInstrs[256];
+unsigned char instructionSetsLoaded = 0;
 Instruction* loadBytecode( char* bytes, size_t inputlength )
 {
 
@@ -73,21 +71,18 @@ Instruction* loadBytecode( char* bytes, size_t inputlength )
 	}
 
 	size_t instpos = 0;
-	size_t instarrnum = 0;
 	size_t bytepos = 0;
 
-	//to facilitate allocating more space later without resorting to realloc()
-	//the instructions are not acessed directly, but through the use of the
-	//helper function _instrAt.
-	Instruction** instrarr;
+	size_t instnum = countInstructions( bytes, inputlength );
+	Instruction* instrarr = malloc( sizeof(Instruction) * instnum);
 
-	if(( instrarr = malloc( sizeof(Instruction*) * INSTRBUFSIZE ) ) == 0
-		|| ((instrarr[0] = malloc( sizeof(Instruction) * INSTRBUFSIZE )) == 0 ) )
+	if( instrarr == 0 )
 	{
 		fprintf(stderr, "Failed to allocate memory for instructions\n");
 		exit(1);
 	}
 
+	loadedInstrs[instructionSetsLoaded++] = instrarr;
 
 	while( bytepos < inputlength )
 	{
@@ -179,24 +174,6 @@ Instruction* loadBytecode( char* bytes, size_t inputlength )
 
 		}
 		curins-> additionalData = additionalData;
-
-		//alloc more memory if needed.
-		if( instpos % INSTRBUFSIZE == 0 )
-		{
-			if(++instarrnum == INSTRBUFSIZE)
-			{
-				fprintf(stderr, "Ran out of Instruction space.. %d Instructions\n\
-					Recompile with a larger INSTRBUFSIZE at constants.h",
-					INSTRBUFSIZE * INSTRBUFSIZE );
-				exit(1);
-			}
-			if((instrarr[instarrnum] = malloc( sizeof(Instruction)* INSTRBUFSIZE)) == 0)
-			{
-				fprintf(stderr, "Failed to allocate memory for instructions\n");
-				exit(1);
-			}
-		}
-
 	}
 
 	#ifndef NINSPRINT
@@ -205,12 +182,10 @@ Instruction* loadBytecode( char* bytes, size_t inputlength )
 		printInstruction( _instrAt(instrarr, i ) );
 	#endif
 
-	Instruction * e = *instrarr;
-	free( instrarr );
-	return e;
+	return instrarr;
 }
 
-char* loadedFiles[255];
+char* loadedFiles[256];
 unsigned char loadedFilenum = 0;
 void loadFile( char* filename )
 {
@@ -261,10 +236,15 @@ void loadFile( char* filename )
 		}
 	}
 
-//	puts( bytes );
-
 	loadBytecode( bytes, length );
 
 	free( bytes );
-	
+}
+
+void unloadBytecode()
+{
+	for( unsigned char i = 0; i < instructionSetsLoaded; ++i )
+		free( loadedInstrs[i] );
+
+	nameStore_destroy( globalVariables );
 }
