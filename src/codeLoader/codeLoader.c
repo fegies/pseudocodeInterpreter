@@ -15,6 +15,50 @@ Instruction* _instrAt( Instruction** instrarr, size_t pos )
 	return instrarr[pos/INSTRBUFSIZE]+(pos%INSTRBUFSIZE);
 }
 
+size_t countInstructions( char* bytes, size_t inputlength )
+{
+	size_t instrcount = 0;
+	for( size_t i = 0; i < inputlength; ++i, ++instrcount )
+	{
+		switch( bytes[i] )
+		{
+			//these have an int as additional data.
+			case InstrType_Jump:
+			case InstrType_ConditionalJump:
+			case InstrType_PushConstInt:
+			{
+				i += 4;
+				break;
+			}
+			//these take just a single string
+			case InstrType_VarLookup:
+			case InstrType_GlobalLookup:
+			case InstrType_PushConstStr:
+			case InstrType_ObjNew:
+			case InstrType_Load:
+			{
+				++i;
+				i += strnlen(bytes + i, inputlength - i);
+				break;
+			}
+			case InstrType_FunctionDecl:
+			case InstrType_ClassDecl:
+			{
+				char type = bytes[i];
+
+				++i;
+				while( i < inputlength && bytes[i] != 0 )
+					i += strnlen(bytes + i, inputlength - i) + 1;
+
+				if( type == InstrType_FunctionDecl )
+					i += 4;
+
+				break;
+			}
+		}
+	}
+	return instrcount;
+}
 
 
 Instruction* loadBytecode( char* bytes, size_t inputlength )

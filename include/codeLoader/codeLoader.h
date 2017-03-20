@@ -9,6 +9,8 @@
 //returns the entry point to the program.
 Instruction* loadBytecode( char* bytes, size_t inputLength );
 
+size_t countInstructions( char* bytes, size_t inputLength );
+
 struct function_Data
 {
 	Instruction* functionEntrypoint;
