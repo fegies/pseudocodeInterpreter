@@ -17,3 +17,8 @@ variable* variableFunction_new( Instruction* e,
 
 	return v;
 }
+
+void variableFunction_destroy( variableFunction* f )
+{
+	free( f );
+}

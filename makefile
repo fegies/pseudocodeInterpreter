@@ -12,12 +12,11 @@ CPPCOMPILER= $(CXX)
 CCOMPILER  = $(CC)
 
 #Name of subpaths inside Odir (Must be the same in ./include and ./src as well)
-SUBPATHS   = . datastructures codeLoader standartLibrary
+SUBPATHS   = . datastructures codeLoader
 
 #The Objects that are compiled
 OBJS       = $(BASEOBS) $(addprefix datastructures/, $(DATASTRUCTS)) \
-	$(addprefix codeLoader/, $(CODELOADER)) \
-	$(addprefix standartLibrary/, $(STDLIBRARY))
+	$(addprefix codeLoader/, $(CODELOADER))
 
 BASEOBS    = main.o boolean.o operation.o interpreter.o instruction.o
 

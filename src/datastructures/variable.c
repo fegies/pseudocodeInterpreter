@@ -4,6 +4,7 @@
 #include "datastructures/variableString.h"
 #include "datastructures/class.h"
 #include "datastructures/object.h"
+#include "datastructures/function.h"
 
 #include <assert.h>
 #include <stdlib.h>
@@ -43,6 +44,8 @@ void _variable_free( variable* v )
 			variableString_destroy( v-> ref ); break;
 		case VARIABLE_TYPE_ARRAY:
 			array_destroy( v-> ref ); break;
+		case VARIABLE_TYPE_FUNCTION:
+			variableFunction_destroy( v->ref ); break;
 		case VARIABLE_TYPE_OBJECT:
 			object_destroy( v-> ref ); break;
 		case VARIABLE_TYPE_CLASS:
