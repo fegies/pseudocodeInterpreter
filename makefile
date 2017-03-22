@@ -4,6 +4,7 @@ PROG       = pseudocode
 VPATH      = src include
 ODIR       = ./bin
 OBJDIR     = objs
+PSCDIR     = bytecode
 SHAREFLAGS = -pipe -Wall -pedantic -g
 CPPCFLAGS  = $(SHAREFLAGS) -std=c++14
 CCFLAGS    = $(SHAREFLAGS) -std=gnu11
@@ -25,6 +26,10 @@ DATASTRUCTS= class.o object.o variable.o nameStore.o execStack.o array.o \
 
 CODELOADER = codeLoader.o byteops.o standartLibrary.o
 
+#pseudocode in the standart library
+STDLIBFILES = print.pscb
+STDLIBDIR   = standartLibrary
+
 OPROG = $(addprefix $(ODIR)/, $(PROG))
 RUNFLAGS = $(PSEUDOCODE)
 
@@ -39,7 +44,9 @@ PSEUDOCODE = program.pscb
 
 COMPILER_REPO_URL = "/home/felix/programming/haskell/pseudocodeCompiler"
 
-test: all $(ODIR)/pcompile
+PSEUDOCODECOMPILER = $(ODIR)/pcompile
+
+test: all $(ODIR)/pcompile STDLIB
 	./scripts/test.sh
 
 run : all $(PSEUDOCODE)
@@ -49,10 +56,6 @@ all : buildbin $(OPROG)
 
 flagless : all
 	$(OPROG)
-
-#Installs the pseudocodeCompiler in bin and links to pcompile
-$(ODIR)/pcompile:
-	./scripts/setupCompiler.sh $(COMPILER_REPO_URL)
 
 memcheck: all
 	valgrind $(OPROG) $(RUNFLAGS)
@@ -66,7 +69,17 @@ debug: all
 clean:
 	rm -rf ./bin $(DEPDIR)
 
-.PHONY: run all clean memcheck memcheckfull flagless
+.PHONY: run all clean memcheck memcheckfull flagless test
+
+#Installs the pseudocodeCompiler in bin and links to pcompile
+$(ODIR)/pcompile:
+	./scripts/setupCompiler.sh $(COMPILER_REPO_URL)
+
+STDLIB: $(addprefix $(ODIR)/$(PSCDIR)/$(STDLIBDIR)/,$(STDLIBFILES))
+
+$(ODIR)/$(PSCDIR)/$(STDLIBDIR)/%.pscb : pseudocode/standartLibrary/%.psc
+	$(PSEUDOCODECOMPILER) $< > $@
+	
 
 #linking
 $(OPROG): $(addprefix $(ODIR)/$(OBJDIR)/, $(OBJS))
@@ -84,22 +97,15 @@ buildbin: | $(ODIR) \
 	$(ODIR)/$(OBJDIR) \
 	$(addprefix $(ODIR)/$(OBJDIR)/,$(SUBPATHS)) \
 	$(DEPDIR) \
-	$(addprefix $(DEPDIR)/,$(SUBPATHS))
+	$(addprefix $(DEPDIR)/,$(SUBPATHS)) \
+	$(ODIR)/$(PSCDIR)/$(STDLIBDIR)
 
-$(ODIR):
-	mkdir $(ODIR)
-
-$(ODIR)/$(OBJDIR):
-	mkdir $(ODIR)/$(OBJDIR)
-
-$(DEPDIR):
-	mkdir $(DEPDIR)
-
-$(addprefix $(DEPDIR)/,$(SUBPATHS)):
-	mkdir $@
-
-$(addprefix $(ODIR)/$(OBJDIR)/,$(SUBPATHS)):
-	mkdir $@
+$(ODIR) $(ODIR)/$(OBJDIR) \
+	$(addprefix $(ODIR)/$(OBJDIR)/,$(SUBPATHS)) \
+	$(DEPDIR) \
+	$(addprefix $(DEPDIR)/,$(SUBPATHS)) \
+	$(ODIR)/$(PSCDIR)/$(STDLIBDIR):
+	mkdir -p $@
 
 $(addprefix $(DEPDIR)/,$(OBJS:.o=.d)): ;
 .PRECIOUS: $(DEPDIR)/%.d

@@ -10,11 +10,15 @@ fi
 
 cd bin
 
-#figure out if haskell compiler is installed
+#figure out if haskell and cabal are installed
 ghc --help >/dev/null
-
 if [ $? != 0 ]; then
-	"ghc not found. Do you have a haskell Compiler installed?"
+	echo "ghc not found. Do you have a haskell Compiler installed?"
+	exit 1
+fi
+cabal --help >/dev/null
+if [ $? != 0 ]; then
+	echo "cabal not found. Do you have it installed?"
 	exit 1
 fi
 

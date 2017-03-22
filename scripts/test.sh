@@ -2,26 +2,34 @@
 
 #This script is supposed to be run from the makefile
 
-./scripts/compilePseudocode.sh
-
-if [ -n bin/testresults ]; then
-	mkdir -p bin/testresults
-fi
-
-
 failedTests=0
 passedTests=0
 
-for f in tests/*.txt; do
-	file=$(basename -s .txt "$f")
+for f in $(find tests -type f -name '*.txt'); do
 
+	sdir=$(dirname "$f")
+	bdir="bin/bytecode/$sdir"
+	tdir="bin/testresults/${sdir#tests}"
 
-	bin/pseudocode bin/bytecode/$file.pscb > bin/testresults/$file.txt
-	diff="$(diff bin/testresults/$file.txt tests/$file.txt)"
+	if [ -n "$bdir" ]; then
+		mkdir -p "$bdir"
+	fi
+	if [ -n "$tdir" ]; then
+		mkdir -p "$tdir"
+	fi
+
+	fileroot=$(basename -s .txt "$f")
+	bfile="$bdir/$fileroot.pscb"
+	tfile="$tdir/$fileroot.txt"
+
+	./bin/pcompile "$sdir/$fileroot.psc" > "$bfile"
+
+	bin/pseudocode "$bfile" > "$tfile"
+	diff="$(diff "$f" "$tfile")"
 	if [ -z "$diff" ]; then
 		passedTests=$((passedTests + 1))
 	else
-		echo "Test $file failed"
+		echo "Test ${sdir#tests/}/$fileroot failed"
 		failedTests=$((failedTests + 1))
 	fi
 done

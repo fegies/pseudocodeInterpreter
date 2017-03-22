@@ -46,3 +46,4 @@ Type | Instruction Name  | Parameters
 32     STACK TOP DISCARD : none
 33     PRINT             : none
 34     LOAD              : String <- The filename to load. The Code is loaded only once, during code Loading.
+35     FOREIGNFUNCTION   : int <- the index of the function in the foreign function list, int <- the number of arguments to pass the function
