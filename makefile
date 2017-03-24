@@ -28,7 +28,7 @@ DATASTRUCTS= class.o object.o variable.o nameStore.o execStack.o array.o \
 CODELOADER = codeLoader.o byteops.o standartLibrary.o
 
 #pseudocode in the standart library
-STDLIBFILES = print.pscb
+STDLIBFILES = print.pscb file.pscb
 STDLIBDIR   = standartLibrary
 
 OPROG = $(addprefix $(ODIR)/, $(PROG))
