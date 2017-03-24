@@ -1,0 +1,7 @@
+Foreign Functions:
+
+
+0 : fopen( file, mode )
+1 : fread( File )
+2 : fwrite( File, content )
+3 : fclose( File )

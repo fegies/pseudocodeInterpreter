@@ -177,7 +177,7 @@ variable* interpretFunction( Instruction* entry, nameStore* args )
 				variable* op2 = execStack_pop( stack );
 
 				//just because I want to save myself all the boilerplate
-				variable* (*ops[15])(variable*, variable*) =
+				variable* (*ops[])(variable*, variable*) =
 				{
 					&operation_compareEq,
 					&operation_compareLt,
