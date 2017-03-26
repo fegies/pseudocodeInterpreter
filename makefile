@@ -1,6 +1,6 @@
 #The program Name (Name of the resulting executable)
 
-PROG       = pseudocode
+PROG       = pseudocodeInterpreter
 VPATH      = src include
 ODIR       = ./bin
 OBJDIR     = objs
@@ -13,23 +13,16 @@ CPPCOMPILER= $(CXX)
 CCOMPILER  = $(CC)
 
 #Name of subpaths inside Odir (Must be the same in ./include and ./src as well)
-SUBPATHS   = . datastructures codeLoader
+SUBPATHS   = .
 
 #The Objects that are compiled
-OBJS       = $(BASEOBS) $(addprefix datastructures/, $(DATASTRUCTS)) \
-	$(addprefix codeLoader/, $(CODELOADER))
+OBJS       = $(BASEOBS)
 
-BASEOBS    = main.o boolean.o operation.o interpreter.o instruction.o \
-	foreignFunction.o
-
-DATASTRUCTS= class.o object.o variable.o nameStore.o execStack.o array.o \
-	variableString.o function.o
-
-CODELOADER = codeLoader.o byteops.o standartLibrary.o
+BASEOBS    =
 
 #pseudocode in the standart library
-STDLIBFILES = print.pscb file.pscb
-STDLIBDIR   = standartLibrary
+STDLIBFILES = 
+STDLIBDIR   =
 
 OPROG = $(addprefix $(ODIR)/, $(PROG))
 RUNFLAGS = $(PSEUDOCODE)
@@ -80,7 +73,7 @@ STDLIB: $(addprefix $(ODIR)/$(PSCDIR)/$(STDLIBDIR)/,$(STDLIBFILES))
 
 $(ODIR)/$(PSCDIR)/$(STDLIBDIR)/%.pscb : pseudocode/standartLibrary/%.psc
 	$(PSEUDOCODECOMPILER) $< > $@
-	
+
 
 #linking
 $(OPROG): $(addprefix $(ODIR)/$(OBJDIR)/, $(OBJS))
